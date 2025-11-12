@@ -1,3 +1,15 @@
+- [Fix regression in `trusted-replace-argument` scriptlet](https://github.com/gorhill/uBlock/commit/2e509d42fc)
+- [Add web-accessible resource for sensors analytics](https://github.com/gorhill/uBlock/commit/cd0f5be12c)
+- [Fix custom prefixes unduly assigning trust to external lists](https://github.com/gorhill/uBlock/commit/b5f74456a4)
+- [Improve `m3u-prune` scriptlet](https://github.com/gorhill/uBlock/commit/53d60ac36c)
+- [Improve `prevent-fetch` scriptlet](https://github.com/gorhill/uBlock/commit/60e15cb6e1)
+- [Fix regex-matching in `JSONPath`](https://github.com/gorhill/uBlock/commit/8491e9c476)
+- [Ignore negated request types when validating `redirect` option](https://github.com/gorhill/uBlock/commit/50e898b847)
+
+----------
+
+# 1.67.0
+
 - [Improve `href-sanitizer` scriptlet](https://github.com/gorhill/uBlock/commit/a43d1d8c42)
 - [Fix `editInboundObjectFn` utility scriptlet](https://github.com/gorhill/uBlock/commit/d376adaae8)
 - [Improve `trusted-replace-argument` scriptlet](https://github.com/gorhill/uBlock/commit/52bc354bce)
