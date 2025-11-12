@@ -37,12 +37,7 @@ jobs:
           > release.body.txt
           grep -m1 -B10000 -- "----------" CHANGELOG.md >> release.body.txt
           sed -e 's!%version%!${{ env.VERSION }}!g' .github/workflows/RELEASE.HEAD.md >> release.body.txt
-      - name: Upload changelog
-        id: upload_changelog_artifact
-        uses: actions/upload-artifact@v4
-        with:
-         name: build
-         path: release.body.txt
+          cp release.body.txt dist/build/release.body.txt
       - name: Upload builds
         id: upload_build_artifacts
         uses: actions/upload-artifact@v4
