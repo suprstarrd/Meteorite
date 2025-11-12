@@ -539,14 +539,6 @@
     "message": "Apply changes on current page",
     "description": "English: refresh page from menu notification"
   },
-  "adnOpenLetterNotification": {
-    "message": "AdNauseam needs your support!",
-    "description": "English: notification to open letter"
-  },
-  "adnOpenLetterButton": {
-    "message": "OPEN LETTER",
-    "description": "English: button to open letter"
-  },
   "supportS6P3S1": {
     "message": "Make sure this issue is <b>AdNauseam-specific</b>.",
     "description": "A paragraph in the filter issue reporter section"
