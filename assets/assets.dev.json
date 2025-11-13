@@ -3,14 +3,12 @@
 		"content": "internal",
 		"updateAfter": 13,
 		"contentURL": [
-			"https://raw.githubusercontent.com/gorhill/uBlock/master/assets/assets.dev.json",
+			"https://raw.githubusercontent.com/suprstarrd/StarsAdNauseam/master/assets/assets.dev.json",
 			"assets/assets.dev.json"
 		],
 		"cdnURLs": [
-			"https://ublockorigin.github.io/uAssetsCDN/ublock/assets.dev.json",
-			"https://ublockorigin.pages.dev/ublock/assets.dev.json",
-			"https://cdn.jsdelivr.net/gh/gorhill/uBlock@master/assets/assets.dev.json",
-			"https://cdn.statically.io/gh/gorhill/uBlock/master/assets/assets.dev.json"
+			"https://cdn.jsdelivr.net/gh/suprstarrd/StarsAdNauseam@master/assets/assets.dev.json",
+			"https://cdn.statically.io/gh/suprstarrd/StarsAdNauseam@master/assets/assets.dev.json"
 		]
 	},
 	"public_suffix_list.dat": {
@@ -18,8 +16,69 @@
 		"updateAfter": 19,
 		"contentURL": [
 			"https://publicsuffix.org/list/public_suffix_list.dat",
-			"assets/thirdparties/publicsuffix.org/list/effective_tld_names.dat"
+			"https://raw.githubusercontent.com/publicsuffix/list/refs/heads/main/public_suffix_list.dat",
+			"assets/thirdparties/publicsuffix.org/list/public_suffix_list.dat"
 		]
+	},
+	"ublock-resources": {
+		"content": "internal",
+		"updateAfter": 7,
+		"contentURL": "assets/ublock/resources.txt"
+	},
+	"nano-resources": {
+		"content": "internal",
+		"updateAfter": 7,
+		"contentURL": "assets/nano/resources.txt"
+	},
+	"nano-filters": {
+		"content": "filters",
+		"group": "default",
+		"title": "Nano filters",
+		"contentURL": "assets/nano/base.txt",
+		"supportURL": "https://github.com/NanoAdblocker/NanoFilters/issues"
+	},
+	"nano-allowlist": {
+		"content": "filters",
+		"group": "default",
+		"title": "Nano filters – Allowlist",
+		"contentURL": "assets/nano/allowlist.txt",
+		"supportURL": "https://github.com/NanoAdblocker/NanoFilters/issues"
+	},
+	"nano-defender": {
+		"content": "filters",
+		"group": "default",
+		"title": "Nano Defender Integration",
+		"off": true,
+		"contentURL": "assets/nano/defender.txt",
+		"supportURL": "https://github.com/NanoAdblocker/NanoFilters/issues",
+		"instructionURL": "https://jspenguin2017.github.io/uBlockProtector/"
+	},
+	"adnauseam-filters": {
+		"content": "filters",
+		"group": "default",
+		"title": "AdNauseam filters",
+		"tags": "ads",
+		"contentURL": [
+			"https://raw.githubusercontent.com/dhowe/AdNauseam/master/filters/adnauseam.txt",
+			"assets/ublock/adnauseam.txt"
+		],
+		"cdnURLs": [
+			"https://cdn.jsdelivr.net/gh/dhowe/AdNauseam@master/filters/adnauseam.txt",
+			"https://cdn.statically.io/gh/dhowe/AdNauseam/master/filters/adnauseam.txt"
+		],
+		"supportURL": "https://github.com/dhowe/adnauseam/issues"
+	},
+	"eff-dnt-allowlist": {
+		"content": "filters",
+		"group": "default",
+		"hidden": true,
+		"title": "DNT Policy Allowlist",
+		"tags": "allowlist",
+		"contentURL": [
+			"https://www.eff.org/files/effdntlist.txt",
+			"assets/thirdparties/www.eff.org/files/effdntlist.txt"
+		],
+		"supportURL": "https://www.eff.org/dnt-policy"
 	},
 	"ublock-badlists": {
 		"content": "internal",
@@ -167,6 +226,14 @@
 		],
 		"supportURL": "https://github.com/uBlockOrigin/uAssets"
 	},
+	"awrl-0": {
+		"content": "filters",
+		"group": "ads",
+		"off": false,
+		"title": "Adblock Warning Removal List",
+		"contentURL": "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt",
+		"supportURL": "https://forums.lanik.us/"
+	},
 	"adguard-generic": {
 		"content": "filters",
 		"group": "ads",
@@ -210,7 +277,7 @@
 	"adguard-spyware-url": {
 		"content": "filters",
 		"group": "privacy",
-		"off": true,
+		"off": false,
 		"title": "AdGuard URL Tracking Protection",
 		"tags": "privacy",
 		"contentURL": "https://filters.adtidy.org/extension/ublock/filters/17.txt",
@@ -296,7 +363,7 @@
 		"group": "annoyances",
 		"group2": "cookies",
 		"parent": "AdGuard/uBO – Cookie Notices",
-		"off": true,
+		"off": false,
 		"title": "uBlock filters – Cookie Notices",
 		"tags": "annoyances cookies",
 		"contentURL": "https://ublockorigin.github.io/uAssets/filters/annoyances-cookies.txt",
@@ -503,6 +570,15 @@
 		],
 		"supportURL": "https://easylist.to/"
 	},
+	"nano-annoyance": {
+		"content": "filters",
+		"group": "annoyances",
+		"title": "Nano filters – Annoyance",
+		"off": true,
+		"tags": "annoyances",
+		"contentURL": "assets/nano/annoyances.txt",
+		"supportURL": "https://github.com/NanoAdblocker/NanoFilters/issues"
+	},
 	"ublock-annoyances": {
 		"content": "filters",
 		"group": "annoyances",
@@ -522,6 +598,32 @@
 		],
 		"supportURL": "https://github.com/uBlockOrigin/uAssets"
 	},
+	"legitimate-url-shortener": {
+		"content": "filters",
+		"group": "annoyances",
+		"off": true,
+		"title": "➗ Actually Legitimate URL Shortener Tool",
+		"tags": "annoyances",
+		"contentURL": "https://raw.githubusercontent.com/DandelionSprout/adfilt/refs/heads/master/LegitimateURLShortener.txt",
+		"cdnURLs": [
+			"https://cdn.jsdelivr.net/gh/DandelionSprout/adfilt@master/LegitimateURLShortener.txt",
+			"https://cdn.statically.io/gh/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
+		],
+		"supportURL": "https://github.com/DandelionSprout/adfilt/issues"
+	},
+	"legitimate-url-shortener-affiliate": {
+		"content": "filters",
+		"group": "annoyances",
+		"off": true,
+		"title": "➗ Actually Legitimate URL Shortener Tool - Affiliate tag allowlist",
+		"tags": "annoyances",
+		"contentURL": "https://raw.githubusercontent.com/DandelionSprout/adfilt/refs/heads/master/LegitimateURLShortener-AffiliateTagAllowlist.txt",
+		"cdnURLs": [
+			"https://cdn.jsdelivr.net/gh/DandelionSprout/adfilt@master/LegitimateURLShortener-AffiliateTagAllowlist.txt",
+			"https://cdn.statically.io/gh/DandelionSprout/adfilt/master/LegitimateURLShortener-AffiliateTagAllowlist.txt"
+		],
+		"supportURL": "https://github.com/DandelionSprout/adfilt/issues"
+	},
 	"dpollock-0": {
 		"content": "filters",
 		"group": "multipurpose",
@@ -536,6 +638,8 @@
 		"content": "filters",
 		"group": "multipurpose",
 		"updateAfter": 13,
+		"off": true,
+		"hidden": true,
 		"title": "Peter Lowe’s Ad and tracking server list",
 		"tags": "ads privacy security",
 		"preferred": true,

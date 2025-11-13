@@ -9,7 +9,7 @@ c8a5281bce4c031cd9d1984ffc5a3ce6 assets/thirdparties/easylist-downloads.adblockp
 ab2b41e4245fa77bfecf8938f32d6929 assets/thirdparties/easylist-downloads.adblockplus.org/easyprivacy.txt
 94bb6a788c9aa3606a37bbae8f5dc853 assets/thirdparties/mirror1.malwaredomains.com/files/justdomains
 03ab45503578b15aaa2b9c1befff37cc assets/thirdparties/pgl.yoyo.org/as/serverlist
-79e5517b2760a6aed72789ba0f62e4ad assets/thirdparties/publicsuffix.org/list/effective_tld_names.dat
+79e5517b2760a6aed72789ba0f62e4ad assets/thirdparties/publicsuffix.org/list/public_suffix_list.dat
 36eaa2db93d9c6a26f2f9395c2cdb6c9 assets/thirdparties/www.malwaredomainlist.com/hostslist/hosts.txt
 3017558c6ce6bdbfa62db7be7a506b73 assets/thirdparties/www.eff.org/files/effdntlist.txt
 33a10c7305befa4afefba24a468ef2eb assets/ublock/adnauseam.txt
