@@ -4,6 +4,7 @@
 
 DES=$1
 UBLOCK=$( cat dist/version ) # ADN:ublock-version
+ADN=$( cat dist/adn-version ) # ADN:adn-version
 
 bash ./tools/pull-assets.sh # ADN
 
@@ -32,6 +33,7 @@ cp LICENSE.txt                     $DES/
 
 # ADN
 awk -v s=$UBLOCK '{gsub(/{UBLOCK_VERSION}/, s)}1' $DES/links.html > /tmp/links.html && mv /tmp/links.html $DES/links.html
+awk -v s=$ADN '{gsub(/{ADN_VERSION}/, s)}1' $DES/links.html > /tmp/links.html && mv /tmp/links.html $DES/links.html
 
 # Remove the following files
 rm $DES/js/adn/tests.js

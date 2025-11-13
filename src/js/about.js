@@ -26,7 +26,7 @@ import { dom } from './dom.js';
 (async ( ) => {
 
     vAPI.messaging.send('dashboard', { what: 'getAppData' }, appData => {
-        dom.text('#aboutNameVer', appData.name + ' v' + appData.version);
+        dom.text('#adnAboutNameVer', appData.name + ' v' + appData.version);
     });
 
     // document.querySelector(
@@ -39,9 +39,9 @@ import { dom } from './dom.js';
     const appData = await vAPI.messaging.send('dashboard', {
         what: 'getAppData',
     });
-
-    dom.text('#aboutNameVer #uBlock', appData.name);
-    dom.text('#builtOnVersion', 'v' + appData.version);
+    
+    dom.text('#adnAboutNameVer', appData.name);
+    dom.text('#adnBuiltOnVersion', 'v' + appData.version);
 
     if ( appData.canBenchmark !== true ) { return; }
 
@@ -58,5 +58,5 @@ import { dom } from './dom.js';
         });
     });
 
-    dom.text('#aboutNameVer', appData.name + ' v' + appData.version);
+    dom.text('#adnAboutNameVer', appData.name + ' v' + appData.version);
 })();
