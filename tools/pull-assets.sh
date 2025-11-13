@@ -25,12 +25,3 @@ else
     echo "Prod repository does not exist. Cloning..."
     git clone --depth 1 --branch gh-pages https://github.com/uBlockOrigin/uAssets "$DES/prod"
 fi
-
-# Check if the Nano repository exists
-if [ -d "dist/build/nano/.git" ]; then
-    echo "Prod repository already exists. Pulling latest changes..."
-    git -C "dist/build/nano" pull
-else
-    echo "Nano repository does not exist. Cloning..."
-    git clone --depth 1 --branch gh-pages https://github.com/NanoAdblocker/NanoFilters "dist/build/nano"
-fi
