@@ -1,0 +1,24 @@
+[Nano Adblocker]
+! Title: Nano Filters - Annoyance
+! Expires: 1 days
+! License: See source for license and credits
+! Source: https://github.com/NanoAdblocker/NanoFilters/tree/master/NanoFiltersSource/NanoAnnoyance.txt
+! This file is a compiled binary, do not modify
+! All modifications will be overwritten on the next build
+mapy.geoportal.gov.pl##+js(nanop-easy-set-cookie.js, regulationsAccepted=true)
+hardware.info##+js(nanop-click-elements-onready.js, .cookiecontainer > .cookie > button#decision[name="accept"])
+marktplaats.nl##+js(nanop-click-elements-onready.js, form#track-accept > input[type="submit"])
+f1racing.pl##+js(nanop-click-elements-onready.js, a[href="/x-set-cookie/"])
+derstandard.at##+js(nanop-click-elements-onready.js, section.privacywall-overview button.js-privacywall-agree)
+fortune.com,time.com##+js(nanop-click-elements-onload.js, body.template-gdpr form.gdpr-form > input[type="submit"])
+vivaldi.com##+js(nanop-click-elements-onready.js, #acceptCookie)
+cookies.buienradar.nl##+js(nanop-click-elements-onready.js, form[action="https://cookieservice.rtl.nl/consent"] > input.accept-button[type="submit"])
+nl.hardware.info##+js(nanop-click-elements-onready.js, .cookie-wall__cookie-container button[name="accept"])
+tweakers.net##+js(nanop-click-elements-onready.js, #cookieAcceptForm button[value="accept"])
+myprivacy.persgroep.net##+js(nanop-click-elements-onready.js, button.fjs-set-consent)
+bizjournals.com##+js(set-constant.js, __page__.isPremium, false)
+||static.infoglobo.com.br/paywall/*$domain=oglobo.globo.com
+||tinypass.com^$domain=businessinsider.com|oglobo.globo.com
+yoututosjeff.es##+js(nano-assign-variable-onready.js, document.oncontextmenu, null)
+live.com,microsoft.com,office.com,windows.com,xbox.com###epb
+wikipedia.org##+js(abort-on-property-write.js, frb)

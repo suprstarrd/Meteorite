@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin Lite - a comprehensive, MV3-compliant content blocker
+    AdNauseam Lite - a comprehensive, MV3-compliant content blocker
     Copyright (C) 2022-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -544,6 +544,7 @@ async function registerInjectables() {
         registerHighGeneric(context, genericDetails),
         registerCustomFilters(context),
         registerToolbarIconToggler(context),
+				registerAdNauseam(context), // ADN
     ]);
 
     toRemove.push(...Array.from(before.keys()));
@@ -574,7 +575,73 @@ async function registerInjectables() {
 }
 
 /******************************************************************************/
+// ADN register AdNauseam scripting
+
+async function registerAdNauseam(context) {
+  const { before, filteringModeDetails } = context;
+  
+  const { none, basic, optimal, complete } = filteringModeDetails;
+  
+  // Only run on optimal/complete modes (has broad permissions)
+  const matches = [
+    ...ut.matchesFromHostnames(optimal),
+    ...ut.matchesFromHostnames(complete),
+  ];
+  
+  if (matches.length === 0) {
+    console.log('[ADN] No matches, skipping registration');
+    return;
+  }
+  
+  normalizeMatches(matches);
+  
+  const js = ['/js/adn/parser.js'];
+  
+  const excludeMatches = [];
+  if (none.has('all-urls') === false) {
+    excludeMatches.push(...ut.matchesFromHostnames(none));
+  }
+  if (basic.has('all-urls') === false) {
+    excludeMatches.push(...ut.matchesFromHostnames(basic));
+  }
+  
+  const registered = before.get('adn-parser');
+  before.delete('adn-parser'); // Important!
+  
+  const directive = {
+    id: 'adn-parser',
+    js,
+    matches,
+    allFrames: true,
+    runAt: 'document_idle',
+  };
+  
+  if (excludeMatches.length !== 0) {
+    directive.excludeMatches = excludeMatches;
+  }
+  
+  // Register
+  if (registered === undefined) {
+    context.toAdd.push(directive);
+    console.log('[ADN] Registering parser');
+    return;
+  }
+  
+  // Update
+  if (
+    ut.strArrayEq(registered.js, js, false) === false ||
+    ut.strArrayEq(registered.matches, matches) === false ||
+    ut.strArrayEq(registered.excludeMatches, excludeMatches) === false
+  ) {
+    context.toRemove.push('adn-parser');
+    context.toAdd.push(directive);
+    console.log('[ADN] Updating parser registration');
+  }
+}
+
+/******************************************************************************/
 
 export {
-    registerInjectables
+    registerInjectables,
+		registerAdNauseam // ADN
 };

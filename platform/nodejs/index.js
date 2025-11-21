@@ -107,7 +107,7 @@ function pslInit(raw) {
     }
 
     raw = readFileSync(
-        resolve(__dirname, './assets/thirdparties/publicsuffix.org/list/effective_tld_names.dat'),
+        resolve(__dirname, './assets/thirdparties/publicsuffix.org/list/public_suffix_list.dat'),
         'utf8'
     );
     if ( typeof raw !== 'string' || raw.trim() === '' ) {

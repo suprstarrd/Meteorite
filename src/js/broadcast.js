@@ -20,6 +20,7 @@
 */
 
 import webext from './webext.js';
+import { makeCloneable } from './adn/adn-utils.js'; // ADN
 
 /******************************************************************************/
 
@@ -28,8 +29,11 @@ import webext from './webext.js';
 let broadcastChannel;
 
 export function broadcast(message) {
+    if (message.what === 'notifications') { // ADN
+        makeCloneable(message.notifications); // #1163
+    }
     if ( broadcastChannel === undefined ) {
-        broadcastChannel = new self.BroadcastChannel('uBO');
+        broadcastChannel = new self.BroadcastChannel('uBO'); // AdNauseam change (uBO -> ADN)
     }
     broadcastChannel.postMessage(message);
 }
@@ -52,7 +56,7 @@ export async function broadcastToAll(message) {
 /******************************************************************************/
 
 export function onBroadcast(listener) {
-    const bc = new self.BroadcastChannel('uBO');
+    const bc = new self.BroadcastChannel('uBO'); // AdNauseam change (uBO -> ADN)
     bc.onmessage = ev => listener(ev.data || {});
     return bc;
 }

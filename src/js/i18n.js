@@ -257,7 +257,8 @@ if ( isBackgroundProcess !== true ) {
         for ( const elem of root.querySelectorAll('[data-i18n-tip]') ) {
             const text = i18n$(elem.getAttribute('data-i18n-tip'))
                        .replace(/<br>/g, '\n')
-                       .replace(/\n{3,}/g, '\n\n');
+                       .replace(/\n{3,}/g, '\n\n')
+                       .replace(/uBlock₀/g, 'AdNauseam'); // Adn
             elem.setAttribute('data-tip', text);
             if ( elem.getAttribute('aria-label') === 'data-tip' ) {
                 elem.setAttribute('aria-label', text);

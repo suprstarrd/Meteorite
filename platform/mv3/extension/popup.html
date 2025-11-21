@@ -52,6 +52,31 @@
         <span id="gotoMatchedRules" class="fa-icon tool" tabindex="0" title="Show matched rules">list-alt<span class="caption">Show matched rules</span></span>
         <span id="gotoDashboard" class="fa-icon tool enabled" tabindex="0" data-i18n-title="popupTipDashboard">cogs<span class="caption" data-i18n="popupTipDashboard"></span></span>
     </div>
+
+		<!-- AdNauseam Vault Section -->
+		<div id="adn-vault-section" class="adn-section">
+				<div class="adn-header">
+						<label>AdNauseam Vault</label>
+						<span id="adn-stats">
+								<span id="adn-total-ads">0</span> ads • 
+								<span id="adn-total-clicks">0</span> clicks
+						</span>
+				</div>
+				
+				<div class="adn-actions">
+						<span id="adn-toggle-vault" class="tool enabled" tabindex="0">
+								<span class="fa-icon">folder-open</span>
+								<span>View Vault</span>
+						</span>
+						<span id="adn-clear-vault" class="tool enabled" tabindex="0">
+								<span class="fa-icon">trash</span>
+								<span>Clear</span>
+						</span>
+				</div>
+				<div id="adn-vault-list" class="adn-vault-list hidden">
+						<!-- Vault items will be inserted here -->
+				</div>
+		</div>
 </div>
 
 <script src="js/theme.js" type="module"></script>

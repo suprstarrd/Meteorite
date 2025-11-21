@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="color-scheme" content="light dark" />
 <title>uBlock — Filter lists</title>
+<link rel="stylesheet" href="css/fonts/stylesheet.css">
 <link rel="stylesheet" type="text/css" href="css/themes/default.css">
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/fa-icons.css">
@@ -23,7 +24,7 @@
     <button id="buttonUpdate" class="preferred disabled iconified" type="button" data-i18n-title="3pUpdateNow"><span class="fa-icon">refresh</span><span data-i18n="3pUpdateNow">_</span><span class="hover"></span></button>
 </p>
 
-<div>
+<div id="options">
     <div class="li">
         <label><span class="input checkbox"><input type="checkbox" id="autoUpdate"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span><span data-i18n="3pAutoUpdatePrompt1"></span></label>
     </div>
@@ -54,10 +55,14 @@
         </span>
         <textarea dir="ltr" spellcheck="false" placeholder="3pExternalListsHint"></textarea>
     </div>
+    <ul id="lists">
+      <!-- AdNauseam txt -->
+      <button id="buttonUpdateAdNauseam" class="custom" data-i18n="3pPageUpdate"></button>
+    </ul>
 </div>
 
 </div>
-
+</div>
 <div id="templates" style="display: none;">
     <div class="listEntries"></div>
     <div class="li listEntry" data-role="leaf">

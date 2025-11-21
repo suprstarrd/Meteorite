@@ -39,7 +39,7 @@
     "message": "আমার নিয়ম",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "বিশ্বস্ত তালিকা",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "গন্তব্য",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "আপনার হোস্টের তালিকা যাদের জন্য uBlock₀ নিষ্ক্রিয় করা হবে। লাইন প্রতি একটি ভুক্তি। অবৈধ হোস্ট নাম নিশব্দে উপেক্ষা করা হবে।",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "আমদানি ও পরিশেষে যোগ করুন",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "রপ্তানি করুন",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
-    "message": "amar-ublock-whitelist_{{datetime}}.txt",
+  "allowlistExportFilename": {
+    "message": "amar-ublock-allowlist_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "পরিবর্তনগুলি প্রয়োগ",
     "description": "English: Apply changes"
   },

@@ -217,13 +217,14 @@ vAPI.download = function(details) {
 /******************************************************************************/
 
 vAPI.getURL = browser.runtime.getURL;
+vAPI.getViews = chrome.extension.getViews; // ADN
 
 /******************************************************************************/
 
 // https://github.com/gorhill/uBlock/issues/3057
 // - webNavigation.onCreatedNavigationTarget become broken on Firefox when we
 //   try to make the popup panel close itself using the original
-//   `window.open('', '_self').close()`. 
+//   `window.open('', '_self').close()`.
 
 vAPI.closePopup = function() {
     if ( vAPI.webextFlavor.soup.has('firefox') ) {

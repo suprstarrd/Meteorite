@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin Lite - a comprehensive, MV3-compliant content blocker
+    AdNauseam Lite - a comprehensive, MV3-compliant content blocker
     Copyright (C) 2022-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -98,8 +98,15 @@ import {
 } from './debug.js';
 
 import { dnr } from './ext-compat.js';
-import { registerInjectables } from './scripting-manager.js';
+import { registerInjectables, registerAdNauseam } from './scripting-manager.js';
 import { toggleToolbarIcon } from './action.js';
+
+// ADN imports 
+
+// Import AdNauseam modules
+import { adnauseam } from './adn/core.js';
+import { loadAdNauseamFilters } from './adn/filters.js';
+
 
 /******************************************************************************/
 
@@ -287,7 +294,38 @@ function onMessage(request, sender, callback) {
             callback();
         });
         return true;
-
+			
+		// start of ADN cases
+		case 'adFound': {
+			if (!request.ad) return false;
+			adnauseam.saveAd(request.ad).then(ad => {
+				if (ad && ad.targetUrl) {
+					adnauseam.clickAd(ad, 'fetch');
+				}
+			});
+			return false;
+		}
+		
+		case 'getAdNauseamStats': {
+			adnauseam.getStats().then(stats => callback(stats));
+			return true;
+		}
+		
+		case 'getVault': {
+			chrome.storage.local.get(['vault'], data => {
+				callback(data.vault || []);
+			});
+			return true;
+		}
+		
+		case 'clearVault': {
+			chrome.storage.local.set({
+				vault: [],
+				stats: { totalAds: 0, totalClicks: 0 }
+			}, () => callback({ success: true }));
+			return true;
+		}
+		// end of ADN cases
     default:
         break;
     }
@@ -634,6 +672,16 @@ function onCommand(command, tab) {
 async function startSession() {
     const currentVersion = getCurrentVersion();
     const isNewVersion = currentVersion !== rulesetConfig.version;
+
+		// ADN start vault
+		const { vault } = await chrome.storage.local.get(['vault']);
+		if (!vault) {
+			await chrome.storage.local.set({
+				vault: [],
+				stats: { totalAds: 0, totalClicks: 0 }
+			});
+			console.log('[ADN] Initialized storage');
+		}
 
     // Admin settings override user settings
     await loadAdminConfig();

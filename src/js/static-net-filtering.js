@@ -5411,10 +5411,91 @@ StaticNetFilteringEngine.prototype.matchRequest = function(fctxt, modifiers = 0)
     const r = this.realmMatchString(BLOCK_REALM, typeBits, partyBits);
     if ( r || (modifiers & 0b0010) !== 0 ) {
         if ( $isBlockImportant ) { return 1; }
+        // Adn
+        // Adn always need to check for important blocks, to know if its an adnauseam filter trying to overwrite a adn-allowed block
+        // read more on https://github.com/dhowe/AdNauseam/issues/2110
+        this.realmMatchString(BLOCKIMPORTANT_REALM, typeBits, partyBits)
+        // end of Adn
         if ( this.realmMatchString(ALLOW_REALM, typeBits, partyBits) ) {
             if ( this.realmMatchString(BLOCKIMPORTANT_REALM, typeBits, partyBits) ) {
                 return 1;
             }
+            return 2;
+        }
+        if ( r ) { return 1; }
+    }
+    return 0;
+};
+
+/******************************************************************************
+
+ADN 
+
+The function bellow was removed from uBlock on between version 1.37 and 1.38. Adnauseam needs it on line 849:
+ const updatedResult = snfe.matchString(fctxt);
+In order to properly load blocking rules
+
+https://github.com/dhowe/AdNauseam/issues/2020
+
+Old uBlock comments bellow: 
+
+// https://github.com/chrisaljoudi/uBlock/issues/116
+//   Some type of requests are exceptional, they need custom handling,
+//   not the generic handling.
+// https://github.com/chrisaljoudi/uBlock/issues/519
+//   Use exact type match for anything beyond `other`. Also, be prepared to
+//   support unknown types.
+// https://github.com/uBlockOrigin/uBlock-issues/issues/1501
+//   Add support to evaluate allow realm before block realm.
+
+/**
+ * Matches a URL string using filtering context.
+ * @param {FilteringContext} fctxt - The filtering context
+ * @param {integer} [modifier=0] - A bit vector modifying the behavior of the
+ *   matching algorithm:
+ *   Bit 0: match exact type.
+ *   Bit 1: lookup allow realm regardless of whether there was a match in
+ *          block realm.
+ *
+ * @returns {integer} 0=no match, 1=block, 2=allow (exeption)
+ */
+
+StaticNetFilteringEngine.prototype.matchHeaders = function(fctxt, headers) {
+    let typeValue = typeNameToTypeValue[fctxt.type];
+    if ( modifiers === 0 ) {
+        if ( typeValue === undefined ) {
+            typeValue = otherTypeBitValue;
+        } else if ( typeValue === 0 || typeValue > otherTypeBitValue ) {
+            modifiers |= 0b0001;
+        }
+    }
+    if ( (modifiers & 0b0001) !== 0 ) {
+        if ( typeValue === undefined ) { return 0; }
+        typeValue |= 0x80000000;
+    }
+
+    const partyBits = fctxt.is3rdPartyToDoc() ? ThirdParty : FirstParty;
+
+    // Prime tokenizer: we get a normalized URL in return.
+    $requestURL = urlTokenizer.setURL(fctxt.url);
+    $requestURLRaw = fctxt.url;
+    this.$filterUnit = 0;
+
+    // These registers will be used by various filters
+    $docHostname = fctxt.getDocHostname();
+    $docDomain = fctxt.getDocDomain();
+    $docEntity.reset();
+    $requestHostname = fctxt.getHostname();
+
+    // Important block realm.
+    if ( this.realmMatchString(BLOCKIMPORTANT_REALM, typeValue, partyBits) ) {
+        return 1;
+    }
+
+    // Evaluate block realm before allow realm.
+    const r = this.realmMatchString(BlockAction, typeValue, partyBits);
+    if ( r || (modifiers & 0b0010) !== 0 ) {
+        if ( this.realmMatchString(AllowAction, typeValue, partyBits) ) {
             return 2;
         }
         if ( r ) { return 1; }

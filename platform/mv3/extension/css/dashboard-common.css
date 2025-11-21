@@ -24,7 +24,7 @@ a {
 
 .fa-icon.info {
     color: var(--info0-ink);
-        fill: var(--info0-ink);
+    fill: var(--info0-ink);
     font-size: 115%;
     }
 .fa-icon.info:hover {

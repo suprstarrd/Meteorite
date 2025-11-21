@@ -26,8 +26,10 @@ import cacheStorage from './cachestorage.js';
 import { i18n$ } from './i18n.js';
 import logger from './logger.js';
 import { orphanizeString } from './text-utils.js';
-import { ubolog } from './console.js';
 import µb from './background.js';
+// adn
+import dnt from './adn/dnt.js'
+import { ubolog } from './console.js';
 
 /******************************************************************************/
 
@@ -281,6 +283,10 @@ assets.fetch = function(url, options = {}) {
             return fail(details, `${url}: ${details.statusCode} ${details.statusText}`);
         }
         details.content = this.response;
+        // ADN: If we've loaded a DNT list, we need to parse it
+        if (dnt.isDoNotTrackUrl(url)) {
+            dnt.processEntries(this.response);
+        }
         details.resourceTime = resourceTimeFromXhr(this);
         resolve(details);
     };
@@ -1052,6 +1058,11 @@ async function getRemote(assetKey, options = {}) {
             resourceTime: result.resourceTime || 0,
         });
 
+        // ADN: If we've loaded a DNT list, we need to parse it
+        if (dnt.isDoNotTrackUrl(assetKey)) {
+            dnt.processEntries(result.content);
+        }
+
         if ( assetDetails.content === 'filters' ) {
             const metadata = extractMetadataFromList(result.content, [
                 'Last-Modified',
@@ -1472,6 +1483,40 @@ assets.updateStop = function() {
         updateDone();
     }
 };
+
+assets.forceUpdate = async function(which) { // ADN
+
+    var updateDone = function(details) {
+      const assetKeys = updaterUpdated.slice(0);
+      updaterFetched.clear();
+      updaterUpdated.length = 0;
+      updaterStatus = undefined;
+      updaterAssetDelay = updaterAssetDelayDefault;
+      fireNotification('after-assets-updated', { assetKeys: assetKeys });
+      µb.applyCompiledFilters(details.assetKey, details.content);
+    };
+
+    const updatedOne = function(details) {
+        if (details.content !== '') {
+            updaterUpdated.push(details.assetKey);
+        } else {
+            fireNotification('asset-update-failed', { assetKey: details.assetKey });
+        }
+        updateDone(details);
+    };
+
+    let result;
+
+    switch (which) {
+      case "Adnauseam":
+        result = await getRemote("adnauseam-filters");
+        break;
+      case "Eff":
+        result = await getRemote("eff-dnt-allowlist");
+      default:
+    }
+      updatedOne(result);
+}
 
 assets.isUpdating = function() {
     return updaterStatus === 'updating' &&

@@ -55,7 +55,7 @@ hr {
     }
 
 #sticky {
-    background-color: var(--surface-1);
+    background-color: inherit; /* adn */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -185,6 +185,7 @@ body.needSave #revertRules {
     white-space: normal;
     }
 .toolRibbon .tool {
+    fill: white; /* ADN */
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -259,6 +260,7 @@ body.needSave #revertRules {
     grid-template: auto / 1fr 1fr;
     justify-items: stretch;
     margin: 1px 0 0 0;
+    fill: #999;
     }
 #moreOrLess > span {
     cursor: pointer;

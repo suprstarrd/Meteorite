@@ -39,7 +39,7 @@
     "message": "القواعد الخاصة بي",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "المواقع الموثوقة",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "الوجهة",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "تحدد توجيهات المواقع الموثوقة الصفحات التي يجب تعطيل uBlock Origin عليها. إدخال واحد في كل سطر.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "استورد وألحق…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "صدّر…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
-    "message": "my-ublock-whitelist_{{datetime}}.txt",
+  "allowlistExportFilename": {
+    "message": "my-ublock-allowlist_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "حفظ التغيرات",
     "description": "English: Apply changes"
   },

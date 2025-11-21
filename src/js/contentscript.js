@@ -14,7 +14,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see {http://www.gnu.org/licenses/}.
+    along with this program.  If not, see { This starts bootstrap process.http://www.gnu.org/licenses/}.
 
     Home: https://github.com/gorhill/uBlock
 */
@@ -56,7 +56,7 @@
     actual elements on the current page. This component is dynamically loaded
     IF AND ONLY IF uBO's logger is opened.
 
-  If page is whitelisted:
+  If page is allowlisted:
     - domWatcher: off
     - domCollapser: off
     - domFilterer: off
@@ -64,7 +64,7 @@
     - domLogger: off
 
   I verified that the code in this file is completely flushed out of memory
-  when a page is whitelisted.
+  when a page is allowlisted.
 
   If cosmetic filtering is disabled:
     - domWatcher: on
@@ -186,6 +186,8 @@ vAPI.userStylesheet = {
   [2] https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
 
 */
+
+vAPI.useShadowDOM = false; // ADN
 
 // https://github.com/gorhill/uBlock/issues/2147
 
@@ -470,6 +472,14 @@ vAPI.SafeAnimationFrame = class {
 
 vAPI.hideStyle = 'display:none!important;';
 
+/* Adn */
+vAPI.notHideStyle = '/*display:none!important;*/'; 
+vAPI.showAdsDebug = false;
+vAPI.messaging.send('contentscript', {what:'getShowAdsDebug'}).then(response => {
+    vAPI.showAdsDebug = response
+});
+/* end of Adn */
+
 vAPI.DOMFilterer = class {
     constructor() {
         this.commitTimer = new vAPI.SafeAnimationFrame(
@@ -486,7 +496,11 @@ vAPI.DOMFilterer = class {
 
     explodeCSS(css) {
         const out = [];
-        const cssHide = `{${vAPI.hideStyle}}`;
+        var cssHide = `{${vAPI.hideStyle}}`;
+        // ADN
+        if (vAPI.showAdsDebug) {
+            cssHide = `{${vAPI.notHideStyle}}`;
+        }
         const blocks = css.trim().split(/\n\n+/);
         for ( const block of blocks ) {
             if ( block.endsWith(cssHide) === false ) { continue; }
@@ -705,7 +719,7 @@ vAPI.DOMFilterer = class {
         if ( collapseToken === undefined ) {
             collapseToken = vAPI.randomToken();
             vAPI.userStylesheet.add(
-                `[${collapseToken}]\n{display:none!important;}`,
+                `[${collapseToken}]\n{${vAPI.showAdsDebug ? vAPI.notHideStyle : vAPI.hideStyle}}`, // Adn
                 true
             );
         }
@@ -913,6 +927,8 @@ vAPI.DOMFilterer = class {
                 if ( iframes.length !== 0 ) {
                     addIFrames(iframes);
                 }
+                // remove process-adn attri, allowing for parsing again #2236
+                node.removeAttribute('process-adn')
             }
             process();
         }
@@ -1094,15 +1110,48 @@ vAPI.DOMFilterer = class {
             const css = result.injectedCSS;
             if ( typeof css === 'string' && css.length !== 0 ) {
                 domFilterer.addCSS(css);
+                //ADN tmp fix: hiding - local iframe without src
+                /* old adn solution
+                const isSpecialLocalIframes = (location.href=="about:blank" || location.href=="") && (window.self !== window.top)
+                */
                 mustCommit = true;
             }
             const selectors = result.excepted;
             if ( Array.isArray(selectors) && selectors.length !== 0 ) {
                 domFilterer.exceptCSSRules(selectors);
             }
+            // ADN: ad check on new elements found
+            let allSelectors = "";
+            for(const key in result) {
+              if(result[key] != "") {
+                let injected = result[key];
+                let selectors;
+                if (typeof injected === 'string') {
+                    if (vAPI.showAdsDebug) {
+                        selectors = injected.split(`\n{${vAPI.notHideStyle}}`)[0]
+                    } else {
+                        selectors = injected.split(`\n{${vAPI.hideStyle}}`)[0] // ADN
+                    }
+                } else {
+                    selectors = injected.join(",")
+                }
+                allSelectors += (allSelectors == "" ? "" : ",") + selectors;
+              }
+            }
+            // Adn
+            let nodes;
+            if (allSelectors != "") {
+              nodes = document.querySelectorAll(allSelectors);
+              for ( const node of nodes ) {
+                  vAPI.adCheck && vAPI.adCheck(node);
+              }
+            }
+            // end of Adn
+
         }
         if ( hasPendingNodes() ) {
             surveyTimer.start(1);
+            bootstrapAdnTimer.start(1); // ADN
         }
         if ( mustCommit ) {
             surveyResultMissCount = 0;
@@ -1144,6 +1193,7 @@ vAPI.DOMFilterer = class {
             ));
             if ( hasPendingNodes() ) {
                 surveyTimer.start();
+                bootstrapAdnTimer.start(); // ADN
             }
         },
         onDOMChanged: function(addedNodes) {
@@ -1160,6 +1210,7 @@ vAPI.DOMFilterer = class {
             }
             if ( hasPendingNodes() ) {
                 surveyTimer.start(1);
+                bootstrapAdnTimer.start(1); // ADN
             }
         }
     };
@@ -1176,6 +1227,7 @@ vAPI.DOMFilterer = class {
         stopped = true;
         pendingLists.length = 0;
         surveyTimer.clear();
+        bootstrapAdnTimer.clear(); // ADN
         if ( self.vAPI instanceof Object === false ) { return; }
         if ( self.vAPI.domWatcher instanceof Object ) {
             self.vAPI.domWatcher.removeListener(domWatcherInterface);
@@ -1190,12 +1242,98 @@ vAPI.DOMFilterer = class {
 /******************************************************************************/
 /******************************************************************************/
 
+// ADN function to go through the selectors from bootstrapPhase2 and run the ad check on the detected ad nodes
+// https://github.com/dhowe/AdNauseam/issues/1838
+
+// avoid running too many times;
+const intervalTime = window.self === window.top ? 4000 : 8000
+const maxTimesRunBootstrapPhaseAdn = window.self === window.top ? 64 : 8;
+var lastRunBootstrapPhaseAdn = null; 
+var bootstrapPhaseAdnCounter = 0
+var specificCosmeticFilters = null
+const bootstrapPhaseAdn = function (response) {
+    if (response && response.specificCosmeticFilters && response.specificCosmeticFilters.injectedCSS) {
+        //let specificCosmeticFilters = response.specificCosmeticFilters
+        specificCosmeticFilters =  response.specificCosmeticFilters.injectedCSS.split('{')[0]
+    }
+    // check last time ran
+    let now = Date.now()
+    // run if its first time running or if the last time it ran was more than 1 sec ago
+    if (vAPI && (lastRunBootstrapPhaseAdn === null || (lastRunBootstrapPhaseAdn && now - lastRunBootstrapPhaseAdn > intervalTime))) {
+        // avoid it running too many times;
+        if (bootstrapPhaseAdnCounter >= maxTimesRunBootstrapPhaseAdn) {
+            bootstrapAdnTimer.clear();
+            return; 
+        }
+        lastRunBootstrapPhaseAdn = Date.now()
+        bootstrapPhaseAdnCounter++;
+        if (specificCosmeticFilters) {
+            processFilters(specificCosmeticFilters)
+        } else {
+            // avoid exception
+            if (typeof vAPI.domFilterer == 'undefined' || vAPI.domFilterer == null) {
+                // console.warn("[ADN] vAPI.domFilterer undefined") // to do, why this is happening?
+                return;
+            }
+
+            // get declarative selectors
+            var allSelectors = vAPI.domFilterer.getAllSelectors(0b11)
+            // 0b11 avoid getting procedural selectors, they are now handled in the contentscript-extra.js
+            
+            // parse declarative filters
+            if (allSelectors.declarative && allSelectors.declarative.length > 0) {
+                processFilters(allSelectors.declarative)
+            }
+        }
+    }
+}
+
+const queryCheck = (s) => document.createDocumentFragment().querySelector(s)
+
+const isSelectorValid = (selector) => {
+    //console.warn("typeof selector", selector[0])
+    try { queryCheck(selector) } catch { 
+        // debug
+        selector[0].split(',\n').forEach(s => {
+            try { queryCheck(s) } catch {
+                console.warn("[ADN] bad selector: " + s);
+            }
+        })
+        return false
+    }
+    return true
+}
+
+
+const processFilters = function (selectors) {
+    if (!isSelectorValid(selectors)) {
+        //console.warn("[ADN] invalid selector: " + selectors);
+        return;
+    }
+    let nodes = document.querySelectorAll(selectors);
+    for ( const node of nodes ) {
+        vAPI.adCheck && vAPI.adCheck(node);
+    }
+}
+
 // vAPI.bootstrap:
 //   Bootstrapping allows all components of the content script
 //   to be launched if/when needed.
 
+// create BootstraAdnTimer, to use the "SafeAnimationFrame" class when doing the delays
+const bootstrapAdnTimer = new vAPI.SafeAnimationFrame(bootstrapPhaseAdn)
+
 {
     const onDomReady = ( ) => {
+        /*
+        ADN catch ads with delay: https://github.com/dhowe/AdNauseam/issues/1838
+        This is a workaround to catch ads that apear with a certain delay but don't trigger the DomWatcher, such as dockduckgo 
+        */
+        if (vAPI.domFilterer) {
+            bootstrapPhaseAdn()
+            bootstrapAdnTimer.start(2000)
+        }
+        
         // This can happen on Firefox. For instance:
         // https://github.com/gorhill/uBlock/issues/1893
         if ( window.location === null ) { return; }
@@ -1260,6 +1398,8 @@ vAPI.DOMFilterer = class {
         if ( response instanceof Object === false ) { return; }
         vAPI.bootstrap = undefined;
 
+        if (response && response.prefs) vAPI.prefs = response.prefs; // ADN
+
         // cosmetic filtering engine aka 'cfe'
         const cfeDetails = response && response.specificCosmeticFilters;
         if ( !cfeDetails || !cfeDetails.ready ) {
@@ -1278,14 +1418,14 @@ vAPI.DOMFilterer = class {
         vAPI.noSpecificCosmeticFiltering = noSpecificCosmeticFiltering;
         vAPI.noGenericCosmeticFiltering = noGenericCosmeticFiltering;
 
-        if ( noSpecificCosmeticFiltering && noGenericCosmeticFiltering ) {
+        if ( noSpecificCosmeticFiltering && noGenericCosmeticFiltering || response.prefs.hidingDisabled) { // ADN
             vAPI.domFilterer = null;
             vAPI.domSurveyor = null;
         } else {
             const domFilterer = vAPI.domFilterer = new vAPI.DOMFilterer();
             if ( noGenericCosmeticFiltering || cfeDetails.disableSurveyor ) {
                 vAPI.domSurveyor = null;
-            }
+            } 
             domFilterer.exceptions = cfeDetails.exceptionFilters;
             domFilterer.addCSS(cfeDetails.injectedCSS);
             domFilterer.addProceduralSelectors(cfeDetails.proceduralFilters);
@@ -1300,6 +1440,8 @@ vAPI.DOMFilterer = class {
             }
             vAPI.domSurveyor.start(cfeDetails);
         }
+
+        bootstrapPhaseAdn(response) // Adn
 
         const readyState = document.readyState;
         if ( readyState === 'interactive' || readyState === 'complete' ) {
