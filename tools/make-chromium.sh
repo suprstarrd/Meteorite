@@ -1,34 +1,38 @@
 #!/usr/bin/env bash
 #
-# This script assumes a linux environment
+# This script assumes an OS X environment
 
-set -e
 
-echo "*** uBlock0.chromium: Creating web store package"
 
-DES=dist/build/uBlock0.chromium
+echo "*** AdNauseam.chromium: Creating chrome package"
+
+if [ "$1" = experimental ]; then
+    DES=dist/build/experimental/adnauseam.chromium
+else
+    DES=dist/build/adnauseam.chromium
+fi
+
 rm -rf $DES
 mkdir -p $DES
 
-echo "*** uBlock0.chromium: Copying common files"
+echo "*** AdNauseam.chromium: Copying common files"
 bash ./tools/copy-common-files.sh $DES
 
 # Chromium-specific
-echo "*** uBlock0.chromium: Copying chromium-specific files"
-cp platform/chromium/*.js   $DES/js/
-cp platform/chromium/*.html $DES/
-cp platform/chromium/*.json $DES/
+echo "*** AdNauseam.chromium: Copying chromium-specific files"
+cp platform/chromium/*.js          $DES/js/
+cp platform/chromium/*.html        $DES/
 
 # Chrome store-specific
-cp -R $DES/_locales/nb $DES/_locales/no
+[[ -e $DES/_locales/nb ]] && cp -R $DES/_locales/nb $DES/_locales/no
 
-echo "*** uBlock0.chromium: Generating meta..."
+echo "*** AdNauseam: Generating meta..."
 python3 tools/make-chromium-meta.py $DES/
 
 if [ "$1" = all ]; then
-    echo "*** uBlock0.chromium: Creating plain package..."
+    echo "*** AdNauseam.chromium: Creating package..."
     pushd $(dirname $DES/) > /dev/null
-    zip uBlock0.chromium.zip -qr $(basename $DES/)/*
+    zip artifacts/adnauseam.chromium.zip -qr $(basename $DES/)/*
     popd > /dev/null
 elif [ -n "$1" ]; then
     echo "*** uBlock0.chromium: Creating versioned package..."
@@ -37,4 +41,4 @@ elif [ -n "$1" ]; then
     popd > /dev/null
 fi
 
-echo "*** uBlock0.chromium: Package done."
+echo "*** AdNauseam.chromium: Package done."

@@ -39,7 +39,7 @@
     "message": "මාගේ නීති",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "විශ්වාසදායී අඩවි",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "ගමනාන්තය",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "විශ්වාසදායක අඩවි නියෝග මඟින් uBlock Origin අක්‍රිය කළ යුත්තේ කුමන වෙබ් පිටු මතද යන්න නියම කරයි. පේළියකට එක් ඇතුළත් කිරීමක් පමණි.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "…ආයාත කර එකතු කරන්න",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "නිර්යාත…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "මාගේ-ublock-විශ්වාසදායී-අඩවි_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "වෙනස්කම් යොදන්න",
     "description": "English: Apply changes"
   },

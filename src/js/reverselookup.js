@@ -77,7 +77,7 @@ const initWorker = function() {
 
     const onListLoaded = function(details) {
         const entry = entries.get(details.assetKey);
-
+        entry.content = details.content; // ADN
         // https://github.com/gorhill/uBlock/issues/536
         // Use assetKey when there is no filter list title.
 
@@ -117,7 +117,9 @@ const initWorker = function() {
             })
         );
     }
-    return Promise.all(promises);
+    return Promise.all(promises).then(data => {
+        return entries; // adn
+    });
 };
 
 const fromNetFilter = async function(rawFilter) {
@@ -212,6 +214,7 @@ export const staticFilteringReverseLookup = {
     fromNetFilter,
     fromExtendedFilter,
     resetLists,
+    initWorker: initWorker, // ADN
     shutdown: stopWorker
 };
 

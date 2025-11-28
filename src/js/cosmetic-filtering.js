@@ -26,7 +26,15 @@ import { StaticExtFilteringHostnameDB } from './static-ext-filtering-db.js';
 import { entityFromHostname } from './uri-utils.js';
 import logger from './logger.js';
 import µb from './background.js';
+import adnauseam from './adn/core.js'
 
+/******************************************************************************/
+/******************************************************************************/
+
+//ADN google adsense collection
+//ublock also added something similar to address google ads at src/web_accessible_resources/googlesyndication_adsbygoogle.js
+// TO DO - add these entries to a separate config file 
+const fakeEntries = '.adsbygoogle, ins[id*="aswift"] > iframe, iframe[id^="google_ads_frame"], #google_image_div, #mys-content'.split(", ");
 /******************************************************************************/
 /******************************************************************************/
 
@@ -704,7 +712,11 @@ CosmeticFilteringEngine.prototype.retrieveGenericSelectors = function(request) {
         }
     }
 
-    if ( selectorsSet.size === 0 && excepted.length === 0 ) { return; }
+    if ( selectorsSet.size === 0 && excepted.length === 0 ) { 
+      // ADN: return fake hide anyway
+      const out = {fake: fakeEntries.join(", ")}
+      return out;
+    }
 
     const out = { injectedCSS: '', excepted, };
     const selectors = Array.from(selectorsSet);
@@ -719,14 +731,19 @@ CosmeticFilteringEngine.prototype.retrieveGenericSelectors = function(request) {
     }
 
     if ( selectors.length === 0 ) { return out; }
-
-    out.injectedCSS = `${selectors.join(',\n')}\n{display:none!important;}`;
-    vAPI.tabs.insertCSS(request.tabId, {
-        code: out.injectedCSS,
-        frameId: request.frameId,
-        matchAboutBlank: true,
-        runAt: 'document_start',
-    });
+    
+    if (!adnauseam.contentPrefs(request.hostname).hidingDisabled) { // ADN Don't inject user stylesheets if hiding is disabled
+        out.injectedCSS = `${selectors.join(',\n')}\n{display:none!important;}`;
+        if (µb.hiddenSettings.showAdsDebug) {
+            out.injectedCSS = `${selectors.join(',\n')}\n{/*display:none!important;*/}`; // ADN showAdsDebug option
+        }
+        vAPI.tabs.insertCSS(request.tabId, {
+            code: out.injectedCSS,
+            frameId: request.frameId,
+            matchAboutBlank: true,
+            runAt: 'document_start',
+        });
+    }
 
     return out;
 };
@@ -756,9 +773,12 @@ CosmeticFilteringEngine.prototype.retrieveSpecificSelectors = function(
         proceduralFilters: [],
         convertedProceduralFilters: [],
         disableSurveyor: this.lowlyGeneric.size === 0,
+        fake:[] // ADN
     };
     const injectedCSS = [];
 
+    const injectedHideFilters = []; // ADN this needs to outside of if since in ADN there is no "noCosmeticFiltering" option available
+    
     if (
         options.noSpecificCosmeticFiltering !== true ||
         options.noGenericCosmeticFiltering !== true
@@ -831,7 +851,7 @@ CosmeticFilteringEngine.prototype.retrieveSpecificSelectors = function(
                 }
                 const cssRule = this.cssRuleFromProcedural(pfilter);
                 if ( cssRule === undefined ) { continue; }
-                injectedCSS.push(cssRule);
+                if (!µb.hiddenSettings.showAdsDebug) injectedCSS.push(cssRule);
                 proceduralSet.delete(json);
                 out.convertedProceduralFilters.push(json);
             }
@@ -886,8 +906,12 @@ CosmeticFilteringEngine.prototype.retrieveSpecificSelectors = function(
         runAt: 'document_start',
     };
 
+    // ADN Don't inject user stylesheets if hiding is disabled
     // Inject all declarative-based filters as a single stylesheet.
-    if ( injectedCSS.length !== 0 ) {
+    if (
+        !adnauseam.contentPrefs(request.hostname).hidingDisabled &&
+        injectedCSS.length !== 0
+    ) {
         out.injectedCSS = injectedCSS.join('\n\n');
         details.code = out.injectedCSS;
         if ( request.tabId !== undefined && options.dontInject !== true ) {
@@ -895,17 +919,28 @@ CosmeticFilteringEngine.prototype.retrieveSpecificSelectors = function(
         }
     }
 
+
     // CSS selectors for collapsible blocked elements
     if ( cacheEntry ) {
         const networkFilters = [];
         if ( cacheEntry.retrieveNet(networkFilters) ) {
-            details.code = `${networkFilters.join('\n')}\n{display:none!important;}`;
+            if (!µb.hiddenSettings.showAdsDebug) { // Adn
+                details.code = `${networkFilters.join('\n')}\n{display:none!important;}`;
+            } else {
+                details.code = `${networkFilters.join('\n')}\n{/*display:none!important;*/}`;
+            }
             if ( request.tabId !== undefined && options.dontInject !== true ) {
                 vAPI.tabs.insertCSS(request.tabId, details);
             }
         }
-    }
 
+        if ( out.fake.length !== 0 ) {
+            details.code = out.fake + '\n{height:0px!important;}';
+            vAPI.tabs.insertCSS(request.tabId, details);
+            out.networkFilters = '';
+        }
+
+    }
     return out;
 };
 

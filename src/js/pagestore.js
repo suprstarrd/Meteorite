@@ -41,6 +41,9 @@ import staticNetFilteringEngine from './static-net-filtering.js';
 import webext from './webext.js';
 import µb from './background.js';
 
+import adnauseam from './adn/core.js' // ADN
+import dnt from './adn/dnt.js'; // ADN
+
 /*******************************************************************************
 
 A PageRequestStore object is used to store net requests in two ways:
@@ -584,6 +587,14 @@ const PageStore = class {
                  .getNetFilteringSwitch();
     }
 
+    /* ADN - Strict Block List Filtering */
+    getIsPageStrictBlocked() {
+        return µb.tabContextManager
+                 .mustLookup(this.tabId)
+                 .getIsPageStrictBlocked();
+    }
+    /* end of ADN */
+
     toggleNetFilteringSwitch(url, scope, state) {
         µb.toggleNetFilteringSwitch(url, scope, state);
         this.netFilteringCache.empty();
@@ -765,6 +776,14 @@ const PageStore = class {
         journal.length = 0;
     }
 
+    /*
+     * Returns
+     *   0 -> allow
+     *   1 -> block (including redirects)
+     *   2 -> exception-for-cname-on-block ?? [allow]
+     *   3 -> abort
+     *   4 -> adn-allowed
+     */
     filterRequest(fctxt) {
         fctxt.filter = undefined;
         fctxt.redirectURL = undefined;
@@ -808,7 +827,7 @@ const PageStore = class {
         }
 
         const requestType = fctxt.type;
-        const loggerEnabled = logger.enabled;
+        const loggerEnabled = logger.enabled || µb.userSettings.eventLogging;
 
         // Dynamic URL filtering.
         let result = sessionURLFiltering.evaluateZ(
@@ -816,8 +835,19 @@ const PageStore = class {
             fctxt.url,
             requestType
         );
-        if ( result !== 0 && loggerEnabled ) {
+        if ( result !== 0 || loggerEnabled ) {
             fctxt.filter = sessionURLFiltering.toLogData();
+        }
+
+        // ADN: now check our firewall (top precedence) if DNT enabled
+        if ( result === 0 && dnt.enabled() ) {
+            if ( dnt.mustAllow(fctxt) ) {
+                  result = 2;
+                  if ( logger.enabled ) { // logger
+                      this.logData = dnt.firewall.toLogData();
+                  }
+                  if (!cacheableResult) return result;
+            }
         }
 
         // Dynamic hostname/type filtering.
@@ -829,13 +859,18 @@ const PageStore = class {
             );
             if ( result !== 0 && result !== 3 && loggerEnabled ) {
                 fctxt.filter = sessionFirewall.toLogData();
+                // ADN: local strict blocks hit here (result==4)
             }
         }
 
         // Static filtering has lowest precedence.
         const snfe = staticNetFilteringEngine;
-        if ( result === 0 || result === 3 ) {
-            result = snfe.matchRequest(fctxt);
+        if ( result === 0 || result === 3 || result === 4) { // ADN: added result === 4 scenario
+
+           const snfe = staticNetFilteringEngine;
+           const updatedResult = snfe.matchRequest(fctxt);
+           result = result === 4 ? 4 : updatedResult;
+           // End of ADN: keep result === 4 so that static filtering info can be added later
             if ( result !== 0 ) {
                 if ( loggerEnabled ) {
                     fctxt.setFilter(snfe.toLogData());
@@ -850,6 +885,11 @@ const PageStore = class {
                 ) {
                     return 2;
                 }
+            }
+            if ( result !== 2 && adnauseam.mustAllowRequest(result, fctxt)) {
+                result = 4; // ADN: adnauseamAllowed
+                if (fctxt.filter) fctxt.filter.result = 4;
+                if (!cacheableResult) return result;
             }
         }
 

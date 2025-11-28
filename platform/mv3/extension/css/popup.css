@@ -195,3 +195,135 @@ body.needReload #refresh {
 :root.desktop .tool:hover {
     background-color: var(--popup-toolbar-surface-hover);
 }
+
+
+/* ADN specific styles */
+
+.adn-section {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px solid var(--border-color-normal);
+}
+
+.adn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.adn-header label {
+    font-weight: 600;
+    color: var(--fg-color-emphasis);
+}
+
+#adn-stats {
+    font-size: 0.85em;
+    color: var(--fg-color-dimmed);
+}
+
+.adn-actions {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.adn-actions .tool {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+    padding: 0.4em;
+    background: var(--surface-1);
+    border: 1px solid var(--border-color-normal);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+.adn-actions .tool:hover {
+    background: var(--surface-2);
+}
+
+.adn-vault-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 0.5em;
+}
+
+.adn-vault-list.hidden {
+    display: none;
+}
+
+.adn-vault-item {
+    display: flex;
+    gap: 0.5em;
+    padding: 0.5em;
+    margin: 0.3em 0;
+    background: var(--surface-1);
+    border: 1px solid var(--border-color-normal);
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.adn-vault-item.clicked {
+    background: var(--surface-green);
+    border-color: var(--green-60);
+}
+
+.adn-vault-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.adn-vault-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.adn-vault-title {
+    font-weight: 600;
+    color: var(--fg-color-emphasis);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.adn-vault-text {
+    color: var(--fg-color-dimmed);
+    font-size: 0.9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.2em;
+}
+
+.adn-vault-url {
+    color: var(--fg-color-dimmed2);
+    font-size: 0.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.2em;
+}
+
+.adn-vault-status {
+    font-size: 0.75em;
+    color: var(--fg-color-dimmed2);
+    margin-top: 0.3em;
+}
+
+.adn-vault-status.clicked {
+    color: var(--green-60);
+}
+
+.adn-vault-empty {
+    text-align: center;
+    padding: 2em 1em;
+    color: var(--fg-color-dimmed);
+    font-size: 0.9em;
+}

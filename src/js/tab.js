@@ -39,6 +39,7 @@ import scriptletFilteringEngine from './scriptlet-filtering.js';
 import staticNetFilteringEngine from './static-net-filtering.js';
 import webext from './webext.js';
 import µb from './background.js';
+import adnauseam from './adn/core.js' // ADN
 
 /******************************************************************************/
 /******************************************************************************/
@@ -85,7 +86,7 @@ import µb from './background.js';
 
 // https://github.com/gorhill/uBlock/issues/99
 // https://github.com/gorhill/uBlock/issues/991
-// 
+//
 // popup:
 //   Test/close target URL
 // popunder:
@@ -479,7 +480,7 @@ master switch and dynamic filtering rules can be evaluated now properly even
 in the absence of a PageStore object, this was not the case before.
 
 Also, the TabContext object will try its best to find a good candidate root
-document URL for when none exists. This takes care of 
+document URL for when none exists. This takes care of
 <https://github.com/chrisaljoudi/uBlock/issues/1001>.
 
 The TabContext manager is self-contained, and it takes care to properly
@@ -614,7 +615,10 @@ housekeep itself.
         this.onGCBarrier = false;
         this.netFiltering = true;
         this.netFilteringReadTime = 0;
-
+        /* ADN - Strict Block List Filtering */
+        this.strictBlockFiltering = true;
+        this.strictBlockFilteringReadTime = 0;
+        /* end of ADN */
         tabContexts.set(tabId, this);
     };
 
@@ -678,6 +682,7 @@ housekeep itself.
     //   context.
     TabContext.prototype.update = function() {
         this.netFilteringReadTime = 0;
+        this.strictBlockFilteringReadTime = 0; // Adn
         if ( this.stack.length === 0 ) {
             this.rawURL =
             this.normalURL =
@@ -726,7 +731,7 @@ housekeep itself.
     };
 
     TabContext.prototype.getNetFilteringSwitch = function() {
-        if ( this.netFilteringReadTime > µb.netWhitelistModifyTime ) {
+        if ( this.netFilteringReadTime > µb.netAllowlistModifyTime ) {
             return this.netFiltering;
         }
         // https://github.com/chrisaljoudi/uBlock/issues/1078
@@ -742,6 +747,26 @@ housekeep itself.
         this.netFilteringReadTime = Date.now();
         return this.netFiltering;
     };
+
+    /* ADN */
+    TabContext.prototype.getIsPageStrictBlocked = function() {
+        if ( this.strictBlockFilteringReadTime > µb.strictBlockFilteringModifyTime ) {
+            return this.strictBlockFiltering;
+        }
+        // https://github.com/chrisaljoudi/uBlock/issues/1078
+        // Use both the raw and normalized URLs.
+        this.strictBlockFiltering = µb.getIsPageStrictBlocked(this.normalURL);
+        if (
+            this.strictBlockFiltering &&
+            this.rawURL !== this.normalURL &&
+            this.rawURL !== ''
+        ) {
+            this.strictBlockFiltering = µb.getIsPageStrictBlocked(this.rawURL);
+        }
+        this.strictBlockFilteringReadTime = Date.now();
+        return this.strictBlockFiltering;
+    };
+    /* End of ADN */
 
     // These are to be used for the API of the tab context manager.
 
@@ -1028,7 +1053,7 @@ vAPI.tabs = new vAPI.Tabs();
 // Permanent page store for behind-the-scene requests. Must never be removed.
 //
 // https://github.com/uBlockOrigin/uBlock-issues/issues/651
-//   The whitelist status of the tabless page store will be determined by
+//   The allowlist status of the tabless page store will be determined by
 //   the document context (if present) of the network request.
 
 {
@@ -1072,17 +1097,22 @@ vAPI.tabs = new vAPI.Tabs();
         return color;
     };
 
-    const updateBadge = (tabId) => {
+    const updateBadge = (tabId, isClick) => {
         let parts = tabIdToDetails.get(tabId);
         tabIdToDetails.delete(tabId);
 
         let state = 0;
         let badge = '';
         let color = '#666';
-
+        let count = 0; // ADN
+        let isStrict = 0 // ADN
+        
         const pageStore = µb.pageStoreFromTabId(tabId);
+        let pageDomain = pageStore ? domainFromHostname(pageStore.tabHostname) : null; // ADN;
+        
         if ( pageStore !== null ) {
             state = pageStore.getNetFilteringSwitch() ? 1 : 0;
+            isStrict = pageStore.getIsPageStrictBlocked() ? 1 : 0 // ADN
             if ( state === 1 ) {
                 if ( (parts & 0b0010) !== 0 ) {
                     const blockCount = pageStore.counts.blocked.any;
@@ -1096,6 +1126,10 @@ vAPI.tabs = new vAPI.Tabs();
                     );
                 }
             }
+
+          state = adnauseam.getIconState(state, pageDomain, isClick, isStrict); // ADN
+          count = adnauseam.currentCount(pageStore.rawURL); // ADN
+          badge = µb.formatCount(count);
         }
 
         // https://www.reddit.com/r/uBlockOrigin/comments/d33d37/
@@ -1104,6 +1138,12 @@ vAPI.tabs = new vAPI.Tabs();
         }
 
         vAPI.setIcon(tabId, { parts, state, badge, color });
+         /* Adn start */
+         isClick && vAPI.setTimeout(( ) => {
+             state = adnauseam.getIconState(state, pageDomain, 0, isStrict);
+             vAPI.setIcon(tabId, { parts, state, badge, color });
+        }, 600);
+        /* Adn ends */
     };
 
     // parts: bit 0 = icon
@@ -1111,15 +1151,14 @@ vAPI.tabs = new vAPI.Tabs();
     //        bit 2 = badge color
     //        bit 3 = hide badge
 
-    µb.updateToolbarIcon = function(tabId, newParts = 0b0111) {
-        if ( this.readyToFilter === false ) { return; }
+    µb.updateToolbarIcon = function(tabId, newParts = 0b0111, isClick) {
         if ( typeof tabId !== 'number' ) { return; }
         if ( vAPI.isBehindTheSceneTabId(tabId) ) { return; }
         const currentParts = tabIdToDetails.get(tabId);
         if ( currentParts === newParts ) { return; }
         if ( currentParts === undefined ) {
             self.requestIdleCallback(
-                ( ) => updateBadge(tabId),
+                ( ) => updateBadge(tabId, isClick),
                 { timeout: 701 }
             );
         } else {

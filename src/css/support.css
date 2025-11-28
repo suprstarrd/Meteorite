@@ -59,6 +59,12 @@ body[data-should-update-lists]:not(.updated) .e .createEntry {
     pointer-events: none;
 }
 
+/* adn specific button for report filter issue */
+body.adn-unchecked .e .createEntry { 
+    opacity: 0.25;
+    pointer-events: none;
+}
+
 body:not([data-should-update-lists]) .shouldUpdate {
     display: none;
     }

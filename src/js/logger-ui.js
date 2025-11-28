@@ -35,6 +35,7 @@ const logDate = new Date();
 const logDateTimezoneOffset = logDate.getTimezoneOffset() * 60;
 const loggerEntries = [];
 
+let dntDomains = [];
 const COLUMN_TIMESTAMP = 0;
 const COLUMN_FILTER = 1;
 const COLUMN_MESSAGE = 1;
@@ -205,6 +206,7 @@ const nodeFromURL = function(parent, url, re, type) {
         case 'other':
         case 'script':
         case 'xhr':
+        case 'advisit': // adn
             href = `code-viewer.html?url=${encodeURIComponent(href)}`;
             break;
         default:
@@ -361,6 +363,13 @@ const processLoggerEntries = function(response) {
 };
 
 /******************************************************************************/
+const isDNTDomain = function(domain) { // ADN
+      for (var i = 0; i < dntDomains.length; i++) {
+        if (domain == dntDomains[i])
+          return true;
+      }
+      return false;
+}
 
 const parseLogEntry = function(details) {
     // Patch realm until changed all over codebase to make this unnecessary
@@ -397,6 +406,7 @@ const parseLogEntry = function(details) {
 
     // Cell 1, 2
     if ( entry.filter !== undefined ) {
+
         textContent.push(entry.filter.raw);
         if ( entry.filter.result === 1 ) {
             textContent.push('--');
@@ -404,14 +414,22 @@ const parseLogEntry = function(details) {
             textContent.push('++');
         } else if ( entry.filter.result === 3 ) {
             textContent.push('**');
+        } else if ( entry.filter.result === 4 ) {
+            textContent.push('~~'); //ADN: allow
         } else if ( entry.filter.source === 'redirect' ) {
             textContent.push('<<');
         } else {
             textContent.push('');
         }
+
     } else {
-        textContent.push('', '');
+        if (isDNTDomain(entry.domain)) {
+          textContent.push("*" + entry.domain + "*allow");
+          textContent.push('@@');  //ADN: DNT
+        }
+        else textContent.push('', '');
     }
+
 
     // Cell 3
     textContent.push(normalizeToStr(entry.docHostname));
@@ -667,6 +685,13 @@ const viewPort = (( ) => {
         const divcl = div.classList;
         let span;
 
+        // Type
+        if ( details.type !== undefined ) {
+            if ( details.type === 'advisit' ) {
+                dom.attr(div, 'data-advisit', 'advisit');
+            }
+        }
+
         // Realm
         if ( details.realm !== undefined ) {
             divcl.add(details.realm + 'Realm');
@@ -730,6 +755,10 @@ const viewPort = (( ) => {
             dom.attr(div, 'data-status', '2');
         } else if ( cells[COLUMN_RESULT] === '**' ) {
             dom.attr(div, 'data-status', '3');
+        } else if ( cells[COLUMN_RESULT] === '~~' ) { // ADN: allow
+            dom.attr(div, 'data-status', '4');
+        } else if ( cells[COLUMN_RESULT] === '@@' ) {
+            dom.attr(div, 'data-status', '5');
         } else if ( cells[COLUMN_RESULT] === '<<' ) {
             divcl.add('redirect');
         }
@@ -997,6 +1026,10 @@ const onLogBufferRead = function(response) {
         }
     }
 
+
+    dntDomains = response.dntDomains; // ADN
+
+
     // Tab id of currently active tab
     let activeTabIdChanged = false;
     if ( response.activeTabId ) {
@@ -1078,7 +1111,7 @@ const readLogBuffer = (( ) => {
         timer.on(1200);
     };
 })();
- 
+
 /******************************************************************************/
 
 const pageSelectorChanged = function() {
@@ -1322,7 +1355,7 @@ dom.on(document, 'keydown', ev => {
             dom.cl.toggle(row, 'exceptored', status);
             return;
         }
-        
+
         // Create static filter
         if ( target.id === 'createStaticFilter' ) {
             ev.stopPropagation();
@@ -1567,6 +1600,15 @@ dom.on(document, 'keydown', ev => {
         const nodeFromFilter = function(filter, lists) {
             const fragment = document.createDocumentFragment();
             const template = qs$('#filterFinderListEntry > span');
+
+            // AdNauseam
+            if (lists == "AdNauseam") {
+              const span = document.createElement("span");
+              span.innerText = "AdNauseam(internal)";
+              fragment.appendChild(span);
+              return fragment;
+            }
+
             for ( const list of lists ) {
                 const span = dom.clone(template);
                 let a = qs$(span, 'a:nth-of-type(1)');
@@ -1607,11 +1649,19 @@ dom.on(document, 'keydown', ev => {
             }
             // https://github.com/gorhill/uBlock/issues/2179
             if ( rows[1].children[1].childElementCount === 0 ) {
+              if (rawFilter.indexOf("height:0px!important")) {
+               // this is AdNauseam google ads filters
+               bestMatchFilter = rawFilter;
+               rows[1].children[1].appendChild(nodeFromFilter(
+                   bestMatchFilter,"AdNauseam"
+               ));
+             } else {
                 i18n.safeTemplateToDOM(
                     'loggerStaticFilteringFinderSentence2',
                     { filter: rawFilter },
                     rows[1].children[1]
                 );
+             }
             }
         };
 
@@ -3013,6 +3063,28 @@ const loggerSettings = (( ) => {
     dom.on('#loggerSettings', 'click', toggleOn);
 
     return settings;
+})();
+
+/******************************************************************************/
+
+// ADN color key dialog
+
+const keyColorPopup = (( ) => {
+    const toggleOn = function() {
+        const dialog = modalDialog.create(
+            '#colorKeyDialog',
+            dialog => {
+                toggleOff(dialog);
+            }
+        );
+        modalDialog.show();
+    };
+
+    const toggleOff = function(dialog) {
+        viewPort.updateLayout();
+    };
+
+    dom.on('#loggerColorKey', 'click', toggleOn);
 })();
 
 /******************************************************************************/

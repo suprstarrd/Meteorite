@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=560, initial-scale=1">
 <meta name="color-scheme" content="light dark" />
+<link rel="stylesheet" href="css/fonts/stylesheet.css">
 <link rel="stylesheet" href="css/themes/default.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/fa-icons.css">
@@ -27,10 +28,7 @@
         <button id="showpopup" class="iconified notext disabled needdom" data-i18n-title="loggerPopupPanelTip" type="button"><span class="fa-icon"><svg><use href="/img/ublock-defs.svg#ubo-solid"></use></svg></span><span class="hover"></span></button>
     </div>
     <div>
-        <button class="logConsole iconified notext" title="Show/hide console" type="button"><span class="fa-icon">terminal</span><span class="hover"></span></button>
-    </div>
-    <div>
-        <a class="wikilink fa-icon" href="https://github.com/gorhill/uBlock/wiki/The-logger" target="_blank" data-i18n-title="loggerInfoTip">book</a>
+        <a id="info" class="button fa-icon" href="https://github.com/dhowe/AdNauseam/wiki/The-logger" target="_blank" data-i18n-title="loggerInfoTip">info-circle</a>
     </div>
 </div>
 
@@ -62,7 +60,13 @@
                         <input type="search" placeholder="logFilterPrompt" spellcheck="false">
                         <span id="filterExprButton" class="button fa-icon expanded" data-i18n-title="loggerRowFiltererBuiltinTip">angle-up</span>
                         <div id="filterExprPicker">
-                            <div><span data-filtex="!" data-i18n="loggerRowFiltererBuiltinNot"></span><span data-filtex="\x1F--\x1F|\x1F<<\x1F|\x1F##" data-i18n="loggerRowFiltererBuiltinBlocked"></span><span data-filtex="\x1F\+\+\x1F|\x1F\*\*\x1F|\x1F#@#" data-i18n="loggerRowFiltererBuiltinAllowed"></span><span data-filtex="[$,](?:csp|permissions|removeparam|redirect-rule|replace|urlskip|ur[il]transform)=|\x1F\<\<\x1F" data-i18n="loggerRowFiltererBuiltinModified"></span></div>
+                            <div>
+															<span data-filtex="!" data-i18n="loggerRowFiltererBuiltinNot"></span>
+															<span data-filtex="\x1F--\x1F|\x1F<<\x1F|\x1F##" data-i18n="loggerRowFiltererBuiltinBlocked"></span>
+															<span data-filtex="\x1F\+\+\x1F|\x1F\*\*\x1F|\x1F#@#" data-i18n="loggerRowFiltererBuiltinAllowed"></span>
+															<span data-filtex="[$,](?:csp|permissions|removeparam|redirect-rule|replace|urlskip|ur[il]transform)=|\x1F\<\<\x1F" data-i18n="loggerRowFiltererBuiltinModified"></span>
+                              <span data-filtex="~~">adn-<span style="pointer-events: none;" data-i18n="loggerRowFiltererBuiltinAllowed"></span> <!-- adnauseam allowed requests -->
+                            </div>
                             <div><span data-filtex="!" data-i18n="loggerRowFiltererBuiltinNot"></span>
                                 <span style="flex-direction: column;">
                                     <div><span data-filtex="\x1F(?:css|(?:inline-)?font)\x1F">css/font</span><span data-filtex="\x1Fimage\x1F">image</span><span data-filtex="\x1Fmedia\x1F">media</span><span data-filtex="\x1F(?:inline-)?script(?:ing)?\x1F">script</span></div>
@@ -87,6 +91,10 @@
                 </span>
             </div>
             <div>
+                <button id="logLevel" class="iconified notext" title="Toggle verbose mode" type="button"><span class="fa-icon">volume-up</span><span class="hover"></span></button>
+            </div>
+            <div>
+                <button id="loggerColorKey" class="iconified notext"><span class="fa-icon">color-pallete</span><span class="hover"></span></button>
                 <button id="loggerStats" class="iconified notext" style="display: none;"><span class="fa-icon">bar-chart</span><span class="hover"></span></button>
                 <button id="loggerExport" class="iconified notext"><span class="fa-icon">clipboard</span><span class="hover"></span></button>
                 <button id="loggerSettings" class="iconified notext"><span class="fa-icon">cog</span><span class="hover"></span></button>
@@ -194,6 +202,19 @@
 
     <div id="loggerStatsDialog">
         <div class="sortedEntries"></div>
+    </div>
+    <!-- Adn Color Key Dialog -->
+    <div id="colorKeyDialog" style="height: 228px;">
+        <div id="vwRenderer" style="height: 100%">
+            <br/><span class="colorKey">normal request</span><div class="logEntry"><div class="networkRealm canDetails" data-tabid="932850385" data-tabhn="www.nytimes.com" data-dochn="www.nytimes.com" data-parties="nytimes.com ⇒ nytimes.com"><span>17:16:29</span>&ZeroWidthSpace;<span></span>&ZeroWidthSpace;<span></span>&ZeroWidthSpace;<span>www.nytimes.com</span>&ZeroWidthSpace;<span>1</span>&ZeroWidthSpace;<span>image</span>&ZeroWidthSpace;<span>https://www.nytimes.com/vi-assets/static-assets/favicon-dark-c0de2ee21c5d303cad570e8565f03f1d.ico<a href="https://www.nytimes.com/vi-assets/static-assets/favicon-dark-c0de2ee21c5d303cad570e8565f03f1d.ico" target="_blank"></a></span></div></div>
+            <br/><span class="colorKey">Block</span><div class="logEntry"><div class="networkRealm canDetails canLookup" data-tabid="932850461" data-status="1" data-tabhn="www.nytimes.com" data-dochn="www.nytimes.com" data-parties="nytimes.com ⇒ nytimes.com"><span>17:11:29</span>&ZeroWidthSpace;<span>||nytimes.com/svc/nyt/data-layer?</span>&ZeroWidthSpace;<span>--</span>&ZeroWidthSpace;<span>www.nytimes.com</span>&ZeroWidthSpace;<span>1</span>&ZeroWidthSpace;<span>xhr</span>&ZeroWidthSpace;<span>https://a.<b>nytimes.com/svc/nyt/data-layer?</b>assetUrl=https%3A%2F%2Fwww.nytimes.com%2F&amp;caller_id=nyt-vi&amp;jkcb=1660662689600&amp;referrer=&amp;sourceApp=nyt-vi<a href="https://a.nytimes.com/svc/nyt/data-layer?assetUrl=https%3A%2F%2Fwww.nytimes.com%2F&amp;caller_id=nyt-vi&amp;jkcb=1660662689600&amp;referrer=&amp;sourceApp=nyt-vi" target="_blank"></a></span></div></div>
+            <br/><span class="colorKey">Allow-exception</span><div class="logEntry"><div class="networkRealm canDetails canLookup" data-tabid="932850385" data-status="2" data-tabhn="duckduckgo.com" data-dochn="www.google.com" data-parties="duckduckgo.com ⋯ google.com ⇒ google.com"><span>17:17:33</span>&ZeroWidthSpace;<span>@@||www.google.*/search?$generichide</span>&ZeroWidthSpace;<span>++</span>&ZeroWidthSpace;<span>www.google.com</span>&ZeroWidthSpace;<span>3,1</span>&ZeroWidthSpace;<span>generichide</span>&ZeroWidthSpace;<span>https://<b>www.google.com/search?</b>q=duckduckgo&amp;rlz=1C5CHFA_enDE997DE997&amp;oq=duckdu&amp;aqs=chrome.0.0i10i131i355i433j46i10i131i199i433i465j69i57j0i10i131i433l3j0i10j0i10i433j0i10i131i433j0i10.2875j0j4&amp;sourceid=chrome&amp;ie=UTF-8<a href="https://www.google.com/search?q=duckduckgo&amp;rlz=1C5CHFA_enDE997DE997&amp;oq=duckdu&amp;aqs=chrome.0.0i10i131i355i433j46i10i131i199i433i465j69i57j0i10i131i433l3j0i10j0i10i433j0i10i131i433j0i10.2875j0j4&amp;sourceid=chrome&amp;ie=UTF-8" target="_blank"></a></span></div></div>
+            <br/><span class="colorKey">DNT-allow</span><div class="logEntry"><div class="networkRealm canDetails" data-tabid="932850385" data-status="5" data-tabhn="duckduckgo.com" data-dochn="duckduckgo.com" data-parties="duckduckgo.com ⇒ duckduckgo.com"><span>17:17:33</span>&ZeroWidthSpace;<span>*duckduckgo.com*allow</span>&ZeroWidthSpace;<span>@@</span>&ZeroWidthSpace;<span>duckduckgo.com</span>&ZeroWidthSpace;<span>1</span>&ZeroWidthSpace;<span>script</span>&ZeroWidthSpace;<span>https://duckduckgo.com/d3109.js<a href="https://duckduckgo.com/d3109.js" target="_blank"></a></span></div></div>
+            <br/><span class="colorKey">ADN-allow</span><div class="logEntry"><div class="networkRealm canDetails canLookup" data-tabid="932850461" data-status="4" data-tabhn="www.nytimes.com" data-dochn="www.nytimes.com" data-parties="nytimes.com ⇒ amazon-adsystem.com"><span>17:11:29</span>&ZeroWidthSpace;<span>||amazon-adsystem.com^</span>&ZeroWidthSpace;<span>~~</span>&ZeroWidthSpace;<span>www.nytimes.com</span>&ZeroWidthSpace;<span>3</span>&ZeroWidthSpace;<span>xhr</span>&ZeroWidthSpace;<span>https://c.<b>amazon-adsystem.com/</b>e/dtb/bid?src=3030&amp;u=https%3A%2F%2Fwww.nytimes.com%2F&amp;pid=x88aEgWnaSmg6&amp;cb=4&amp;ws=1920x944&amp;v=22.8.42053&amp;t=2000&amp;slots=%5B%7B%22sd%22%3A%22dfp-ad-mid3%22%2C%22s%22%3A%5B%22728x90%22%2C%22970x90%22%2C%22970x250%22%5D%2C%22sn%22%3A%22dfp-ad-mid3_hp_web%22%7D%5D&amp;pj=%7B%22si_section%22%3A%22home%22%7D&amp;cfgv=1&amp;gdprl=%7B%22status%22%3A%22no-cmp%22%7D<a href="https://c.amazon-adsystem.com/e/dtb/bid?src=3030&amp;u=https%3A%2F%2Fwww.nytimes.com%2F&amp;pid=x88aEgWnaSmg6&amp;cb=4&amp;ws=1920x944&amp;v=22.8.42053&amp;t=2000&amp;slots=%5B%7B%22sd%22%3A%22dfp-ad-mid3%22%2C%22s%22%3A%5B%22728x90%22%2C%22970x90%22%2C%22970x250%22%5D%2C%22sn%22%3A%22dfp-ad-mid3_hp_web%22%7D%5D&amp;pj=%7B%22si_section%22%3A%22home%22%7D&amp;cfgv=1&amp;gdprl=%7B%22status%22%3A%22no-cmp%22%7D" target="_blank"></a></span></div></div>
+            <br/><span class="colorKey">Cosmetic</span><div class="logEntry"><div class="extendedRealm canDetails canLookup" data-tabid="932850461" data-tabhn="www.nytimes.com" data-dochn="www.nytimes.com"><span>17:12:11</span>&ZeroWidthSpace;<span><span>##</span><span>#dfp-ad-top</span></span>&ZeroWidthSpace;<span></span>&ZeroWidthSpace;<span>www.nytimes.com</span>&ZeroWidthSpace;<span></span>&ZeroWidthSpace;<span>dom</span>&ZeroWidthSpace;<span>https://www.nytimes.com/<a href="https://www.nytimes.com/" target="_blank"></a></span></div></div>
+            <br/><span class="colorKey">Redirect-rule</span><div class="logEntry"><div class="networkRealm canDetails canLookup" data-tabid="932850461" data-modifier="" data-status="1" data-tabhn="www.nytimes.com" data-dochn="www.nytimes.com" data-parties="nytimes.com ⇒ googletagmanager.com"><span>17:14:05</span>&ZeroWidthSpace;<span>||googletagmanager.com/gtm.js$script,redirect-rule=googletagmanager_gtm.js:5</span>&ZeroWidthSpace;<span>--</span>&ZeroWidthSpace;<span>www.nytimes.com</span>&ZeroWidthSpace;<span>3</span>&ZeroWidthSpace;<span>script</span>&ZeroWidthSpace;<span>https://www.<b>googletagmanager.com/gtm.js</b>?id=GTM-P528B3&amp;gtm_auth=tfAzqo1rYDLgYhmTnSjPqw&amp;gtm_preview=env-130&amp;gtm_cookies_win=x<a href="https://www.googletagmanager.com/gtm.js?id=GTM-P528B3&amp;gtm_auth=tfAzqo1rYDLgYhmTnSjPqw&amp;gtm_preview=env-130&amp;gtm_cookies_win=x" target="_blank"></a></span></div></div>
+            <br/><span class="colorKey">Redirected file </span><div class="logEntry"><div class="networkRealm canDetails redirect" data-tabid="932850461" data-tabhn="www.nytimes.com" data-dochn="www.nytimes.com" data-parties="nytimes.com ⇒ googletagmanager.com"><span>17:14:05</span>&ZeroWidthSpace;<span>googletagmanager_gtm.js</span>&ZeroWidthSpace;<span>&lt;&lt;</span>&ZeroWidthSpace;<span>www.nytimes.com</span>&ZeroWidthSpace;<span>3</span>&ZeroWidthSpace;<span>script</span>&ZeroWidthSpace;<span>https://www.googletagmanager.com/gtm.js?id=GTM-P528B3&amp;gtm_auth=tfAzqo1rYDLgYhmTnSjPqw&amp;gtm_preview=env-130&amp;gtm_cookies_win=x<a href="https://www.googletagmanager.com/gtm.js?id=GTM-P528B3&amp;gtm_auth=tfAzqo1rYDLgYhmTnSjPqw&amp;gtm_preview=env-130&amp;gtm_cookies_win=x" target="_blank"></a></span></div></div>
+        </div>
     </div>
 
     <div id="loggerExportDialog">

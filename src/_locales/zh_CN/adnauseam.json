@@ -1,0 +1,554 @@
+{
+  "adnAboutPageName": {
+    "message": "AdNauseam — 关于",
+    "description": "English: Firstrun.html page title"
+  },
+  "aboutSupport": {
+    "message": "技术支持",
+    "description": "English: links.html Support"
+  },
+  "aboutBuiltOn": {
+    "message": "基于",
+    "description": "English: links.html Built on"
+  },
+  "aboutFaq": {
+    "message": "常见问题",
+    "description": "English: links.html -> Frequently asked questions"
+  },
+  "adnFirstRunPlease": {
+    "message": "请:",
+    "description": "English: Firstrun.html -> Please:"
+  },
+  "adnFirstRunHideAllAds": {
+    "message": "隐藏广告",
+    "description": "English: Firstrun.html -> Hide Ads:"
+  },
+  "adnFirstRunClickingAds": {
+    "message": "点击广告",
+    "description": "English: Firstrun.html -> Click Ads"
+  },
+  "adnFirstRunBlockingMalware": {
+    "message": "屏蔽恶意软件",
+    "description": "English: Firstrun.html -> Block Malware"
+  },
+  "adnAboutResetDataConfirm": {
+    "message": "您的设置與廣告均将被清除，AdNauseam将重新启动。\\n\\n确定将AdNauseam重置到初始状态？",
+    "description": "Message asking user to confirm reset"
+  },
+  "adnFirstRunHideAllAdsDescription": {
+    "message": "隐藏由你的<span>筛选器列表<\/span>标记的广告",
+    "description": "English: Firstrun.html -> Hide Ads in your selected filter lists"
+  },
+  "adnFirstRunClickingAdsDescription": {
+    "message": "访问由你的<span>筛选器列表<\/span>标记的广告",
+    "description": "English: Firstrun.html -> Register visits on Ads found via your filter lists"
+  },
+  "adnFirstRunBlockingMalwareDescription": {
+    "message": "阻止跟踪器和其他恶意软件 （<span>自定义<\/span>）",
+    "description": "English: Firstrun.html -> Block trackers and other malware (customize)"
+  },
+  "adnNotificationReactivate": {
+    "message": "启用",
+    "description": "English: Notifications -> Reactivate"
+  },
+  "adnNotificationDisable": {
+    "message": "停用",
+    "description": "English: Notifications -> Disable"
+  },
+  "adnNotificationActivateHiding": {
+    "message": "请启用“隐藏广告”功能",
+    "description": "English: Notifications -> Activate Ad hiding"
+  },
+  "adnNotificationActivateClicking": {
+    "message": "请启用“点击广告”功能",
+    "description": "English: Notifications -> Activate Ad clicking"
+  },
+  "adnNotificationActivateBlocking": {
+    "message": "启用“屏蔽恶意软件”功能",
+    "description": "English: Notifications -> Activate malware blocking"
+  },
+  "adnNotificationActivateEasyList": {
+    "message": "启用 Easy List 筛选列表",
+    "description": "English: Notifications -> Activate the EasyList filter"
+  },
+  "adnNotificationActivateAdNauseamList": {
+    "message": "请启用 AdNauseam 筛选列表",
+    "description": "English: Notifications -> Activate the AdNauseam filter"
+  },
+  "adnNotificationDisableAdBlocker": {
+    "message": "广告拦截插件和 AdNauseam 可能会发生冲突 ！",
+    "description": "English: Notifications -> Your ad blocker and AdNauseam may conflict!"
+  },
+  "adnNotificationDisableUBlock": {
+    "message": "uBlock 和 AdNauseam 可能会冲突！",
+    "description": "English: Notifications -> uBlock and AdNauseam may conflict!"
+  },
+  "adnNotificationOperaSetting": {
+    "message": "请允许 AdNauseam 访问搜索页面结果",
+    "description": "English: Notifications -> Please allow AdNauseam to access search page results"
+  },
+  "adnNotificationBrowserSetting": {
+    "message": "您的浏览器设置“内容拦截”可能会干扰 AdNauseam！",
+    "description": "English: Notifications -> The 'Content Blocking' settings in your browser may interfere with AdNauseam!"
+  },
+  "adnNotificationPrivacyMode": {
+    "message": "您已允许AdNauseam在隐私浏览中获知您的在线活动",
+    "description": "English: Notifications -> You have allowed adnauseam to have access to your online activities while private browsing."
+  },
+  "adnNotificationDNTAllowed": {
+    "message": "此页尊重 <b>Do Not Track<\/b>原则，允许广告。",
+    "description": "English: Notifications -> This page respects Do Not Track, Ads are allowed."
+  },
+  "adnNotificationDNTHidingNotClicking": {
+    "message": "此页尊重 <b>Do Not Track<\/b>原则，隐藏但不点击广告。",
+    "description": "English: Notifications -> This page respects Do Not Track, hiding not clicking."
+  },
+  "adnNotificationDNTClickingNotHiding": {
+    "message": "此页尊重 <b>Do Not Track<\/b>原则，点击但显示广告。",
+    "description": "English: Notifications -> This page respects Do Not Track, clicking not hiding."
+  },
+  "adnNotificationDNTJustSoYouKnow": {
+    "message": "此页尊重 <b>Do Not Track<\/b>原则。",
+    "description": "English: Notifications -> This page respects Do Not Track, just so you know."
+  },
+  "adnNotificationShowAdsDebug": {
+    "message": "高级设置“显示广告调试”已开启",
+    "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
+  },
+  "adnNewerVersionAvailableNotification": {
+    "message": "AdNauseam有新版本的可用",
+    "description": "English: Notifications -> A newer version of AdNauseam is available"
+  },
+  "adnTarget": {
+    "message": "目标",
+    "description": "English: Vault.html -> inspected Ad -> TARGET"
+  },
+  "adnFoundOn": {
+    "message": "发现于",
+    "description": "English: Vault.html -> inspected Ad -> FOUND ON"
+  },
+  "adnNotYetVisited": {
+    "message": "尚未访问",
+    "description": "English: Not Yet Visited"
+  },
+  "adnAllowedByDNT": {
+    "message": "被 Do Not Track 原则允许",
+    "description": "English: Not Yet Visited"
+  },
+  "adnFirstRunSwitchMeOn": {
+    "message": "按下开关",
+    "description": "English: Firstrun.html -> Switch me on"
+  },
+  "adnFirstRunThatsIt": {
+    "message": "只是这样吗？好吧...",
+    "description": "English: Firstrun.html -> That's it? ok…"
+  },
+  "adnFirstRunBetterButStill": {
+    "message": "好一些，但是...",
+    "description": "English: Firstrun.html -> Better, but still…"
+  },
+  "adnFirstRunLetsGo": {
+    "message": "开始吧！",
+    "description": "English: Firstrun.html -> Let's go!"
+  },
+  "goToAdNauseamWebsite": {
+    "message": "前往 AdNauseam 网站",
+    "description": "English: Menu icon title -> Go to AdNauseam website"
+  },
+  "adnPausedOnPage": {
+    "message": "AdNauseam 在本页面被暂停",
+    "description": "English: Menu->display when paused on page\/site"
+  },
+  "adnNotHiding": {
+    "message": "AdNauseam 目前不隐藏广告",
+    "description": "English: Menu->display when not hiding Ads"
+  },
+  "adnVaultName": {
+    "message": "AdNauseam — 广告库",
+    "description": "English: AdNauseam — Ad Vault"
+  },
+  "myStatistics": {
+    "message": "我的统计数据",
+    "description": "appears in ADN vault, above ad slider"
+  },
+  "topAdnetworks": {
+    "message": "广告来源-常见广告网络",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "topSites": {
+    "message": "广告来源-常见网站",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypes": {
+    "message": "广告类型",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypesImageAds": {
+    "message": "图片广告",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypesTextAds": {
+    "message": "文字广告",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adnShowingRecentAds": {
+    "message": "没有在本页收集到广告 (显示最新)",
+    "description": "shown in menu when only 'recent' Ads are shown"
+  },
+  "adnThisPageStrictBlocked": {
+    "message": "{{domain}} 目前被严格屏蔽。",
+    "description": "shown in menu when the current page is strict-blocked"
+  },
+  "adnStrictBlockListDescription": {
+    "message": "“严格的阻止列表”可以帮助用户更容易地阻止特定的域名（IP）或页面。",
+    "description": "Description on the strict-block list tab, which is found on the dashboard"
+  },
+  "adnExportedAdsFilename": {
+    "message": "AdNauseam-已导出的广告_{{datetime}}.json",
+    "description": "English: AdNauseam file export"
+  },
+  "adnImportAlertFormat": {
+    "message": "该文件不包含任何广告, 请选择另一个文件。",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnImportAlert": {
+    "message": "{{count}} 个新广告被导入",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnClearConfirm": {
+    "message": "该操作会永久移除全部已保存的广告",
+    "description": "appears in ADN settings"
+  },
+  "adnPurgeConfirm": {
+    "message": "此操作将永久删除无法加载图像的所有广告。 在净化之前备份您的密码库是一个好主意，同时也是为了确保您有可用的互联网连接。",
+    "description": "appears in ADN settings"
+  },
+  "adnAdClickingStatusPending": {
+    "message": "等待中",
+    "description": "Menu & AdVault: Pending"
+  },
+  "adnAdClickingStatusVisited": {
+    "message": "已访问",
+    "description": "Menu & AdVault: Visited"
+  },
+  "adnAdClickingStatusFailed": {
+    "message": "访问失败",
+    "description": "Menu & AdVault: Failed"
+  },
+  "adnAdClickingStatusSkippedDNT": {
+    "message": "跳过: DNT 原则",
+    "description": "Menu & AdVault: SKIPPED: DNT Allowed"
+  },
+  "adnAdClickingStatusSkippedUser": {
+    "message": "跳过: 已被用户访问",
+    "description": "Menu & AdVault: SKIPPED: Clicked by User"
+  },
+  "adnAdClickingStatusSkippedFrequency": {
+    "message": "跳过: 点击频率",
+    "description": "Menu & AdVault: SKIPPED: Click Frequency"
+  },
+  "adnAdClickingStatusSkippedDisabled": {
+    "message": "跳过: 点击禁用",
+    "description": "Menu & AdVault: SKIPPED: Clicking disabled"
+  },
+  "adnMenuViewLog": {
+    "message": "查看日志",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuAdsClicked": {
+    "message": "{{number}}个已点击",
+    "description": "appears in ADN popup menu and vault"
+  },
+  "adnMenuAdsDetected": {
+    "message": "{{count}}个已侦测广告",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuViewVault": {
+    "message": "查看广告库",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuResume": {
+    "message": "恢复 Adnauseam",
+    "description": "appears in ADN popup menu three state button"
+  },
+  "adnMenuDisable": {
+    "message": "停用",
+    "description": "Disabled Adnauseam -> appears in ADN popup menu three state button"
+  },
+  "adnMenuActive": {
+    "message": "启用",
+    "description": "Make Adnauseam Active -> appears in ADN popup menu three state button"
+  },
+  "adnMenuStrict": {
+    "message": "严格的",
+    "description": "Activate Strict-Block -> appears in ADN popup menu three state button"
+  },
+  "adnMenuDisableScopeDomain": {
+    "message": "在 {{domain}}",
+    "description": "Disable AdNaueam Block On this Domain -> Popup option that appears inside ADN menu"
+  },
+  "adnMenuDisableScopePage": {
+    "message": "在本页面",
+    "description": "Disable AdNaueam Block On This Page -> Popup option that appears inside ADN menu"
+  },
+  "adnMenuSettings": {
+    "message": "设置",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuExportOptions": {
+    "message": "导出选项",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportAdsOnly": {
+    "message": "仅限广告",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsOnly": {
+    "message": "仅限设置",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsAndAds": {
+    "message": "设置和广告",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuImportAds": {
+    "message": "导入广告",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableAllLogging": {
+    "message": "关闭所有日志纪录",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableOutgoingReferrer": {
+    "message": "禁止发送来源地址",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAds": {
+    "message": "清除广告与浏览记录",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuHideBadge": {
+    "message": "隐藏图标上的广告数目",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAdsNow": {
+    "message": "清除广告",
+    "description": "appears in ADN popup menu"
+  },
+  "adnLogNoLog": {
+    "message": "没有可用的日志",
+    "description": "appears in ADN log page"
+  },
+  "adnLogViewFullLog": {
+    "message": "查看完整日志",
+    "description": "appears in ADN log page"
+  },
+  "adnVaultSince": {
+    "message": "自从{{datetime}}",
+    "description": "appears on vault page"
+  },
+  "adnVaultExport": {
+    "message": "导出",
+    "description": "appears on vault page"
+  },
+  "adnVaultImport": {
+    "message": "导入",
+    "description": "appears on vault page"
+  },
+  "adnVaultClear": {
+    "message": "清空",
+    "description": "appears on vault page"
+  },
+  "adnPurgeDeadAds": {
+    "message": "清除无用广告",
+    "description": "appears on vault page"
+  },
+  "adnShowDeadAds": {
+    "message": "显示死亡广告",
+    "description": "appears on vault page"
+  },
+  "adnHideDeadAds": {
+    "message": "清除无用广告",
+    "description": "appears on vault page"
+  },
+  "adnCaptureVault": {
+    "message": "捕获",
+    "description": "appears on vault page in dev mode"
+  },
+  "adnVaultFound": {
+    "message": "已收集{{total}}个广告",
+    "description": "appears on vault page"
+  },
+  "adnVaultShowing": {
+    "message": "显示",
+    "description": "appears on vault page"
+  },
+  "adnVaultDeleteThisAd": {
+    "message": "删除这个广告",
+    "description": "appears on vault page"
+  },
+  "adnVaultTotalEstimated": {
+    "message": "估计总",
+    "description": "appears on vault page"
+  },
+  "adnVaultAdsCost": {
+    "message": "费用",
+    "description": "appears on vault page"
+  },
+  "hidingAdsPrompt": {
+    "message": "隐藏由你的筛选器列表标记的广告",
+    "description": "English: Hide Ads identified by your chosen filter lists"
+  },
+  "clickingAdsPrompt": {
+    "message": "点击由你的筛选器列表标记的广告",
+    "description": "English: Click Ads identified by your chosen filter lists"
+  },
+  "blockingMalwarePrompt": {
+    "message": "屏蔽追踪器和其他恶意软件",
+    "description": "English: lock trackers and other malware"
+  },
+  "parseTextAdsPrompt": {
+    "message": "当可行时捕捉文字广告",
+    "description": "English: Capture text-only Ads when possible"
+  },
+  "settingsIconBadgePrompt": {
+    "message": "在图标上显示已找到的广告数目",
+    "description": "English: Show the number of found Ads on the icon"
+  },
+  "settingsExtraPrivacyPrompt": {
+    "message": "其它隐私选项",
+    "description": "English: Interface"
+  },
+  "settingsInterfacePrompt": {
+    "message": "用户界面",
+    "description": "English: Interface"
+  },
+  "noIncomingCookiesPrompt": {
+    "message": "忽略由点击广告产生的 cookie",
+    "description": "English: Ignore cookies returned with clicks"
+  },
+  "noOutgoingCookiesPrompt": {
+    "message": "不要发送 cookie 访问",
+    "description": "English: Don't send cookies on visits"
+  },
+  "noOutgoingUserAgentPrompt": {
+    "message": "当访问广告时隐藏浏览器识别符",
+    "description": "English: Hide user-agent header on visits"
+  },
+  "noOutgoingRefererPrompt": {
+    "message": "当访问广告时隐藏引用页面",
+    "description": "English: Hide referring page on visits"
+  },
+  "ClickingFrequencyRarely": {
+    "message": "很少",
+    "description": "English: Click Frequency - Rarely"
+  },
+  "ClickingFrequencySometimes": {
+    "message": "有时",
+    "description": "English: Click Frequency - Sometimes"
+  },
+  "ClickingFrequencyAlways": {
+    "message": "始终",
+    "description": "English: Click Frequency - Always"
+  },
+  "respectDNTPrompt": {
+    "message": "排除非追踪广告",
+    "description": "English: Make exceptions for non-tracking Ads"
+  },
+  "disableHidingForDNTPrompt": {
+    "message": "显示非追踪广告",
+    "description": "English: Don't hide non-tracking Ads"
+  },
+  "disableClickingForDNTPrompt": {
+    "message": "不点击非追踪广告",
+    "description": "English: Don't click non-tracking Ads"
+  },
+  "extName": {
+    "message": "AdNauseam",
+    "description": "extension name"
+  },
+  "extShortDesc": {
+    "message": "一款被设计为对抗来自广告网络追踪的扩展",
+    "description": "for the chrome web store: must be 132 characters or less"
+  },
+  "3pGroupEssentials": {
+    "message": "基本",
+    "description": "English: Essentials"
+  },
+  "3pGroupOther": {
+    "message": "其它",
+    "description": "English: Other"
+  },
+  "3pGroupMalware": {
+    "message": "恶意软件",
+    "description": "English: Malware"
+  },
+  "3pGroupRegions": {
+    "message": "语言",
+    "description": "English: Languages"
+  },
+  "3pPageUpdate": {
+    "message": "更新",
+    "description": "English: update"
+  },
+  "adnUpdateButton": {
+    "message": "更新",
+    "description": "English: update"
+  },
+  "allowlistPageName": {
+    "message": "白名单",
+    "description": "appears as tab name in dashboard"
+  },
+  "strictBlockListPageName": {
+    "message": "严格屏蔽",
+    "description": "appears as tab name in dashboard"
+  },
+  "eventLoggingPrompt": {
+    "message": "调试模式",
+    "description": "prompt for toggle"
+  },
+  "disableWarnings": {
+    "message": "disable-warnings",
+    "description": "English:Disable warnings"
+  },
+  "blurCollectedAds": {
+    "message": "模糊收藏的广告",
+    "description": "English: Blur Collected ads"
+  },
+  "hideDeadAds": {
+    "message": "清除无用广告",
+    "description": "English: Hide Dead ads"
+  },
+  "showAdsDebugPrompt": {
+    "message": "显示广告以此来整体调试广告",
+    "description": "English: Show ads for ad-collection debugging"
+  },
+  "removeAdsInPrivate": {
+    "message": "移除在无痕模式下收集的广告",
+    "description": "English:Remove ads collected in private mode - settings page"
+  },
+  "settingsStrictBlockingMode": {
+    "message": "启用严格屏蔽模式",
+    "description": "English: Activate Strict-Blocking Mode"
+  },
+  "adnRefreshButton": {
+    "message": "刷新",
+    "description": "English: refresh page from menu notification button"
+  },
+  "adnRefreshNotification": {
+    "message": "在当前页面应用更改",
+    "description": "English: refresh page from menu notification"
+  },
+  "supportS6P3S1": {
+    "message": "请确保此问题为 <b>AdNauseam specified<\/b>",
+    "description": "A paragraph in the filter issue reporter section"
+  },
+  "supportS6P3S2": {
+    "message": "我测试了同一网页的 <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> 并确认此问题是 <b>AdNauseam specific<\/b>。",
+    "description": "A checkbox in the filter issue reporter section"
+  },
+  "supportS6Select1Option7": {
+    "message": "未收集的广告",
+    "description": "Ads are present on page but none are collected"
+  }
+}

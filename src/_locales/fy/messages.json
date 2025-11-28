@@ -39,7 +39,7 @@
     "message": "Myn rigels",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Fertroude websites",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Bestimming",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "De fertroude-website-ynstruksjes skriuwe foar op hokker websiden uBlock Origin útskeakele wurde moat. Ien fermelding per rigel.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Ymportearje en tafoegje",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Eksportearje",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
-    "message": "myn-ublock-whitelist_{{datetime}}.txt",
+  "allowlistExportFilename": {
+    "message": "myn-ublock-allowlist_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Wizigingen tapasse",
     "description": "English: Apply changes"
   },

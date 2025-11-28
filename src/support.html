@@ -7,7 +7,7 @@
 <title>uBlock Origin — Support</title>
 
 <link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
-
+<link rel="stylesheet" href="css/fonts/stylesheet.css">
 <link rel="stylesheet" href="css/themes/default.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/dashboard-common.css">
@@ -21,49 +21,49 @@
 
 <div class="body">
     <div class="a">
-        <h3 data-i18n="supportS1H"></h3>
+        <h2 data-i18n="supportS1H"></h2>
         <div class="supportEntry">
             <div>
                 <p data-i18n="supportS1P1">
             </div>
-            <button type="button" data-url="https://github.com/gorhill/uBlock/wiki" data-i18n="supportOpenButton">_<span class="hover"></span></button>
+            <button type="button" data-url="https://github.com/dhowe/AdNauseam/wiki" data-i18n="supportOpenButton">_<span class="hover"></span></button>
         </div>
         <hr>
     </div>
     <div class="b">
-        <h3 data-i18n="supportS2H"></h3>
+        <h2 data-i18n="supportS2H"></h2>
         <div class="supportEntry">
             <div>
                 <p data-i18n="supportS2P1">
             </div>
-            <button type="button" data-url="https://www.reddit.com/r/uBlockOrigin/" data-i18n="supportOpenButton">_<span class="hover"></span></button>
+            <button type="button" data-url="https://github.com/dhowe/AdNauseam/discussions" data-i18n="supportOpenButton">_<span class="hover"></span></button>
         </div>
         <hr>
     </div>
     <div class="c">
-        <h3 data-i18n="supportS3H"></h3>
+        <h2 data-i18n="supportS3H"></h2>
         <div class="supportEntry">
             <div>
                 <p data-i18n="supportS3P1">
                 <p data-i18n="supportS3P2">
                 <p data-i18n="supportS3P3">
             </div>
-            <button id="filterReport" type="button" data-url="https://github.com/uBlockOrigin/uAssets/issues/new?template=report_from_ubo.yml" data-i18n="supportOpenButton">_<span class="hover"></span></button>
+            <button id="filterReport" type="button" data-url="https://github.com/dhowe/AdNauseam/issues/new" data-i18n="supportOpenButton">_<span class="hover"></span></button>
         </div>
         <hr>
     </div>
     <div class="d">
-        <h3 data-i18n="supportS4H"></h3>
+        <h2 data-i18n="supportS4H"></h2>
         <div class="supportEntry">
             <div>
                 <p data-i18n="supportS4P1">
             </div>
-            <button id="bugReport" type="button" data-url="https://github.com/uBlockOrigin/uBlock-issues/issues/new?template=bug_report_from_ubo.yml" data-i18n="supportOpenButton">_<span class="hover"></span></button>
+            <button id="bugReport" type="button" data-url="https://github.com/dhowe/AdNauseam/issues/new" data-i18n="supportOpenButton">_<span class="hover"></span></button>
         </div>
         <hr>
     </div>
     <div class="e">
-        <h3 data-i18n="supportS6H"></h3>
+        <h2 data-i18n="supportS6H"></h2>
         <p data-i18n="supportS3P1"></p>
         <div class="supportEntry shouldUpdate">
             <hr>
@@ -76,7 +76,20 @@
             <p data-i18n="supportS6P1S1"></p>
             <button type="button" data-i18n="supportFindSpecificButton">_<span class="hover"></span></button>
         </div>
-        <div class="supportEntry createEntry">
+        <div class="supportEntry"> <!-- adn specific -->
+            <hr>
+            <p data-i18n="supportS6P3S1"></p>
+            <p>
+                <label>
+                    <span class="input checkbox">
+                        <input id="isAdnSpecific" type="checkbox">
+                        <svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg>
+                    </span>
+                    <span data-i18n="supportS6P3S2"></span>
+                </label>
+            </p>
+        </div>
+        <div class="supportEntry createEntry needsAdnCheck">
             <hr>
             <p>
                 <label data-i18n="supportS6URL"></label><br>
@@ -94,19 +107,26 @@
                     <option value="nuisance" data-i18n="supportS6Select1Option2"></option>
                     <option value="breakage" data-i18n="supportS6Select1Option5"></option>
                     <option value="privacy" data-i18n="supportS6Select1Option4"></option>
-                    <option value="badware" data-i18n="supportS6Select1Option7"></option>
+										<option value="badware" data-i18n="supportS6Select1Option7"></option>
+                    <option value="adnotcollected" data-i18n="supportS6Select1Option7"></option>
                 </select>
             </p>
             <p>
-                <label><span class="input checkbox"><input id="isNSFW" type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span><span data-i18n="supportS6Checkbox1"></span></label>
+                <label>
+                    <span class="input checkbox">
+                        <input id="isNSFW" type="checkbox">
+                        <svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg>
+                    </span>
+                    <span data-i18n="supportS6Checkbox1"></span>
+                </label>
             </p>
             <button type="button" data-i18n="supportReportSpecificButton" class="preferred">_<span class="hover"></span></button>
         </div>
         <hr>
-        <h3 id="showSupportInfo" class="subtil" data-i18n="supportS5H">_<span>&nbsp;&#x25b8;</span></h3>
+        <h2 id="showSupportInfo" class="subtil" data-i18n="supportS5H">_<span>&nbsp;&#x25b8;</span></h2>
     </div>
     <div class="a b c d">
-        <h3 data-i18n="supportS5H"></h3>
+        <h2 data-i18n="supportS5H"></h2>
         <p data-i18n="supportS5P1">
         <p>
             <button id="selectAllButton" type="button" data-i18n="genericSelectAll">_<span class="hover"></span></button>

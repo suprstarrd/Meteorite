@@ -19,7 +19,7 @@
     Home: https://github.com/gorhill/uBlock
 */
 
-import Regex from '../lib/regexanalyzer/regex.js';
+import * as Regex from '../lib/regexanalyzer/regex.js';
 
 /******************************************************************************/
 

@@ -43,27 +43,37 @@ Object.assign(supportedDynamicTypes, {
 });
 
 const typeBitOffsets = Object.create(null);
-Object.assign(typeBitOffsets, {
+Object.assign(typeBitOffsets, { // ADN -> 3 bits for one more action
             '*':  0,
-'inline-script':  2,
-    '1p-script':  4,
-    '3p-script':  6,
-     '3p-frame':  8,
-        'image': 10,
-           '3p': 12
+'inline-script':  3,
+    '1p-script':  6,
+    '3p-script':  9,
+     '3p-frame': 12,
+        'image': 15,
+           '3p': 18
+});
+
+const actionToNameMap = Object.create(null);
+Object.assign(actionToNameMap, {    
+    '1': 'block', // ub & ADN block, might not trigger rules in  filter lists
+    '2': 'allow',
+    '3': 'noop',
+    '4': 'strictBlock' // ADN: only block if it is blocked by filter list
 });
 
 const nameToActionMap = Object.create(null);
 Object.assign(nameToActionMap, {
     'block': 1,
     'allow': 2,
-     'noop': 3
+    'noop': 3,
+    'strictBlock': 4
 });
 
 const intToActionMap = new Map([
     [ 1, 'block' ],
     [ 2, 'allow' ],
-    [ 3, 'noop' ]
+    [ 3, 'noop' ],
+    [ 4, 'strictBlock' ]
 ]);
 
 // For performance purpose, as simple tests as possible
@@ -212,7 +222,7 @@ class DynamicHostRuleFiltering {
         const bitOffset = typeBitOffsets[type];
         const k = `${srcHostname} ${desHostname}`;
         const oldBitmap = this.rules.get(k) || 0;
-        const newBitmap = oldBitmap & ~(3 << bitOffset) | (state << bitOffset);
+        const newBitmap = oldBitmap & ~(7 << bitOffset) | (state << bitOffset); //ADN: 7 << bitOffset
         if ( newBitmap === oldBitmap ) { return false; }
         if ( newBitmap === 0 ) {
             this.rules.delete(k);
@@ -235,7 +245,8 @@ class DynamicHostRuleFiltering {
         const key = `${srcHostname} ${desHostname}`;
         const bitmap = this.rules.get(key);
         if ( bitmap === undefined ) { return 0; }
-        return bitmap >> typeBitOffsets[type] & 3;
+        //return bitmap >> typeBitOffsets[type] & 3;
+        return bitmap >> typeBitOffsets[type] & 7; // ADN: 3 bits
     }
 
     clearRegisters() {
@@ -248,11 +259,12 @@ class DynamicHostRuleFiltering {
         decomposeHostname(srcHostname, decomposedSource);
         this.type = type;
         const bitOffset = typeBitOffsets[type];
+
         for ( const srchn of decomposedSource ) {
             this.z = srchn;
             let v = this.rules.get(`${srchn} ${desHostname}`);
             if ( v === undefined ) { continue; }
-            v = v >>> bitOffset & 3;
+            v = v >>> bitOffset & 7; //ADN: 3 bits
             if ( v === 0 ) { continue; }
             return (this.r = v);
         }
@@ -346,8 +358,10 @@ class DynamicHostRuleFiltering {
     }
 
     lookupRuleData(src, des, type) {
-        const r = this.evaluateCellZY(src, des, type);
+        let r = this.evaluateCellZY(src, des, type);
         if ( r === 0 ) { return; }
+        /////////// ADN ////////////
+        //console.log("**** lookupRuleData: "+r);
         return `${this.z} ${this.y} ${this.type} ${r}`;
     }
 
@@ -471,7 +485,40 @@ class DynamicHostRuleFiltering {
         this.changed = true;
         return true;
     }
-}
+
+
+    async benchmark() {
+        const requests = await µBlock.loadBenchmarkDataset();
+        if ( Array.isArray(requests) === false || requests.length === 0 ) {
+            log.print('No requests found to benchmark');
+            return;
+        }
+        log.print(`Benchmarking sessionFirewall.evaluateCellZY()...`);
+        const fctxt = µBlock.filteringContext.duplicate();
+        const t0 = self.performance.now();
+        for ( const request of requests ) {
+            fctxt.setURL(request.url);
+            fctxt.setTabOriginFromURL(request.frameUrl);
+            fctxt.setType(request.cpt);
+            this.evaluateCellZY(
+                fctxt.getTabHostname(),
+                fctxt.getHostname(),
+                fctxt.type
+            );
+        }
+        const t1 = self.performance.now();
+        const dur = t1 - t0;
+        log.print(`Evaluated ${requests.length} requests in ${dur.toFixed(0)} ms`);
+        log.print(`\tAverage: ${(dur / requests.length).toFixed(3)} ms per request`);
+    }
+};
+
+DynamicHostRuleFiltering.prototype.intToActionMap = new Map([
+    [ 1, 'block' ],
+    [ 2, 'allow' ],
+    [ 3, 'noop' ],
+    [ 4, 'strictBlock' ] // ADN
+]);
 
 DynamicHostRuleFiltering.prototype.magicId = 1;
 

@@ -13,6 +13,9 @@ textarea {
     resize: vertical;
     width: 100%;
     }
+.container {
+  position: relative;
+}
 .permatoolbar {
     background-color: var(--surface-1);
     border: 0;
@@ -30,13 +33,43 @@ textarea {
 .permatoolbar button.iconified {
     padding-left: var(--default-gap-xsmall);
     padding-right: var(--default-gap-xsmall);
+    /* ADN */
+    height: auto;
+    margin-right: 6px;
+    margin-left: 6px;
+    border: none;
+    /* end of adn */
     }
 .permatoolbar button.active {
     fill: rgb(var(--primary-50));
     }
 .permatoolbar button > .fa-icon {
-    font-size: 180%;
+    font-size: 140%; /* ADN */
     }
+
+#colorKeyDialog #vwRenderer .logEntry { /* ADN */
+    display: inline-block !important;
+    position: relative !important;
+    width: calc(100% - 100px) !important;
+}
+
+#colorKeyDialog #vwRenderer span.colorKey { /* ADN */
+    border: 1px dotted var(--border-1);
+    background: var(--adn-button-active);
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    height: 23px;
+    position: relative;
+    padding: 0.2em;
+    vertical-align: top;
+}
+
+#loggerColorKey img { /* ADN */
+    width: 1em;
+    height: 1em;
+}
 #pageSelector {
     min-width: 10em;
     padding: 0.25em 0;
@@ -111,7 +144,7 @@ textarea {
 }
 #netInspector.paused #pause > .fa-icon[data-i18n-title="loggerUnpauseTip"] {
     display: inline-flex;
-    fill: #5F9EA0;
+    /*fill: #5F9EA0;*/ /* ADN */
 }
 #netInspector #filterExprGroup {
     display: flex;
@@ -136,6 +169,33 @@ textarea {
     }
 #netInspector #filterExprButton:hover {
     background-color: transparent;
+    }
+#netInspector tr.blocked {
+    background-color: rgba(192, 0, 0, 0.25);
+    }
+body.colorBlind #netInspector tr.blocked {
+    background-color: rgba(0, 19, 110, 0.25);
+    }
+#netInspector tr.nooped {
+    background-color: rgba(108, 108, 108, 0.25);
+    }
+body.colorBlind #netInspector tr.nooped {
+    background-color: rgba(96, 96, 96, 0.25);
+    }
+#netInspector tr.allowed {
+    background-color: rgba(0, 160, 0, 0.25);
+    }
+#netInspector tr.allowed.dnt {
+    background-color: rgba(150,185,107,0.5);
+    }
+#netInspector tr.cosmetic.adFound {
+    background-color: rgba(160,31,240, 0.25);
+    }
+body.colorBlind #netInspector tr.allowed {
+    background-color: rgba(255, 194, 57, 0.25)
+    }
+#netInspector tr.cosmetic, #netInspector tr.redirect {
+    background-color: rgba(255, 255, 0, 0.25);
     }
 #netInspector #filterExprButton.expanded {
     transform: scaleY(1);
@@ -233,6 +293,7 @@ body[dir="rtl"] #netInspector #filterExprPicker {
     overflow: hidden;
     position: absolute;
     width: 100%;
+    color: var(--adn-text-contrast);
     }
 #vwRenderer .logEntry:empty {
     display: none;
@@ -245,6 +306,7 @@ body[dir="rtl"] #netInspector #filterExprPicker {
     max-height: 200px;
     white-space: nowrap;
     }
+  /* Block color */
 #vwRenderer .logEntry > div[data-status="1"],
 .netFilteringDialog > .panes > .details > div[data-status="1"] {
     background-color: rgb(var(--popup-cell-block-surface-rgb) / 50%);
@@ -254,18 +316,39 @@ body[dir="rtl"] #netInspector #filterExprPicker {
     background-color: var(--logger-modified-surface);
     }
 #vwRenderer .logEntry > div[data-status="3"] {
-    background-color: rgba(108, 108, 108, 0.1);
+    background-color: rgba(108, 108, 108, 0.25);
     }
 :root.colorBlind #vwRenderer .logEntry > div[data-status="3"] {
     background-color: rgba(96, 96, 96, 0.1);
     }
+/* Allow color */
 #vwRenderer .logEntry > div[data-status="2"],
-.netFilteringDialog > .panes > .details > div[data-status="2"] {
-    background-color: rgb(var(--popup-cell-allow-surface-rgb) / 50%);
+#netFilteringDialog > .panes > .details > div[data-status="2"] {
+    background-color: var(--logger-allowed-surface);
+    }
+body.colorBlind #vwRenderer .logEntry > div[data-status="2"],
+body.colorBlind #netFilteringDialog > .panes > .details > div[data-status="2"] {
+    background-color: rgba(255, 194, 57, 0.25);
+    }
+/* adn allow color*/
+#vwRenderer .logEntry > div[data-status="4"],
+#netFilteringDialog > .panes > .details > div[data-status="4"] {
+    background-color: var(--adn-logger-adnallow);
+    }
+/* dnt allow color */
+#vwRenderer .logEntry > div[data-status="5"],
+#netFilteringDialog > .panes > .details > div[data-status="5"] {
+    background-color: var(--adn-logger-dnt);
     }
 #vwRenderer .logEntry > div[data-tabid="-1"] {
-    text-shadow: 0 0.2em 0.4em #aaa;
+    /*text-shadow: 0 0.2em 0.4em #aaa; */ /* ADN comment*/ 
     }
+    /* ADN ad-visit color */
+#vwRenderer .logEntry > div[data-advisit] {
+    background-color: var(--logger-modified-surface);
+    }
+    /* Cosmetic Color */
+#vwRenderer .logEntry > div.cosmeticRealm,
 #vwRenderer .logEntry > div.extendedRealm,
 #vwRenderer .logEntry > div.redirect {
     background-color: var(--logger-redirected-surface);
@@ -745,7 +828,7 @@ body[dir="rtl"] .netFilteringDialog > .panes > .details > div > span:nth-of-type
     opacity: 1;
     }
 .netFilteringDialog > .panes > .details .exceptored .filter {
-    text-decoration: line-through;
+    text-decor;ation: line-through;
     }
 .netFilteringDialog > .panes > .details .exceptored .exceptor {
     background-color: rgb(var(--primary-50) / 50%);

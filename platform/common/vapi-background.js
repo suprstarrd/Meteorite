@@ -24,8 +24,9 @@
 
 /******************************************************************************/
 
-import { ubolog } from './console.js';
 import webext from './webext.js';
+import { ubolog } from './console.js';
+import { makeCloneable } from './adn/adn-utils.js';
 
 /******************************************************************************/
 
@@ -758,14 +759,39 @@ if ( webext.browserAction instanceof Object ) {
     const titleTemplate = `${browser.runtime.getManifest().browser_action.default_title} ({badge})`;
     const icons = [
         { path: {
-            '16': 'img/icon_16-off.png',
-            '32': 'img/icon_32-off.png',
-            '64': 'img/icon_64-off.png',
+            '16': 'img/adn_off_16.png',
+            '32': 'img/adn_off_32.png',
+            '64': 'img/adn_off_32.png', // ADN: to-do - add 64px icon
         } },
         { path: {
-            '16': 'img/icon_16.png',
-            '32': 'img/icon_32.png',
-            '64': 'img/icon_64.png',
+            '16': 'img/adn_on_16.png',
+            '32': 'img/adn_on_32.png',
+            '64': 'img/adn_on_32.png', // ADN: to-do - add 64px icon
+        } },
+        { path: {
+            '16': 'img/adn_active_16.png',
+            '32': 'img/adn_active_32.png',
+            '64': 'img/adn_active_32.png', // ADN: to-do - add 64px icon
+        } },
+        { path: {
+            '16': 'img/adn_dnt_on_16.png',
+            '32': 'img/adn_dnt_on_32.png',
+            '64': 'img/adn_dnt_on_32.png', // ADN: to-do - add 64px icon
+        } },
+        { path: {
+            '16': 'img/adn_dnt_active_16.png',
+            '32': 'img/adn_dnt_active_32.png',
+            '64': 'img/adn_dnt_active_32.png', // ADN: to-do - add 64px icon
+        } },
+        { path: {
+            '16': 'img/adn_strict_on_16.png',
+            '32': 'img/adn_strict_on_32.png',
+            '64': 'img/adn_strict_on_32.png', // ADN: to-do - add 64px icon
+        } },
+        { path: {
+            '16': 'img/adn_strict_active_16.png',
+            '32': 'img/adn_strict_active_32.png',
+            '64': 'img/adn_strict_active_32.png', // ADN: to-do - add 64px icon
         } },
     ];
 
@@ -815,7 +841,7 @@ if ( webext.browserAction instanceof Object ) {
             }
             const ctx = document.createElement('canvas')
                 .getContext('2d', { willReadFrequently: true });
-            const iconData = [ null, null ];
+            const iconData = [ null, null, null, null, null, null, null]; // adn
             for ( const img of imgs ) {
                 if ( img.cached ) { continue; }
                 const w = img.r.naturalWidth, h = img.r.naturalHeight;
@@ -830,7 +856,9 @@ if ( webext.browserAction instanceof Object ) {
                     imgData.data[0] !== 0 ||
                     imgData.data[1] !== 0 ||
                     imgData.data[2] !== 0 ||
-                    imgData.data[3] !== 0
+                    imgData.data[3] !== 0 || // Adn
+                    imgData.data[4] !== 0 || // Adn
+                    imgData.data[5] !== 0  // Adn
                 ) {
                     return;
                 }
@@ -904,9 +932,9 @@ if ( webext.browserAction instanceof Object ) {
         if ( browserAction.setIcon === undefined ) { return; }
         browserAction.setIcon({
             path: {
-                '16': `img/icon_16${flavor}.png`,
-                '32': `img/icon_32${flavor}.png`,
-                '64': `img/icon_64${flavor}.png`,
+                '16': `img/icon_16.png`, //'16': `img/icon_16${flavor}.png`, // Adn
+                '32': `img/icon_32.png`, //'32': `img/icon_32${flavor}.png`, // Adn
+                '64': `img/icon_64.png`,
             }
         });
         browserAction.setBadgeText({ text });
@@ -1010,6 +1038,24 @@ vAPI.messaging = {
                     this.onPortDisconnect(port);
                 }
             });
+        }
+    },
+
+    broadcast: function(message) {
+        if (message.what === 'notifications') { // ADN
+
+          makeCloneable(message.notifications); // #1163
+        }
+        const messageWrapper = { broadcast: true, msg: message };
+        for ( const { port } of this.ports.values() ) {
+            try {
+                port.postMessage(messageWrapper);
+            } catch(ex) {
+                this.onPortDisconnect(port);
+            }
+        }
+        if ( this.defaultHandler ) {
+            this.defaultHandler(message, null, ( ) => { });
         }
     },
 
@@ -1441,6 +1487,77 @@ vAPI.commands = browser.commands;
 /******************************************************************************/
 /******************************************************************************/
 
+// This is called only once, when everything has been loaded in memory after
+// the extension was launched. It can be used to inject content scripts
+// in already opened web pages, to remove whatever nuisance could make it to
+// the web pages before uBlock was ready.
+//
+// Also being used by ADN to inject content-scripts into dynamically-created
+// iframes, as Chrome does not inject into these by default. This is needed
+// because we often can't block the iframe outright, as we need the ads inside.
+//
+vAPI.onLoadAllCompleted = function(tabId, frameId) { //ADN
+
+    // console.log('C.onLoadAllCompleted: '+tabId, frameId);
+
+    // http://code.google.com/p/chromium/issues/detail?id=410868#c11
+    // Need to be sure to access `vAPI.lastError()` to prevent
+    // spurious warnings in the console.
+    var onScriptInjected = function() {
+        var err = vAPI.lastError();
+        // console.log('C.onScriptInjected: ',err);
+    };
+
+    var scriptStart = function(tabId, frameId) {
+        var manifest = browser.runtime.getManifest();
+        if ( manifest instanceof Object === false ) { return; }
+        for ( var contentScript of manifest.content_scripts ) {
+            for ( var file of contentScript.js ) {
+                injectOne(tabId, frameId, file, 0);
+            }
+        }
+    };
+    var startInTab = function(tab, frameId) { // ADN
+        var µb = µBlock;
+        µb.tabContextManager.commit(tab.id, tab.url);
+        µb.bindTabToPageStore(tab.id, 'tabCommitted', tab); // ADN trying to fix https://github.com/dhowe/AdNauseam/issues/2378
+        // https://github.com/chrisaljoudi/uBlock/issues/129
+        if ( /^https?:\/\//.test(tab.url) ) { // added in ub/1.10.0
+          scriptStart(tab.id, frameId); //why scriptStart itself only take in one parameter?
+        }
+    };
+    var injectOne = function(tabId, frameId, script, cb)  {
+
+      var details = {
+          file: script,
+          allFrames: true,
+          runAt: 'document_idle',
+          matchAboutBlank:true
+      }
+      if (frameId) {
+        details.frameId = frameId;
+        details.matchAboutBlank = true;
+      }
+      vAPI.tabs.injectScript(tabId, details, cb || function(){});
+    };
+    var bindToTabs = function(tabs) {
+        var i = tabs.length;
+        while ( i-- ) {
+            startInTab(tabs[i]);
+        }
+    };
+
+    if (tabId)  {
+        browser.tabs.get(tabId, function(tab) {
+          if (tab) startInTab(tab, frameId); }
+        ); // ADN
+    }
+    else {
+        browser.tabs.query({ url: '<all_urls>' }, bindToTabs);
+    }
+};
+
+
 // https://github.com/gorhill/uBlock/issues/531
 //   Storage area dedicated to admin settings. Read-only.
 
@@ -1784,6 +1901,38 @@ vAPI.cloud = (( ) => {
 
     return { push, pull, used, getOptions, setOptions };
 })();
+
+/******************************************************************************/
+
+vAPI.getAddonInfo = function (callback) { // ADN
+
+  let conflict = false;
+
+  if (typeof browser.management.getAll === 'function') {
+
+    browser.management.getAll(function (extensions) {
+
+      if (browser.runtime.lastError) {
+
+        // do nothing
+
+      } else {
+
+        extensions.forEach(function (extension) {
+
+          if ((extension.name.startsWith("Adblock") || extension.name.startsWith("AdBlock")) && extension.enabled)
+            conflict = "adBlock";
+          else if (extension.name.startsWith("uBlock") && extension.enabled && extension.name != "uBlock Origin Extra")
+            conflict = "uBlock"; // uBlock origin & uBlock
+          else if (extension.name == "Privacy Badger" && extension.enabled)
+            conflict = "privacyBadger"
+        });
+
+        callback (conflict);
+      }
+    });
+  }
+}
 
 /******************************************************************************/
 /******************************************************************************/

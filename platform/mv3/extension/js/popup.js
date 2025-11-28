@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin Lite - a comprehensive, MV3-compliant content blocker
+    AdNauseam Lite - a comprehensive, MV3-compliant content blocker
     Copyright (C) 2022-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -289,6 +289,99 @@ dom.on('#gotoUnpicker', 'click', ( ) => {
     self.close();
 });
 
+
+/******************************************************************************/
+// AdNauseam Vault Integration
+/******************************************************************************/
+
+async function updateAdNauseamStats() {
+    try {
+        const response = await sendMessage({ what: 'getAdNauseamStats' });
+        if (response && response.stats) {
+            dom.text('#adn-total-ads', response.stats.totalAds);
+            dom.text('#adn-total-clicks', response.stats.totalClicks);
+        }
+    } catch (error) {
+        console.error('[ADN Popup] Failed to get stats:', error);
+    }
+}
+
+async function renderVault() {
+    try {
+        const vault = await sendMessage({ what: 'getVault' });
+        const vaultList = qs$('#adn-vault-list');
+        
+        if (!vault || vault.length === 0) {
+            vaultList.innerHTML = '<div class="adn-vault-empty">No ads collected yet</div>';
+            return;
+        }
+        
+        // Show most recent ads first (last 20)
+        const recentAds = vault.slice(-20).reverse();
+        
+        vaultList.innerHTML = recentAds.map(ad => {
+            const displayUrl = ad.targetUrl ? new URL(ad.targetUrl).hostname : '';
+            const imgHtml = ad.imgSrc 
+                ? `<img src="${ad.imgSrc}" class="adn-vault-img" onerror="this.style.display='none'">`
+                : '';
+            
+            return `
+                <div class="adn-vault-item ${ad.clicked ? 'clicked' : ''}">
+                    ${imgHtml}
+                    <div class="adn-vault-details">
+                        <div class="adn-vault-title">${ad.title || 'Untitled Ad'}</div>
+                        ${ad.text ? `<div class="adn-vault-text">${ad.text.substring(0, 60)}...</div>` : ''}
+                        <div class="adn-vault-url">${displayUrl}</div>
+                        <div class="adn-vault-status ${ad.clicked ? 'clicked' : ''}">
+                            ${ad.clicked ? '✓ Clicked' : '○ Not clicked'}
+                            ${ad.imgSrc ? ` • ${ad.imgWidth}×${ad.imgHeight}` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+    } catch (error) {
+        console.error('[ADN Popup] Failed to render vault:', error);
+    }
+}
+
+dom.on('#adn-toggle-vault', 'click', async () => {
+    const vaultList = qs$('#adn-vault-list');
+    const isHidden = dom.cl.has(vaultList, 'hidden');
+    
+    if (isHidden) {
+        dom.cl.remove(vaultList, 'hidden');
+        await renderVault();
+    } else {
+        dom.cl.add(vaultList, 'hidden');
+    }
+});
+
+dom.on('#adn-clear-vault', 'click', async () => {
+    if (!confirm('Clear all ads from vault?')) return;
+    
+    try {
+        await sendMessage({ what: 'clearVault' });
+        await updateAdNauseamStats();
+        const vaultList = qs$('#adn-vault-list');
+        if (!dom.cl.has(vaultList, 'hidden')) {
+            await renderVault();
+        }
+    } catch (error) {
+        console.error('[ADN Popup] Failed to clear vault:', error);
+    }
+});
+
+// Update stats when popup opens
+// Add this call in the existing init() function after other initialization
+async function initAdNauseam() {
+    await updateAdNauseamStats();
+    
+    // Update stats every 2 seconds while popup is open
+    setInterval(updateAdNauseamStats, 2000);
+}
+
 /******************************************************************************/
 
 async function init() {
@@ -339,6 +432,9 @@ async function init() {
     dom.cl.toggle(dom.root, 'isHTTP', isHTTP);
 
     dom.cl.toggle('#gotoUnpicker', 'enabled', popupPanelData.hasCustomFilters);
+
+		// adn
+		await initAdNauseam();
 
     return true;
 }

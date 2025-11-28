@@ -39,7 +39,7 @@
     "message": "Vaše pravidla",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Povolené domény",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Cíl",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "Pravidla v seznamu povolených domén určují, pro které webové stránky bude uBlock Origin vypnutý. Jedna položka na řádek.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Importovat a připojit",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Exportovat",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
-    "message": "ublock-muj-whitelist_{{datetime}}.txt",
+  "allowlistExportFilename": {
+    "message": "ublock-muj-allowlist_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Použít změny",
     "description": "English: Apply changes"
   },
