@@ -72,7 +72,7 @@
     "description": "Header for a ruleset section in 'Filter lists pane'"
   },
   "3pGroupMalware": {
-    "message": "Domini che diffondono virus",
+    "message": "Protezione dai malware, sicurezza",
     "description": "Header for a ruleset section in 'Filter lists pane'"
   },
   "3pGroupAnnoyances": {
@@ -189,7 +189,7 @@
   },
   "supportReportSpecificButton": {
     "message": "Crea nuova segnalazione in GitHub",
-    "description": "Text for button which open an external webpage in Support pane"
+    "description": "Text for button which opens an external web page in Support pane"
   },
   "defaultFilteringModeSectionLabel": {
     "message": "Modalità di filtraggio predefinita",
@@ -281,7 +281,7 @@
   },
   "strictblockTitle": {
     "message": "Pagina bloccata",
-    "description": "Webpage title for the strict-blocked page"
+    "description": "Web page title for the strict-blocked page"
   },
   "strictblockSentence1": {
     "message": "uBO Lite ha impedito alla seguente pagina di caricarsi:",
@@ -301,7 +301,7 @@
   },
   "strictblockBack": {
     "message": "Torna indietro",
-    "description": "A button to go back to the previous webpage"
+    "description": "A button to go back to the previous web page"
   },
   "strictblockClose": {
     "message": "Chiudi questa finestra",
@@ -384,11 +384,11 @@
     "description": "Text for buttons used to restore content"
   },
   "resetToDefaultButton": {
-    "message": "Reset to default settings…",
+    "message": "Reimposta configurazione predefinita…",
     "description": "Text for buttons used to reset configurations to default"
   },
   "resetToDefaultConfirm": {
-    "message": "All your custom settings will be removed. Do you really want to reset to default settings?",
+    "message": "Le impostazioni personali saranno rimosse. Vuoi veramente reimpostare i valori predefiniti?",
     "description": "Message asking user to confirm reset to default settings"
   },
   "dnrRulesWarning": {

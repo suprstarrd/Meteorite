@@ -122,20 +122,22 @@ mkdir -p "$ADNL_DIR"/lib/csstree
 cp "$ADN_DIR"/src/lib/csstree/* "$ADNL_DIR"/lib/csstree/
 
 echo "*** uBOLite.mv3: Generating rulesets"
-UBOL_BUILD_DIR=$(mktemp -d)
-mkdir -p "$UBOL_BUILD_DIR"
-./tools/make-nodejs.sh "$UBOL_BUILD_DIR"
-cp platform/mv3/*.json "$UBOL_BUILD_DIR"/
-cp platform/mv3/*.js "$UBOL_BUILD_DIR"/
-cp platform/mv3/*.mjs "$UBOL_BUILD_DIR"/
-cp platform/mv3/extension/js/utils.js "$UBOL_BUILD_DIR"/js/
-cp -R "$ADN_DIR"/src/js/resources "$UBOL_BUILD_DIR"/js/
-cp -R platform/mv3/scriptlets "$UBOL_BUILD_DIR"/
-mkdir -p "$UBOL_BUILD_DIR"/web_accessible_resources
-cp "$ADN_DIR"/src/web_accessible_resources/* "$UBOL_BUILD_DIR"/web_accessible_resources/
-cp -R platform/mv3/"$PLATFORM" "$UBOL_BUILD_DIR"/
+ADNL_BUILD_DIR=$(mktemp -d)
+mkdir -p "$ADNL_BUILD_DIR"
+./tools/make-nodejs.sh "$ADNL_BUILD_DIR"
+cp platform/mv3/*.json "$ADNL_BUILD_DIR"/
+cp platform/mv3/*.js "$ADNL_BUILD_DIR"/
+cp platform/mv3/*.mjs "$ADNL_BUILD_DIR"/
+cp platform/mv3/extension/js/utils.js "$ADNL_BUILD_DIR"/js/
+cp "$UBO_DIR"/src/js/regex-analyzer.js "$ADNL_BUILD_DIR"/js/
+cp -R "$UBO_DIR"/src/lib/regexanalyzer "$ADNL_BUILD_DIR"/
+cp -R "$UBO_DIR"/src/js/resources "$ADNL_BUILD_DIR"/js/
+cp -R platform/mv3/scriptlets "$ADNL_BUILD_DIR"/
+mkdir -p "$ADNL_BUILD_DIR"/web_accessible_resources
+cp "$ADN_DIR"/src/web_accessible_resources/* "$ADNL_BUILD_DIR"/web_accessible_resources/
+cp -R platform/mv3/"$PLATFORM" "$ADNL_BUILD_DIR"/
 
-cd "$UBOL_BUILD_DIR"
+cd "$ADNL_BUILD_DIR"
 node --no-warnings make-rulesets.js output="$ADNL_DIR" platform="$PLATFORM"
 if [ -n "$BEFORE" ]; then
     echo "*** uBOLite.mv3: salvaging rule ids to minimize diff size"
@@ -144,7 +146,7 @@ if [ -n "$BEFORE" ]; then
     node salvage-ruleids.mjs before="$BEFORE"/"$PLATFORM" after="$ADNL_DIR"
 fi
 cd - > /dev/null
-rm -rf "$UBOL_BUILD_DIR"
+rm -rf "$ADNL_BUILD_DIR"
 
 echo "*** uBOLite.$PLATFORM: extension ready"
 echo "Extension location: $ADNL_DIR/"
@@ -186,15 +188,15 @@ if [ "$FULL" = "yes" ]; then
         EXTENSION="xpi"
     fi
     echo "*** uBOLite.mv3: Creating publishable package..."
-    UBOL_PACKAGE_NAME="uBOLite_$TAGNAME.$PLATFORM.$EXTENSION"
-    UBOL_PACKAGE_DIR=$(mktemp -d)
-    mkdir -p "$UBOL_PACKAGE_DIR"
-    cp -R "$ADNL_DIR"/* "$UBOL_PACKAGE_DIR"/
-    cd "$UBOL_PACKAGE_DIR" > /dev/null
+    ADNL_PACKAGE_NAME="uBOLite_$TAGNAME.$PLATFORM.$EXTENSION"
+    ADNL_PACKAGE_DIR=$(mktemp -d)
+    mkdir -p "$ADNL_PACKAGE_DIR"
+    cp -R "$ADNL_DIR"/* "$ADNL_PACKAGE_DIR"/
+    cd "$ADNL_PACKAGE_DIR" > /dev/null
     rm -f ./log.txt
-    zip "$UBOL_PACKAGE_NAME" -qr ./*
+    zip "$ADNL_PACKAGE_NAME" -qr ./*
     cd - > /dev/null
-    cp "$UBOL_PACKAGE_DIR"/"$UBOL_PACKAGE_NAME" dist/build/
-    rm -rf "$UBOL_PACKAGE_DIR"
-    echo "Package location: $(pwd)/dist/build/$UBOL_PACKAGE_NAME"
+    cp "$ADNL_PACKAGE_DIR"/"$ADNL_PACKAGE_NAME" dist/build/
+    rm -rf "$ADNL_PACKAGE_DIR"
+    echo "Package location: $(pwd)/dist/build/$ADNL_PACKAGE_NAME"
 fi
