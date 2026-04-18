@@ -49,8 +49,9 @@ metacritic.com##.sitewide_promo
 spiegel.de##div[id*="google_ads_iframe"]
 spiegel.de##div[class*="Anzeige"]
 
-www.nytimes.com##.e12j3pa50
-www.nytimes.com###top-wrapper:has(.ad)
+www.nytimes.com###app > div:has(.dfp-ad-top-wrapper)
+www.nytimes.com##[data-hierarchy=feed] > div:has(.ad)
+www.nytimes.com##[id^=story-ad]
 
 search.yahoo.com##.layoutMiddle
 search.yahoo.com##.kr5yi684e6
@@ -546,30 +547,14 @@ opensubtitles.org###fcninnerbox
 # radikal.ru (video)
 ||laim.tv^$important,third-party
 
-# abcnews.com
-||s.abcnews.com/assets/js/prebid.min.js^$important
-||googleadservices.com/pagead/conversion.js^$important
-
 # adage.com
 ||gaia.adage.com/assets/js/min/adBlockDetector.js^$important,script,first-party
 
 # www.batmanstream.com
 ||adbetnet.advertserve.com^$important,domain=batmanstream.com
 
-# bing.com
-||www.bing.com/rms/rms%20answers%20Identity%20SnrWindowsLiveConnectBootstrap/jc,nj/bf587ad6/f1d86b5a.js^$important
-
-#Washington Post
-||washingtonpost.com/wp-stat/advertising/pseudo-static/^$important
-
 #hdrezka.horse
 ||braun634.com^$domain=hdrezka.horse
-
-#nbcnews
-||cdn.krxd.net$domain=www.nbcnews.com^$important
-
-#latimes
-||tribdss.com^$third-party^$important
 
 #kisscartoon
 ||ad.kisscartoon.is^
@@ -612,11 +597,6 @@ opensubtitles.org###fcninnerbox
 ||atpixel.alephd.com/post_adtech$image^$important
 ||cache.btrll.com/default/Pix-1x1.gif^$important
 
-# Ad Tag
-||o.aolcdn.com/ads/adchoices.png^$important
-||tpc.googlesyndication.com/pagead/images/x_button^$important
-||googleads.g.doubleclick.net/pagead/images/abg/icon^$important
-
 # Rubicon tracking section
 ||rubiconproject.com/beacon^$important
 ||tap-secure.rubiconproject.com^$important
@@ -630,13 +610,6 @@ opensubtitles.org###fcninnerbox
 ||innovid.com^$important
 ||pubads.g.doubleclick.net/gampad/ads$important,xmlhttprequest,domain=imasdk.googleapis.com
 ||gcdn.2mdn.net/videoplayback^$important
-
-# google
-||googleads.g.doubleclick.net/pagead/gen^$important
-||pagead2.googlesyndication.com/pagead/gen^$important
-||g.doubleclick.net/pcs/view?^$important
-||pagead2.googlesyndication.com/activeview?avi=^$important
-||google.com/ads/measurement/l?^$important
 
 ||cdn.dynamicyield.com/api/*/api_static.js^$important
 ||cdn.dynamicyield.com/api/*/api_dynamic.js^$important
@@ -795,8 +768,8 @@ flylordsmag.com##.td-ss-main-sidebar
 flylordsmag.com##.td-header-header.td-header-row.td-container-header
 
 # trying to better collect google ads #1906
-#@#.adsbygoogle
-#@#.ads_1
+#@#.adsbygoogle:style(height: 1px !important)
+#@#.ads_1:style(height: 1px !important)
 *###ads_1:style(height: 1px !important)
 *##.adsbygoogle:style(height: 1px !important)
 
@@ -922,3 +895,17 @@ www.snooker.org###stickyAdContainer
 # fix old.reddit false positive ad collection
 old.reddit.com#@#a.outbound[data-outbound-url]:remove-attr(data-outbound-url)
 old.reddit.com#@#a.outbound[data-outbound-url] 
+
+# google ads
+##.product-box:has(.cropped-image-intermedia-box)
+www.google.*#@#+js(set-constant, rwt, noopFunc)
+www.google.*#@#+js(set-attr, c-wiz[data-p] [data-query] a[target="_blank"][role="link"], rlhc, 1)
+###paidPostDriver-Container
+##.posterImage-link
+##.ads-column-container
+##.ad .contentImg
+##.alignClickable[onclick*="adclick"]:has(.imageholder)
+##.mediago-placement-track:has(#mg-img)
+
+# ads.eu.criteo
+ads.eu.criteo.com##div:has(.imageholder)

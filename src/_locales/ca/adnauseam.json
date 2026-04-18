@@ -116,7 +116,7 @@
     "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
   },
   "adnNewerVersionAvailableNotification": {
-    "message": "A newer version of AdNauseam is available",
+    "message": "Una versió més recent d'AdNauseam està disponible",
     "description": "English: Notifications -> A newer version of AdNauseam is available"
   },
   "adnTarget": {
@@ -196,7 +196,7 @@
     "description": "shown in menu when only 'recent' Ads are shown"
   },
   "adnThisPageStrictBlocked": {
-    "message": "{{domain}} es troba blocat de manera estricta.",
+    "message": "{{domain}} es troba bloquejat de manera estricta.",
     "description": "shown in menu when the current page is strict-blocked"
   },
   "adnStrictBlockListDescription": {
@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Aquesta acció esborrarà permanentment tots els anuncis dels quals la imatge no es pot carregar. És una bona idea fer una còpia de seguretat del bagul abans de purgar-lo, i també d'assegurar-se de tenir una connexió d'internet activa.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,15 +364,15 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Mostra els anuncis inactius",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Amaga els anuncis inactius",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Captura",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Actualització",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Mode de depuració",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,11 +512,11 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Difuminar els anuncis recollits",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Amagar els anuncis inactius",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
@@ -532,23 +532,23 @@
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "Actualitzar",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "Aplicar els canvis a la pàgina actual",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Assegureu-vos que aquest problema sigui <b>específic d'AdNauseam<\/b>.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "He provat la mateixa pàgina web a <a url='https:\/\/github.com\/gorhill\/uBlock'>>#uBO#<\/a> i confirmo que aquest problema és <b>específic d'AdNauseam<\/b>.",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Anuncis no recollits",
     "description": "Ads are present on page but none are collected"
   }
 }

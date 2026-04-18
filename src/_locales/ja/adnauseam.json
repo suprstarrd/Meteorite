@@ -372,7 +372,7 @@
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "キャプチャ",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "更新",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -500,11 +500,11 @@
     "description": "appears as tab name in dashboard"
   },
   "strictBlockListPageName": {
-    "message": "Strict-Block List",
+    "message": "厳格ブロックリスト",
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "デバッグモード",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -532,7 +532,7 @@
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "再読み込み",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {

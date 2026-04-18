@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Bu işlem, görseli yüklenemeyen tüm reklamları kalıcı olarak kaldırır. Temizleme işlemini yapmadan önce mahzeni yedeklemeniz ve etkin bir internet bağlantınız olduğundan emin olmanız önerilir.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,15 +364,15 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Ölü Reklamları Göster",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Ölü Reklamları Gizle",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Yakala",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Güncelle",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Hata ayıklama modu",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,11 +512,11 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Toplanmış reklamları bulanıklaştır",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Ölü Reklamları Gizle",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
@@ -544,11 +544,11 @@
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Aynı web sayfasını  <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> üzerinde test ettim ve bu sorunun <b>AdNauseam'a özgü<\/b> olduğunu doğruladım.",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Toplanmamış reklamlar",
     "description": "Ads are present on page but none are collected"
   }
 }

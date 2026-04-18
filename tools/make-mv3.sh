@@ -122,22 +122,22 @@ mkdir -p "$ADNL_DIR"/lib/csstree
 cp "$ADN_DIR"/src/lib/csstree/* "$ADNL_DIR"/lib/csstree/
 
 echo "*** uBOLite.mv3: Generating rulesets"
-ADNL_BUILD_DIR=$(mktemp -d)
-mkdir -p "$ADNL_BUILD_DIR"
-./tools/make-nodejs.sh "$ADNL_BUILD_DIR"
-cp platform/mv3/*.json "$ADNL_BUILD_DIR"/
-cp platform/mv3/*.js "$ADNL_BUILD_DIR"/
-cp platform/mv3/*.mjs "$ADNL_BUILD_DIR"/
-cp platform/mv3/extension/js/utils.js "$ADNL_BUILD_DIR"/js/
-cp "$UBO_DIR"/src/js/regex-analyzer.js "$ADNL_BUILD_DIR"/js/
-cp -R "$UBO_DIR"/src/lib/regexanalyzer "$ADNL_BUILD_DIR"/
-cp -R "$UBO_DIR"/src/js/resources "$ADNL_BUILD_DIR"/js/
-cp -R platform/mv3/scriptlets "$ADNL_BUILD_DIR"/
-mkdir -p "$ADNL_BUILD_DIR"/web_accessible_resources
-cp "$ADN_DIR"/src/web_accessible_resources/* "$ADNL_BUILD_DIR"/web_accessible_resources/
-cp -R platform/mv3/"$PLATFORM" "$ADNL_BUILD_DIR"/
+UBOL_BUILD_DIR=$(mktemp -d)
+mkdir -p "$UBOL_BUILD_DIR"
+./tools/make-nodejs.sh "$UBOL_BUILD_DIR"
+cp platform/mv3/*.json "$UBOL_BUILD_DIR"/
+cp platform/mv3/*.js "$UBOL_BUILD_DIR"/
+cp platform/mv3/*.mjs "$UBOL_BUILD_DIR"/
+cp platform/mv3/extension/js/utils.js "$UBOL_BUILD_DIR"/js/
+cp "$ADN_DIR"/src/js/regex-analyzer.js "$UBOL_BUILD_DIR"/js/
+cp -R "$ADN_DIR"/src/lib/regexanalyzer "$UBOL_BUILD_DIR"/
+cp -R "$ADN_DIR"/src/js/resources "$UBOL_BUILD_DIR"/js/
+cp -R platform/mv3/scriptlets "$UBOL_BUILD_DIR"/
+mkdir -p "$UBOL_BUILD_DIR"/web_accessible_resources
+cp "$ADN_DIR"/src/web_accessible_resources/* "$UBOL_BUILD_DIR"/web_accessible_resources/
+cp -R platform/mv3/"$PLATFORM" "$UBOL_BUILD_DIR"/
 
-cd "$ADNL_BUILD_DIR"
+cd "$UBOL_BUILD_DIR"
 node --no-warnings make-rulesets.js output="$ADNL_DIR" platform="$PLATFORM"
 if [ -n "$BEFORE" ]; then
     echo "*** uBOLite.mv3: salvaging rule ids to minimize diff size"

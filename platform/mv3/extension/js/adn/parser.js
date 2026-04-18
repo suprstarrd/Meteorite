@@ -18,6 +18,22 @@
   // This will be populated by uBlock's cosmetic filter system
   // We piggyback on the selectors that uBlock already uses for hiding
   let adSelectors = [];
+
+  const imgSelectors = [
+    'img',
+    'amp-img',
+    '.cropped-image-intermedia-box',
+    '.imageholder'
+  ];
+
+  const titleSelectors = [
+    '[data-title-id]',
+    '.title',
+    'h1',
+    'h2',
+    'h3',
+    'h4'
+  ];
   
   // Extract ad data from element
   function extractAdData(element) {
@@ -54,7 +70,7 @@
     }
     
     // Find image
-    const img = element.querySelector('img, amp-img');
+    const img = element.querySelector(imgSelectors.join(', '));
     if (img) {
       data.imgSrc = img.src || img.getAttribute('src') || img.dataset.src;
       data.imgWidth = img.naturalWidth || parseInt(img.getAttribute('width')) || img.clientWidth;
@@ -73,7 +89,7 @@
     
     // Extract text and title
     data.text = element.textContent.trim().substring(0, 100);
-    const titleEl = element.querySelector('[data-title-id], .title, h1, h2, h3, h4');
+    const titleEl = element.querySelector(titleSelectors);
     if (titleEl) {
       data.title = titleEl.textContent.trim();
     }
@@ -90,12 +106,28 @@
     return data;
   }
   
+  // Check if onclick attribute contains a valid URL
+  function onclickHasUrl(onclickStr) {
+    if (!onclickStr) return false;
+    // Check for window.open with URL
+    if (/window\.open\(['"]https?:\/\//i.test(onclickStr)) return true;
+    // Check for location.href assignment
+    if (/location\.href\s*=\s*['"]https?:\/\//i.test(onclickStr)) return true;
+    // Check for any http(s) URL in the string
+    if (/https?:\/\/[^\s'"]+/i.test(onclickStr)) return true;
+    return false;
+  }
+
   // Find clickable parent
   function findClickableParent(node) {
     let checkNode = node;
     let depth = 0;
     while (checkNode && checkNode.nodeType === 1 && depth < 10) {
-      if (checkNode.tagName === 'A' || checkNode.hasAttribute('onclick')) {
+      if (checkNode.tagName === 'A' || checkNode.hasAttribute('href')) {
+        return checkNode;
+      }
+      // Only consider onclick if it contains a valid URL
+      if (checkNode.hasAttribute('onclick') && onclickHasUrl(checkNode.getAttribute('onclick'))) {
         return checkNode;
       }
       checkNode = checkNode.parentNode;
@@ -160,7 +192,7 @@
       
       elements.forEach(element => {
         // Skip if already processed
-        if (element.hasAttribute('data-adn-processed')) return;
+        // if (element.hasAttribute('data-adn-processed')) return;
         element.setAttribute('data-adn-processed', 'true');
         
         const adData = extractAdData(element);

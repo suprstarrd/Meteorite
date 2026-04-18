@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Cette action supprimera définitivement toutes les publicités dont l'image ne peut pas être chargée. Il est conseillé de sauvegarder le coffre avant de le purger. Assurez-vous aussi d'avoir une connexion internet.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,11 +364,11 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Montrer les publicités caduques",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Masquer les publicités caduques",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Mettre à jour",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Mode débogueur",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,11 +512,11 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Flouter les publicités collectées",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Masquer les publicités caduques",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {

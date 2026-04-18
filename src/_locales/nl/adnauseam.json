@@ -112,11 +112,11 @@
     "description": "English: Notifications -> This page respects Do Not Track, just so you know."
   },
   "adnNotificationShowAdsDebug": {
-    "message": "The Advanced Setting \"Show Ads Debug\" is turned on",
+    "message": "De geavanceerde instelling \"Toon advertenties in debugmodus\" staat aan",
     "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
   },
   "adnNewerVersionAvailableNotification": {
-    "message": "A newer version of AdNauseam is available",
+    "message": "Er is een nieuwere versie van AdNauseam beschikbaar",
     "description": "English: Notifications -> A newer version of AdNauseam is available"
   },
   "adnTarget": {
@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Deze actie zal alle advertenties waarbij de afbeelding niet geladen kan worden permanent verwijderen. Het is een goed idee om een back-up van je kluis te maken voordat je gaat opschonen. Zorg ervoor dat je een actieve internetverbinding hebt.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,15 +364,15 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Toon dode advertenties",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Verberg dode advertenties",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Opnemen",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -500,11 +500,11 @@
     "description": "appears as tab name in dashboard"
   },
   "strictBlockListPageName": {
-    "message": "Strict-Block List",
+    "message": "Strikte blokkeerlijst",
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Debugmodus",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,15 +512,15 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Vervaag verzamelde advertenties",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Verberg dode advertenties",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
-    "message": "Show ads for ad-collection debugging",
+    "message": "Toon advertenties om advertentieverzameling te debuggen",
     "description": "English: Show ads for ad-collection debugging"
   },
   "removeAdsInPrivate": {
@@ -528,19 +528,19 @@
     "description": "English:Remove ads collected in private mode - settings page"
   },
   "settingsStrictBlockingMode": {
-    "message": "Activate Strict-Blocking Mode",
+    "message": "Activeer Strict-Blokkeer Modus",
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "Verversen",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "Wijzigingen op huidige pagina toepassen",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Maak zeker dat dit probleem is  <b>AdNauseam-specific<\/b>.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
@@ -548,7 +548,7 @@
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Geen advertenties verzameld",
     "description": "Ads are present on page but none are collected"
   }
 }

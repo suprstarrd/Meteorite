@@ -32,7 +32,7 @@
     "description": "English: Firstrun.html -> Block Malware"
   },
   "adnAboutResetDataConfirm": {
-    "message": "Mọi thiết đặt sẽ bị và lượng quảng cáo đã ghi nhận sẽ bị xoá bỏ, AdNauseam sẽ khởi động lại.\n\nĐặt AdNauseam về thiết đặt mặc định ban đầu?",
+    "message": "Mọi cài đặt cấu hình và các quảng cáo đã lưu trong kho sẽ bị xoá, và AdNauseam sẽ khởi động lại.\n\nĐặt AdNauseam về cấu hình mặc định ?",
     "description": "Message asking user to confirm reset"
   },
   "adnFirstRunHideAllAdsDescription": {
@@ -88,11 +88,11 @@
     "description": "English: Notifications -> Please allow AdNauseam to access search page results"
   },
   "adnNotificationBrowserSetting": {
-    "message": "Thiết đặt 'Chặn nội dung' của trình duyệt có thể xung đột với AdNauseam!",
+    "message": "Cài đặt 'Chặn nội dung' của trình duyệt có thể xung đột với AdNauseam!",
     "description": "English: Notifications -> The 'Content Blocking' settings in your browser may interfere with AdNauseam!"
   },
   "adnNotificationPrivacyMode": {
-    "message": "Đã cho phép AdNauseam kiểm tra hoạt động trực tuyến khi duyệt web ở chế độ riêng tư.",
+    "message": "Đã cho phép AdNauseam kiểm tra các hoạt động lướt web online của bạn ở chế độ riêng tư.",
     "description": "English: Notifications -> You have allowed adnauseam to have access to your online activities while private browsing."
   },
   "adnNotificationDNTAllowed": {
@@ -112,7 +112,7 @@
     "description": "English: Notifications -> This page respects Do Not Track, just so you know."
   },
   "adnNotificationShowAdsDebug": {
-    "message": "Cài đặt nâng cao \"Hiển thị gỡ lỗi Quảng Cáo\" đang được bật",
+    "message": "Cài đặt nâng cao \"Hiển thị Debug Quảng Cáo\" đang được bật",
     "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
   },
   "adnNewerVersionAvailableNotification": {
@@ -176,7 +176,7 @@
     "description": "appears in ADN vault\/My Statistics"
   },
   "topSites": {
-    "message": "Trang hàng đầu",
+    "message": "Các trang web hàng đầu",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adTypes": {
@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Hành động này sẽ xóa vĩnh viễn các quảng cáo mà có ảnh không tải được. Bạn nên backup kho lưu trữ trước, đồng thời đảm bảo có kết nối mạng Internet.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -240,7 +240,7 @@
     "description": "Menu & AdVault: SKIPPED: DNT Allowed"
   },
   "adnAdClickingStatusSkippedUser": {
-    "message": "BỎ QUA: Nhấp bởi người dùng",
+    "message": "BỎ QUA: Click bởi người dùng",
     "description": "Menu & AdVault: SKIPPED: Clicked by User"
   },
   "adnAdClickingStatusSkippedFrequency": {
@@ -360,19 +360,19 @@
     "description": "appears on vault page"
   },
   "adnPurgeDeadAds": {
-    "message": "Loại bỏ những quảng cáo chết",
+    "message": "Loại bỏ những quảng cáo không hoạt động",
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Hiển thị quảng cáo không hoạt động",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Ẩn quảng cáo không hoạt động",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Thu thập",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Chế độ kiểm tra lỗi",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,15 +512,15 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "",
+    "message": "Làm mở quảng cáo thu thập được",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Ẩn quảng cáo không hoạt động ",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
-    "message": "",
+    "message": "Hiển thị quảng cáo để debug chức năng thu thập quảng cáo",
     "description": "English: Show ads for ad-collection debugging"
   },
   "removeAdsInPrivate": {
@@ -528,27 +528,27 @@
     "description": "English:Remove ads collected in private mode - settings page"
   },
   "settingsStrictBlockingMode": {
-    "message": "Activate Strict-Blocking Mode",
+    "message": "Bật chế độ chặn mạnh",
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "Tải lại",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "Áp dụng thay đổi cho trang web hiện tại",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Đảm bảo vấn đề này thuộc về <b>AdNauseam-specific<\/b>.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Tôi đã test vấn đề này trên cùng trang web trên <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> và tôi xác nhận vấn đề này thuộc về <b>AdNauseam-specific<\/b>.",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Quảng cáo không được thu thập",
     "description": "Ads are present on page but none are collected"
   }
 }

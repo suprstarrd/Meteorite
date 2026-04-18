@@ -105,14 +105,12 @@ import {
 } from './ext-utils.js';
 
 import { dnr } from './ext-compat.js';
-import { registerInjectables, registerAdNauseam } from './scripting-manager.js';
 import { toggleToolbarIcon } from './action.js';
 
 // ADN imports 
 
 // Import AdNauseam modules
 import { adnauseam } from './adn/core.js';
-import { loadAdNauseamFilters } from './adn/filters.js';
 
 
 /******************************************************************************/

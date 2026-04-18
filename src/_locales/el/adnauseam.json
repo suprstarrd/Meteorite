@@ -84,7 +84,7 @@
     "description": "English: Notifications -> uBlock and AdNauseam may conflict!"
   },
   "adnNotificationOperaSetting": {
-    "message": "Παρακαλούμε δώσε στο AdNauseam πρόσβαση στα αποτελέσματα αναζήτησης",
+    "message": "Παρακαλώ επιτρέψτε στο AdNauseam να έχει πρόσβαση στα αποτελέσματα της σελίδας αναζήτησης",
     "description": "English: Notifications -> Please allow AdNauseam to access search page results"
   },
   "adnNotificationBrowserSetting": {
@@ -112,11 +112,11 @@
     "description": "English: Notifications -> This page respects Do Not Track, just so you know."
   },
   "adnNotificationShowAdsDebug": {
-    "message": "The Advanced Setting \"Show Ads Debug\" is turned on",
+    "message": "Η ρύθμιση για προχωρημένους \"Show Ads Debug\" είναι ενεργοποιημένη",
     "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
   },
   "adnNewerVersionAvailableNotification": {
-    "message": "A newer version of AdNauseam is available",
+    "message": "Μια νεότερη έκδοση του AdNauseam είναι διαθέσιμη",
     "description": "English: Notifications -> A newer version of AdNauseam is available"
   },
   "adnTarget": {
@@ -168,27 +168,27 @@
     "description": "English: AdNauseam — Ad Vault"
   },
   "myStatistics": {
-    "message": "Τα στατιστικά μου",
+    "message": "Τα Στατιστικά μου",
     "description": "appears in ADN vault, above ad slider"
   },
   "topAdnetworks": {
-    "message": "Κορυφαία δίκτυα διαφημίσεων",
+    "message": "Κορυφαία Δίκτυα Διαφημίσεων",
     "description": "appears in ADN vault\/My Statistics"
   },
   "topSites": {
-    "message": "Κορυφαίες σελίδες",
+    "message": "Κορυφαίοι Ιστότοποι",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adTypes": {
-    "message": "Είδη διαφημίσεων",
+    "message": "Τύποι Διαφημίσεων",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adTypesImageAds": {
-    "message": "Διαφημίσεις με εικόνα",
+    "message": "Διαφημίσεις Εικόνας",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adTypesTextAds": {
-    "message": "Διαφημίσεις κειμένου",
+    "message": "Διαφημίσεις Κειμένου",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adnShowingRecentAds": {
@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Αυτή η ενέργεια θα αφαιρέσει μόνιμα όλες τις διαφημίσεις για τις οποίες η εικόνα δεν μπορεί να φορτωθεί. Είναι μια καλή ιδέα να δημιουργήσετε αντίγραφα ασφαλείας στο vault σας πριν από την εκκαθάριση, και επίσης να βεβαιωθείτε ότι έχετε μια ενεργή σύνδεση στο διαδίκτυο.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -360,19 +360,19 @@
     "description": "appears on vault page"
   },
   "adnPurgeDeadAds": {
-    "message": "Απαλοιφή νεκρών διαφημίσεων",
+    "message": "Απαλοιφή Νεκρών Διαφημίσεων",
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Εμφάνιση Νεκρών Διαφημίσεων",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Απόκρυψη Νεκρών Διαφημίσεων",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Σύλληψη",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Αναβάθμιση",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -500,11 +500,11 @@
     "description": "appears as tab name in dashboard"
   },
   "strictBlockListPageName": {
-    "message": "Λίστα αυστηρού αποκλεισμού",
+    "message": "Λίστα Αυστηρού Αποκλεισμού",
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Λειτουργία εντοπισμού σφαλμάτων",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,11 +512,11 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Θόλωμα Συλλεγμένων διαφημίσεων",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Απόκρυψη Νεκρών Διαφημίσεων",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
@@ -532,23 +532,23 @@
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "Ανανέωση",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "Εφαρμογή αλλαγών στην τρέχουσα σελίδα",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Βεβαιωθείτε ότι αυτό το ζήτημα είναι <b>σχετικά με το AdNauseam<\/b>.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Έχω δοκιμάσει την ίδια ιστοσελίδα στο <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> και επιβεβαιώνω ότι αυτό το ζήτημα είναι <b>σχετικό με το AdNauseam<\/b>.",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Δεν έχουν συλλεχθεί διαφημίσεις",
     "description": "Ads are present on page but none are collected"
   }
 }

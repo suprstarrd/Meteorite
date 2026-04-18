@@ -276,7 +276,7 @@
     "description": "Disabled Adnauseam -> appears in ADN popup menu three state button"
   },
   "adnMenuActive": {
-    "message": "Active",
+    "message": "生效中",
     "description": "Make Adnauseam Active -> appears in ADN popup menu three state button"
   },
   "adnMenuStrict": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "更新",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,11 +504,11 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "偵錯模式",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
-    "message": "停用警告",
+    "message": "禁用警告",
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {

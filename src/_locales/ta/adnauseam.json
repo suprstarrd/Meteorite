@@ -12,23 +12,23 @@
     "description": "English: links.html Built on"
   },
   "aboutFaq": {
-    "message": "Frequently asked questions",
+    "message": "பொதுவான கேள்விகள்",
     "description": "English: links.html -> Frequently asked questions"
   },
   "adnFirstRunPlease": {
-    "message": "Please:",
+    "message": "தயவுசெய்து",
     "description": "English: Firstrun.html -> Please:"
   },
   "adnFirstRunHideAllAds": {
-    "message": "Hide Ads",
+    "message": "விளம்பரங்களை மறைக்க",
     "description": "English: Firstrun.html -> Hide Ads:"
   },
   "adnFirstRunClickingAds": {
-    "message": "Click Ads",
+    "message": "விளம்பரங்களை சொடுக்க",
     "description": "English: Firstrun.html -> Click Ads"
   },
   "adnFirstRunBlockingMalware": {
-    "message": "Block Malware",
+    "message": "தீம்பொருளளைத் தடுக்க",
     "description": "English: Firstrun.html -> Block Malware"
   },
   "adnAboutResetDataConfirm": {

@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Esta acción eliminará permanentemente todos los anuncios cuya imagen no se puede cargar. Es ideal hacer una copia de seguridad de tu bóveda antes de purgar, y también asegurarse de que tienes una conexión activa a Internet.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,15 +364,15 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Mostrar anuncios inactivos",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Ocultar anuncios inactivos",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Capturar",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Actualizar",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Modo Depuración",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,11 +512,11 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Difuminar anuncios recolectados",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Ocultar anuncios inactivos",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {

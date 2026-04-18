@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Diese Aktion wird jene Werbung dauerhaft entfernen, dessen Bilder nicht geladen werden können. Es wird empfohlen vor dieser Aktion die Internetverbindung sicherzustellen und eine Sicherung Ihrer 'AdVault' zu erstellen.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,15 +364,15 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Abgelaufene Werbung einblenden",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Abgelaufene Werbung ausblenden",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Aufnahme",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Aktualisierung",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Debug-Modus",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -516,7 +516,7 @@
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Abgelaufene Werbung ausblenden",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {

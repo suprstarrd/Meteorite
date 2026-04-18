@@ -284,7 +284,7 @@
     "description": "Activate Strict-Block -> appears in ADN popup menu three state button"
   },
   "adnMenuDisableScopeDomain": {
-    "message": "on {{domain}}",
+    "message": "на {{domain}}",
     "description": "Disable AdNaueam Block On this Domain -> Popup option that appears inside ADN menu"
   },
   "adnMenuDisableScopePage": {
@@ -540,15 +540,15 @@
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Переконайтесь, що проблема саме в  <b>AdNauseam<\/b>.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Я перевірив цю ж вебсторінку на  <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> і підтверджую, що проблема саме в <b>AdNauseam<\/b>.",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Реклама не зібрана",
     "description": "Ads are present on page but none are collected"
   }
 }

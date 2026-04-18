@@ -116,7 +116,7 @@
     "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
   },
   "adnNewerVersionAvailableNotification": {
-    "message": "A newer version of AdNauseam is available",
+    "message": "AdNauseam এর নতুন ভার্সন উপলব্ধ হয়েছে।",
     "description": "English: Notifications -> A newer version of AdNauseam is available"
   },
   "adnTarget": {
@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "এই পদক্ষেপের ফলে যেসব বিজ্ঞাপনের ছবি লোড করা যাবে না, সেগুলি স্থায়ীভাবে মুছে যাবে। Purge করার আগে আপনার ভল্টের ব্যাকআপ নেওয়া এবং আপনার একটি সক্রিয় ইন্টারনেট সংযোগ আছে কিনা তা নিশ্চিত করা ভালো।",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,7 +364,7 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "অকার্যকর বিজ্ঞাপন দেখান",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
@@ -372,7 +372,7 @@
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "ছবি উঠান ",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "আপডেট",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Debug মোড",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,11 +512,11 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "সংগৃহীত বিজ্ঞাপন ঝাপসাকরণ",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "অকার্যকর বিজ্ঞাপন লুকান",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
@@ -532,23 +532,23 @@
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "রিফ্রেশ",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "বর্তমান পৃষ্ঠায় পরিবর্তনগুলি বাস্তবায়ন করুন",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "নিশ্চিত করুন যে এই সমস্যাটি <b>AdNauseam সম্পর্কিত<\/b>।",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "আমি একই ওয়েব-পেজটি <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> তে পরীক্ষা করেছি এবং নিশ্চিত করছি যে এই সমস্যাটি <b>AdNauseam সম্পর্কিত <\/b>।",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "বিজ্ঞাপন সংগ্রহ করা হয়নি",
     "description": "Ads are present on page but none are collected"
   }
 }

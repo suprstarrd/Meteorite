@@ -19,11 +19,6 @@
       <!--<br><sub>See below for <a href="#installation">more installation options.</a></sub>-->
 </p>
 
-<p align="center">
-<a href="https://github.com/dhowe/AdNauseam/wiki/Install-AdNauseam-on-Chrome-Without-Google's-Permission">Instructions on how to install AdNauseam in <b>Google Chrome</b></a>
-<!--<sub><a href="https://github.com/uBlockOrigin/uBlock-issues/wiki/About-Google-Chrome's-%22This-extension-may-soon-no-longer-be-supported%22"><b>IMPORTANT</b>: About Google Chrome's "This extension may soon no longer be supported"</a></sub>-->
-</p>
-
 ***
 
 [AdNauseam](https://adnauseam.io) is a lightweight browser extension that blends software tool and artware intervention to actively fight back against tracking by advertising networks. AdNauseam works like an ad-blocker (it is built atop [uBlock Origin](https://github.com/gorhill/uBlock)) to silently simulate clicks on each blocked ad, confusing trackers as to one's real interests. At the same time, AdNauseam serves as a means of voicing your discontent with advertising networks that disregard privacy and engage in bulk surveillance.

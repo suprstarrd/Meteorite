@@ -116,7 +116,7 @@
     "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
   },
   "adnNewerVersionAvailableNotification": {
-    "message": "A newer version of AdNauseam is available",
+    "message": "Je dostupná novší verze AdNauseam",
     "description": "English: Notifications -> A newer version of AdNauseam is available"
   },
   "adnTarget": {
@@ -200,7 +200,7 @@
     "description": "shown in menu when the current page is strict-blocked"
   },
   "adnStrictBlockListDescription": {
-    "message": "The strict-block list serves to help the users to strict-block specific domains or pages more easily.",
+    "message": "Seznam přísného zablokování pomáhá uživatelům snadněji blokovat konkrétní domény nebo stránky.",
     "description": "Description on the strict-block list tab, which is found on the dashboard"
   },
   "adnExportedAdsFilename": {
@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Tato akce trvale odstraní všechny reklamy, jejichž obrázek nelze načíst. Před trvalým odstraněním je vhodné zálohovat svůj trezor a přesvědčit se, že máte stabilní připojení k internetu.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -276,19 +276,19 @@
     "description": "Disabled Adnauseam -> appears in ADN popup menu three state button"
   },
   "adnMenuActive": {
-    "message": "Active",
+    "message": "Aktivní",
     "description": "Make Adnauseam Active -> appears in ADN popup menu three state button"
   },
   "adnMenuStrict": {
-    "message": "Strict",
+    "message": "Přísné",
     "description": "Activate Strict-Block -> appears in ADN popup menu three state button"
   },
   "adnMenuDisableScopeDomain": {
-    "message": "on {{domain}}",
+    "message": "Na {{domain}}",
     "description": "Disable AdNaueam Block On this Domain -> Popup option that appears inside ADN menu"
   },
   "adnMenuDisableScopePage": {
-    "message": "on this page",
+    "message": "Na této stránce",
     "description": "Disable AdNaueam Block On This Page -> Popup option that appears inside ADN menu"
   },
   "adnMenuSettings": {
@@ -360,19 +360,19 @@
     "description": "appears on vault page"
   },
   "adnPurgeDeadAds": {
-    "message": "Purge Dead Ads",
+    "message": "Trvale odstranit mrtvé reklamy",
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Zobrazovat mrtvé reklamy",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Skrýt mrtvé reklamy",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Zachytit aktuální stav",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Updatovat",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -500,11 +500,11 @@
     "description": "appears as tab name in dashboard"
   },
   "strictBlockListPageName": {
-    "message": "Strict-Block List",
+    "message": "Seznam přísných zablokování",
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Debugující režim",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,15 +512,15 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Rozmazat sesbírané reklamy",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Skrýt mrtvé reklamy",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
-    "message": "Show ads for ad-collection debugging",
+    "message": "Zobrazovat reklamy pro debugování sbírek reklam",
     "description": "English: Show ads for ad-collection debugging"
   },
   "removeAdsInPrivate": {
@@ -528,27 +528,27 @@
     "description": "English:Remove ads collected in private mode - settings page"
   },
   "settingsStrictBlockingMode": {
-    "message": "Activate Strict-Blocking Mode",
+    "message": "Aktivovat Přísný Blokovací Režim.",
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "Obnov",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "Aplikovat změny na aktuální stránce",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Ujistěte se, že tento problém je skutečně <b>na straně AdNauseam<\/b>.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Stejná stránka byla otestována na<a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> a mohu potvrdit, že problém je <b>na straně AdNauseam<\/b>.",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Reklamy nebyly shromážděny",
     "description": "Ads are present on page but none are collected"
   }
 }

@@ -126,11 +126,10 @@ const adnauseam = (function () {
   const allowAnyBlockOnDomains = ['youtube.com', 'funnyordie.com']; // no dnt in here
 
   // allow blocks only from this set of lists (recheck this)
-  const enabledBlockLists = ['EasyPrivacy',
-    'uBlock filters – Badware risks', 'uBlock filters – Unbreak',
-    'uBlock filters – Privacy', 'Malware domains', 'Malware Domain List',
-    'Anti-ThirdpartySocial', 'AdNauseam filters', 'Fanboy’s Annoyance List',
-    'CHN: CJX\'s Annoyance List', 'Spam404', 'Anti-Adblock Killer | Reek',
+  const enabledBlockLists = [
+    'uBlock filters – Badware risks', 'uBlock filters – Unbreak', 
+    'Malware domains', 'Malware Domain List','Anti-ThirdpartySocial', 
+    'AdNauseam filters', 'Spam404', 'Anti-Adblock Killer | Reek',
     'Fanboy’s Social Blocking List', 'Malware domains (long-lived)',
     'Adblock Warning Removal List', 'Malware filter list by Disconnect',
     'Basic tracking list by Disconnect', 'EFF DNT Policy Allowlist',
@@ -1723,17 +1722,20 @@ const adnauseam = (function () {
   }
 
   exports.lookupAd = function (url, requestId) {
-
-    const ads = adlist();
-    for (let i = 0; i < ads.length; i++) {
-
-      if (ads[i].attemptedTs) {
-        //console.log('check: '+ads[i].requestId+'/'+ads[i].targetUrl+' ?= '+requestId+'/'+url);
-        if (ads[i].requestId === requestId || ads[i].targetUrl === url) {
-          return ads[i];
-        }
-      }
-    }
+		if (requestId) {
+			const ads = adlist();
+			for (let i = 0; i < ads.length; i++) {
+	
+				if (ads[i].attemptedTs) {
+					//console.log('check: '+ads[i].requestId+'/'+ads[i].targetUrl+' ?= '+requestId+'/'+url);
+					if (ads[i].requestId === requestId || ads[i].targetUrl === url) {
+						return ads[i];
+					}
+				}
+			}
+		} else {
+			return false; 
+		}
   };
 
   exports.registerAd = function (request, pageStore, tabId) {

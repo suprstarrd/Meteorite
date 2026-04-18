@@ -196,7 +196,7 @@
     "description": "shown in menu when only 'recent' Ads are shown"
   },
   "adnThisPageStrictBlocked": {
-    "message": "{{domain}} is currently strict-blocked.",
+    "message": "{{domain}} כרגע חסום",
     "description": "shown in menu when the current page is strict-blocked"
   },
   "adnStrictBlockListDescription": {

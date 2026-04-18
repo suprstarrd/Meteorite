@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Denna handling kommer att permanent ta bort alla annonser där bilden in kan laddas. Det är rekommenderat att göra en säkerhetskopia av ditt valv innan du rensar och att ha en stabil internet uppkoppling.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,15 +364,15 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Visa döda annonser",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Dölj döda annonser",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Fånga",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Felsökningsläge",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -516,7 +516,7 @@
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Dölj döda annonser",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {

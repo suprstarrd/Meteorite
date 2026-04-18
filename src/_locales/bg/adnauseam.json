@@ -112,11 +112,11 @@
     "description": "English: Notifications -> This page respects Do Not Track, just so you know."
   },
   "adnNotificationShowAdsDebug": {
-    "message": "The Advanced Setting \"Show Ads Debug\" is turned on",
+    "message": "Разширената настройка \"Показване на реклами в режим за отстраняване на грешки\" е включена",
     "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
   },
   "adnNewerVersionAvailableNotification": {
-    "message": "A newer version of AdNauseam is available",
+    "message": "Достъпна е нова версия на AdNauseam",
     "description": "English: Notifications -> A newer version of AdNauseam is available"
   },
   "adnTarget": {
@@ -200,7 +200,7 @@
     "description": "shown in menu when the current page is strict-blocked"
   },
   "adnStrictBlockListDescription": {
-    "message": "The strict-block list serves to help the users to strict-block specific domains or pages more easily.",
+    "message": "Строгият списък има за цел да помага на потребителите строго да блокират специфични домейни или страници по-лесно.",
     "description": "Description on the strict-block list tab, which is found on the dashboard"
   },
   "adnExportedAdsFilename": {
@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Това действие ще премахне завинаги всички реклами, за които изображение не може да бъде заредено. Добра идея е да архивирате трезорът Ви преди прочистването и се уверете, че имате активна Интернет връзка.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -276,7 +276,7 @@
     "description": "Disabled Adnauseam -> appears in ADN popup menu three state button"
   },
   "adnMenuActive": {
-    "message": "Задействане",
+    "message": "Включване",
     "description": "Make Adnauseam Active -> appears in ADN popup menu three state button"
   },
   "adnMenuStrict": {
@@ -360,19 +360,19 @@
     "description": "appears on vault page"
   },
   "adnPurgeDeadAds": {
-    "message": "Purge Dead Ads",
+    "message": "Почистване на Мъртви Реклами",
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Показване на мъртви реклами",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Скриване на мъртви реклами",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Заснемане",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -492,7 +492,7 @@
     "description": "English: update"
   },
   "adnUpdateButton": {
-    "message": "Update",
+    "message": "Актуализиране",
     "description": "English: update"
   },
   "allowlistPageName": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Режим за отстраняване на грешки",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -512,19 +512,19 @@
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "Размазване на събраните реклами",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Скриване на мъртви реклами",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
-    "message": "Show ads for ad-collection debugging",
+    "message": "Показване на реклами за отстраняване на грешки в колекцията от реклами",
     "description": "English: Show ads for ad-collection debugging"
   },
   "removeAdsInPrivate": {
-    "message": "Remove ads collected in private mode",
+    "message": "Премахване на реклами, събрани в режим инкогнито",
     "description": "English:Remove ads collected in private mode - settings page"
   },
   "settingsStrictBlockingMode": {
@@ -532,23 +532,23 @@
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
-    "message": "Refresh",
+    "message": "Опресняване",
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "Прилагане на промените на текущата страница",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Убедете се, че този проблем е <b>специфичен за AdNauseam<\/b>.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "Тествах същата уеб-страница с  <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> и потвърждавам, че проблемът е <b>специфичен за AdNauseam<\/b>.",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "Рекламите не са събрани",
     "description": "Ads are present on page but none are collected"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "version": "3.27.0",
+  "version": "3.28.2",
   "key": "ilkggpgmkemaniponkfgnkonpajankkm",
   "author": "Daniel C. Howe",
   "background": {
@@ -94,7 +94,7 @@
   "minimum_chrome_version": "93.0",
   "name": "AdNauseam",
   "options_ui": {
-    "page": "options.html",
+    "page": "dashboard.html#options.html",
     "open_in_tab": true
   },
   "incognito": "spanning",

@@ -168,7 +168,7 @@
     "description": "English: AdNauseam — Ad Vault"
   },
   "myStatistics": {
-    "message": "My Statistics",
+    "message": "मेरे आंकड़े",
     "description": "appears in ADN vault, above ad slider"
   },
   "topAdnetworks": {
@@ -176,15 +176,15 @@
     "description": "appears in ADN vault\/My Statistics"
   },
   "topSites": {
-    "message": "Top Sites",
+    "message": "शीर्ष साइट्स",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adTypes": {
-    "message": "Ad Types",
+    "message": "विज्ञापन प्रकार ",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adTypesImageAds": {
-    "message": "Image Ads",
+    "message": "चित्र विज्ञापन",
     "description": "appears in ADN vault\/My Statistics"
   },
   "adTypesTextAds": {
@@ -196,7 +196,7 @@
     "description": "shown in menu when only 'recent' Ads are shown"
   },
   "adnThisPageStrictBlocked": {
-    "message": "{{domain}} is currently strict-blocked.",
+    "message": "{{domain}}  वर्तमान में सख्त-अवरुद्ध है।",
     "description": "shown in menu when the current page is strict-blocked"
   },
   "adnStrictBlockListDescription": {
@@ -224,7 +224,7 @@
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
-    "message": "Pending",
+    "message": "लम्बित",
     "description": "Menu & AdVault: Pending"
   },
   "adnAdClickingStatusVisited": {
@@ -232,7 +232,7 @@
     "description": "Menu & AdVault: Visited"
   },
   "adnAdClickingStatusFailed": {
-    "message": "Failed",
+    "message": "असफल",
     "description": "Menu & AdVault: Failed"
   },
   "adnAdClickingStatusSkippedDNT": {
@@ -272,11 +272,11 @@
     "description": "appears in ADN popup menu three state button"
   },
   "adnMenuDisable": {
-    "message": "Disable",
+    "message": "निष्क्रिय",
     "description": "Disabled Adnauseam -> appears in ADN popup menu three state button"
   },
   "adnMenuActive": {
-    "message": "Active",
+    "message": "सक्रिय",
     "description": "Make Adnauseam Active -> appears in ADN popup menu three state button"
   },
   "adnMenuStrict": {
@@ -500,7 +500,7 @@
     "description": "appears as tab name in dashboard"
   },
   "strictBlockListPageName": {
-    "message": "Strict-Block List",
+    "message": "सख्त-ब्लॉक सूची",
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
@@ -508,15 +508,15 @@
     "description": "prompt for toggle"
   },
   "disableWarnings": {
-    "message": "Disable warnings",
+    "message": "चेतावनियाँ अक्षम करें",
     "description": "English:Disable warnings"
   },
   "blurCollectedAds": {
-    "message": "Blur Collected ads",
+    "message": "एकत्रित विज्ञापनों को धुंधला करें",
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "मृत विज्ञापन छिपाएँ",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {
@@ -524,11 +524,11 @@
     "description": "English: Show ads for ad-collection debugging"
   },
   "removeAdsInPrivate": {
-    "message": "Remove ads collected in private mode",
+    "message": "गुप्त ढंग से इकट्ठा विज्ञापनों को हटाएं",
     "description": "English:Remove ads collected in private mode - settings page"
   },
   "settingsStrictBlockingMode": {
-    "message": "Activate Strict-Blocking Mode",
+    "message": "सख्त-अवरोधन मोड सक्रिय करें",
     "description": "English: Activate Strict-Blocking Mode"
   },
   "adnRefreshButton": {
@@ -536,19 +536,19 @@
     "description": "English: refresh page from menu notification button"
   },
   "adnRefreshNotification": {
-    "message": "Apply changes on current page",
+    "message": "वर्तमान पृष्ठ में परिवर्तन लागू करें",
     "description": "English: refresh page from menu notification"
   },
   "supportS6P3S1": {
-    "message": "Make sure this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "सुनिश्चित करें कि यह समस्या <b>AdNauseam-विशिष्ट<\/b> है.",
     "description": "A paragraph in the filter issue reporter section"
   },
   "supportS6P3S2": {
-    "message": "I have tested the same web-page on <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> and confirm this issue is <b>AdNauseam-specific<\/b>.",
+    "message": "मैंने इस वेब पेज का <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> पर भी परीक्षण किया है और पुष्टि की है कि यह समस्या <b>AdNauseam-विशिष्ट है।<\/b>",
     "description": "A checkbox in the filter issue reporter section"
   },
   "supportS6Select1Option7": {
-    "message": "Ads not collected",
+    "message": "विज्ञापन संग्रहित नहीं हुए",
     "description": "Ads are present on page but none are collected"
   }
 }

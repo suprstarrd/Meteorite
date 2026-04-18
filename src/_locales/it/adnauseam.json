@@ -220,7 +220,7 @@
     "description": "appears in ADN settings"
   },
   "adnPurgeConfirm": {
-    "message": "This action will permanently remove all ads for which the image cannot be loaded. It is a good idea to backup your vault before purging, and also to make sure you have an active internet connection.",
+    "message": "Questa azione rimuoverà permanentemente tutti gli annunci per i quali l'immagine non può essere caricata. Prima di eseguirla è una buona idea eseguire il backup della cassaforte e assicurarsi di avere una connessione internet attiva.",
     "description": "appears in ADN settings"
   },
   "adnAdClickingStatusPending": {
@@ -364,15 +364,15 @@
     "description": "appears on vault page"
   },
   "adnShowDeadAds": {
-    "message": "Show Dead Ads",
+    "message": "Mostra Annunci Morti",
     "description": "appears on vault page"
   },
   "adnHideDeadAds": {
-    "message": "Hide Dead Ads",
+    "message": "Nascondi Annunci Morti",
     "description": "appears on vault page"
   },
   "adnCaptureVault": {
-    "message": "Capture",
+    "message": "Cattura",
     "description": "appears on vault page in dev mode"
   },
   "adnVaultFound": {
@@ -504,7 +504,7 @@
     "description": "appears as tab name in dashboard"
   },
   "eventLoggingPrompt": {
-    "message": "Debug mode",
+    "message": "Modalità di Debug",
     "description": "prompt for toggle"
   },
   "disableWarnings": {
@@ -516,7 +516,7 @@
     "description": "English: Blur Collected ads"
   },
   "hideDeadAds": {
-    "message": "Hide Dead ads",
+    "message": "Nascondi Annunci Morti",
     "description": "English: Hide Dead ads"
   },
   "showAdsDebugPrompt": {

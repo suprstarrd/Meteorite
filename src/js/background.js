@@ -95,6 +95,7 @@ const hiddenSettingsDefault = {
     userResourcesLocation: 'unset',
     showAdsDebug: false, // Adn set "true" to show ads that can be potentially be collected #2136 
     costPerClick: 1.03, // Adn https://github.com/dhowe/AdNauseam/issues/2131
+		cssInjectionDelay: 1, // Adn delay for css injection to ensure it happens after the page has loaded and ads have been collected
     internalLinkDomains: internalLinkDomainsDefault.join(','), // Adn
 };
 

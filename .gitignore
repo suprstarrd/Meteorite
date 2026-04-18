@@ -10,3 +10,4 @@ node_modules/
 /bin/build/
 /tmp/
 .DS_Store
+/.vs
