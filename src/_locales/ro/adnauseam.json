@@ -495,7 +495,7 @@
     "message": "Actualizează",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Siteuri de încredere",
     "description": "appears as tab name in dashboard"
   },

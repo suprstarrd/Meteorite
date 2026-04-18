@@ -731,7 +731,7 @@ housekeep itself.
     };
 
     TabContext.prototype.getNetFilteringSwitch = function() {
-        if ( this.netFilteringReadTime > µb.netWhitelistModifyTime ) {
+        if ( this.netFilteringReadTime > µb.netAllowlistModifyTime ) {
             return this.netFiltering;
         }
         // https://github.com/chrisaljoudi/uBlock/issues/1078
@@ -1053,7 +1053,7 @@ vAPI.tabs = new vAPI.Tabs();
 // Permanent page store for behind-the-scene requests. Must never be removed.
 //
 // https://github.com/uBlockOrigin/uBlock-issues/issues/651
-//   The whitelist status of the tabless page store will be determined by
+//   The allowlist status of the tabless page store will be determined by
 //   the document context (if present) of the network request.
 
 {

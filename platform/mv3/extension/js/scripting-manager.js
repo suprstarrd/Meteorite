@@ -519,3 +519,8 @@ export async function onWakeupRun() {
 }
 
 /******************************************************************************/
+
+export {
+    registerInjectables,
+		registerAdNauseam // ADN
+};

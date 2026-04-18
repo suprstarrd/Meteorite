@@ -495,7 +495,7 @@
     "message": "Güncelle",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Beyaz liste",
     "description": "appears as tab name in dashboard"
   },

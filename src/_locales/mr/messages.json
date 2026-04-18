@@ -39,7 +39,7 @@
     "message": "माझे नियम",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "श्वेतसूची",
     "description": "appears as tab name in dashboard"
   },
@@ -220,7 +220,7 @@
     "description": "Tooltip when hovering the top-most cell of the global-rules column."
   },
   "popupTipLocalRules": {
-    "message": "Local rules: this column is for rules which apply to the current site only.\nLocal rules override global rules.",
+    "message": "Local rules: this column is for rules which apply to the current site only.",
     "description": "Tooltip when hovering the top-most cell of the local-rules column."
   },
   "popupTipSaveRules": {
@@ -627,23 +627,23 @@
     "message": "Destination",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "आपली होस्ट नावांची यादी ज्याचासाठी म्यूब्लॉक अक्षम केले जाईल. प्रति ओळ एक प्रविष्टी. अवैध होस्ट नावांकडे शांतपणे दुर्लक्ष केले जाईल.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "आयात आणि समावेश करा",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "निर्यात करा",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "my-ublock-trusted-sites_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "बदल लागू करा",
     "description": "English: Apply changes"
   },

@@ -495,7 +495,7 @@
     "message": "به روز رسانی",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "سایت های معتمد",
     "description": "appears as tab name in dashboard"
   },

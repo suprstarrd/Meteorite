@@ -55,8 +55,8 @@ function handleImportFilePicker() {
                 throw 'Invalid';
             }
             if (
-                Array.isArray(userData.whitelist) === false &&
-                typeof userData.netWhitelist !== 'string'
+                Array.isArray(userData.allowlist) === false &&
+                typeof userData.netAllowlist !== 'string'
             ) {
                 throw 'Invalid';
             }

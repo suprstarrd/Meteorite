@@ -48,14 +48,14 @@ vAPI.rpcReceiver.getScriptTagFilters = function(details) {
     var µb = µBlock;
     if ( !µb.htmlFilteringEngine ) { return; }
     // Fetching the script tag filters first: assuming it is faster than
-    // checking whether the site is whitelisted.
+    // checking whether the site is allowlisted.
     var hostname = details.frameHostname;
     var r = µb.htmlFilteringEngine.retrieveScriptTagRegex(
         µb.URI.domainFromHostname(hostname),
         hostname
     );
     // https://github.com/gorhill/uBlock/issues/838
-    // Disable script tag filtering if document URL is whitelisted.
+    // Disable script tag filtering if document URL is allowlisted.
     if ( r !== undefined && µb.getNetFilteringSwitch(details.rootURL) ) {
         return r;
     }
@@ -75,14 +75,14 @@ vAPI.rpcReceiver.getScriptTagFiltersWithPrefs = function(details) { // not used
     if ( cfe ) {
 
         // Fetching the script tag filters first: assuming it is faster than
-        // checking whether the site is whitelisted.
+        // checking whether the site is allowlisted.
         var hostname = details.frameHostname;
         var r = cfe.retrieveScriptTagRegex(
             µb.URI.domainFromHostname(hostname) || hostname,
             hostname
         );
         // https://github.com/gorhill/uBlock/issues/838
-        // Disable script tag filtering if document URL is whitelisted.
+        // Disable script tag filtering if document URL is allowlisted.
         if ( r !== undefined && µb.getNetFilteringSwitch(details.rootURL) ) {
             result.filters = r;
         }

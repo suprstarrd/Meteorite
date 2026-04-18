@@ -727,7 +727,7 @@ async function startSession() {
     const shouldInject = isNewVersion || permissionsUpdated ||
         isSideloaded && rulesetConfig.developerMode;
     if ( shouldInject ) {
-        registerInjectables();
+        await registerInjectables();
     }
 
     // Cosmetic filtering-related content scripts cache fitlering data in
@@ -775,6 +775,11 @@ async function start() {
         await startSession();
     } else {
         scrmgr.onWakeupRun();
+    }
+
+    const scripts = await scrmgr.getRegisteredContentScripts();
+    if ( scripts.length === 0 ) {
+        registerInjectables();
     }
 
     toggleDeveloperMode(rulesetConfig.developerMode);

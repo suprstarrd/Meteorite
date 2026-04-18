@@ -407,11 +407,11 @@ onBroadcast(msg => {
 
 /******************************************************************************/
 
-µb.saveWhitelist = function() {
+µb.saveAllowlist = function() {
     vAPI.storage.set({
-        netWhitelist: this.arrayFromWhitelist(this.netWhitelist)
+        netAllowlist: this.arrayFromAllowlist(this.netAllowlist)
     });
-    this.netWhitelistModifyTime = Date.now();
+    this.netAllowlistModifyTime = Date.now();
 };
 
 /******************************************************************************/
@@ -1528,14 +1528,14 @@ onBroadcast(msg => {
         Array.isArray(toOverwrite.trustedSiteDirectives) &&
         toOverwrite.trustedSiteDirectives.length !== 0
     ) {
-        µb.netWhitelistDefault = toOverwrite.trustedSiteDirectives.slice();
-        bin.netWhitelist = toOverwrite.trustedSiteDirectives.slice();
+        µb.netAllowlistDefault = toOverwrite.trustedSiteDirectives.slice();
+        bin.netAllowlist = toOverwrite.trustedSiteDirectives.slice();
         binNotEmpty = true;
-    } else if ( Array.isArray(data.whitelist) ) {
-        bin.netWhitelist = data.whitelist;
+    } else if ( Array.isArray(data.allowlist) ) {
+        bin.netAllowlist = data.allowlist;
         binNotEmpty = true;
-    } else if ( typeof data.netWhitelist === 'string' ) {
-        bin.netWhitelist = data.netWhitelist.split('\n');
+    } else if ( typeof data.netAllowlist === 'string' ) {
+        bin.netAllowlist = data.netAllowlist.split('\n');
         binNotEmpty = true;
     }
 

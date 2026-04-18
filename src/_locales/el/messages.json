@@ -39,7 +39,7 @@
     "message": "Οι κανόνες μου",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Αξιόπιστες τοποθεσίες",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Προορισμός",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "Η λίστα σας με τα ονόματα κόμβων (host names) στα οποία το uBlock θα είναι απενεργοποιημένο. Μια καταχώρηση ανά γραμμή. Άκυρα ονόματα κόμβων θα παρακάμπτονται σιωπηλά.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Εισαγωγή και προσθήκη…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Εξαγωγή…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "ublock-έμπιστες-τοποθεσίες_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Εφαρμογή αλλαγών",
     "description": "English: Apply changes"
   },

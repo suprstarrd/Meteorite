@@ -39,7 +39,7 @@
     "message": "自定义动态规则",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "白名单",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "目标",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "白名单中的规则匹配的页面不会被 uBlock Origin 过滤或阻挡。每行一条规则。",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "导入并添加…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "导出…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "my-ublock-trusted-sites_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "应用更改",
     "description": "English: Apply changes"
   },

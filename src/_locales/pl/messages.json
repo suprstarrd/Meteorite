@@ -39,7 +39,7 @@
     "message": "Moje reguły",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Zaufane witryny",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Miejsce docelowe",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "Wytyczne zaufanych witryn nakazują, na których stronach uBlock Origin powinien zostać wyłączony. Jeden wpis na linię.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Importuj i dołącz…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Eksportuj…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "ublock-zaufane-witryny_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Zastosuj zmiany",
     "description": "English: Apply changes"
   },

@@ -71,8 +71,7 @@ import {
   BlockingDisabled,
   ClickingDisabled,
   HidingDisabled,
-  NewerVersionAvailable,
-  OpenLetter
+  NewerVersionAvailable
 } from './notifications.js';
 
 import {
@@ -133,7 +132,8 @@ const adnauseam = (function () {
     'AdNauseam filters', 'Spam404', 'Anti-Adblock Killer | Reek',
     'Fanboy’s Social Blocking List', 'Malware domains (long-lived)',
     'Adblock Warning Removal List', 'Malware filter list by Disconnect',
-    'Basic tracking list by Disconnect', 'EFF DNT Policy Whitelist',
+    'Basic tracking list by Disconnect', 'EFF DNT Policy Allowlist',
+    'AdGuard Annoyances', 'AdGuard Tracking Protection'
   ];
 
   const removableBlockLists = ['hphosts', 'mvps-0', 'plowe-0'];
@@ -1614,8 +1614,8 @@ const adnauseam = (function () {
       µb.toggleStrictBlock(request.url, request.scope, false); // adn remove strictBlock
       updateBadges();
 
-      // close whitelist if open (see gh #113)
-      const wlId = getExtPageTabId("dashboard.html#whitelist.html");
+      // close allowlist if open (see gh #113)
+      const wlId = getExtPageTabId("dashboard.html#allowlist.html");
       wlId && vAPI.tabs.replace(wlId, vAPI.getURL("dashboard.html"));
 
       // ADN - close strictblocklist if open
@@ -1632,7 +1632,7 @@ const adnauseam = (function () {
     if (store) {
       // enable strict blocking for the current domain...
       µb.toggleStrictBlock(request.url, request.scope, request.state);
-      // and remove the domain from the whitelist if it is there.
+      // and remove the domain from the allowlist if it is there.
       store.toggleNetFilteringSwitch(request.url, request.scope, true);
       updateBadges();
 
@@ -1640,8 +1640,8 @@ const adnauseam = (function () {
       const wlId = getExtPageTabId("dashboard.html#strictblocklist.html");
       wlId && vAPI.tabs.replace(wlId, vAPI.getURL("dashboard.html"));
 
-      // close whitelist if open (see gh #113)
-      const wlIdwl = getExtPageTabId("dashboard.html#whitelist.html");
+      // close allowlist if open (see gh #113)
+      const wlIdwl = getExtPageTabId("dashboard.html#allowlist.html");
       wlIdwl && vAPI.tabs.replace(wlIdwl, vAPI.getURL("dashboard.html"));
     }
   }
@@ -1688,9 +1688,6 @@ const adnauseam = (function () {
     verifySettings();
     verifyLists();
     verifyVersion();
-
-    const modified = addNotification(notifications, OpenLetter);
-    modified && sendNotifications(notifications);
 
     dnt.updateFilters();
 

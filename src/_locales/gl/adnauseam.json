@@ -495,7 +495,7 @@
     "message": "Actualizar",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Sitios de confianza",
     "description": "appears as tab name in dashboard"
   },

@@ -39,7 +39,7 @@
     "message": "マイルール",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "信頼するサイト",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "通信先",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "[信頼するサイト] では uBlock Origin を無効にするウェブページを指定します。1 行につき 1 つです。",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "インポートと追加",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "エクスポート",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "my-ublock-trusted-sites_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "変更を適用",
     "description": "English: Apply changes"
   },

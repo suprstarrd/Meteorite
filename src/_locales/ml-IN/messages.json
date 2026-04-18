@@ -27,7 +27,7 @@
     "message":"എന്‍റെ നിയമങ്ങള്‍",
     "description":"appears as tab name in dashboard"
   },
-  "whitelistPageName":{
+  "allowlistPageName":{
     "message":"വൈറ്റ് ലിസ്റ്റ്",
     "description":"appears as tab name in dashboard"
   },
@@ -415,23 +415,23 @@
     "message":"നിയമത്തിന്‍റെ സിന്‍റ്റാക്സ്‌: <code> സോര്‍സ് ഡെസ്റ്റിനേഷന്‍ ടൈപ്പ് ആക്ഷന്‍<\/code> (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Dynamic-filtering:-rule-syntax'> മുഴുനീള പ്രമാണം<\/a>).",
     "description":"English: dynamic rule syntax and full documentation."
   },
-  "whitelistPrompt":{
+  "allowlistPrompt":{
     "message":"യുബ്ലോക്ക്ഒ ഡിസേബിള്‍ ചെയ്യപ്പെടേണ്ട ഹോസ്റ്റ് നെയിമുകള്‍. ഒരു വരിയില്‍ ഒരു എന്‍ട്രി എന്ന രീതിയില്‍ ചേര്‍ക്കുക. ഇന്‍വാലിഡ്‌ ഹോസ്റ്റ് നെയിമുകള്‍ നിശബ്ദമായി ഇഗ്നോര്‍ ചെയ്യപെടും.",
     "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
-  "whitelistImport":{
+  "allowlistImport":{
     "message":"ഇമ്പോര്‍ട്ടും കൂട്ടിചേര്‍ക്കലും ചെയ്യുക",
     "description":"English: Import and append"
   },
-  "whitelistExport":{
+  "allowlistExport":{
     "message":"എക്സ്പോര്‍ട്ട്‌",
     "description":"English: Export"
   },
-  "whitelistExportFilename":{
+  "allowlistExportFilename":{
     "message":"എന്‍റെ-യുബ്ലോക്ക്-വൈറ്റ്ലിസ്റ്റ്_{{datetime}}.txt",
-    "description":"English: my-ublock-whitelist_{{datetime}}.txt"
+    "description":"English: my-ublock-allowlist_{{datetime}}.txt"
   },
-  "whitelistApply":{
+  "allowlistApply":{
     "message":"മാറ്റങ്ങള്‍ അപ്ലേ ചെയ്യുക",
     "description":"English: Apply changes"
   },

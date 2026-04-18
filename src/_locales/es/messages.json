@@ -39,7 +39,7 @@
     "message": "Mis reglas",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Sitios de confianza",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Destino",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "Sitios de confianza para los cuales se deshabilitará uBlock Origin. Una entrada por línea.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Importar y anexar…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Exportar…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "ublock-mis-sitios-de-confianza_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Aplicar cambios",
     "description": "English: Apply changes"
   },

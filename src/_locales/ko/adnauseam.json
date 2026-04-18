@@ -495,7 +495,7 @@
     "message": "Update",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "화이트리스트",
     "description": "appears as tab name in dashboard"
   },

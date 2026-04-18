@@ -39,7 +39,7 @@
     "message": "ನನ್ನ ನಿಯಮಗಳು",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "ವೈಟ್ ಲಿಸ್ಟ್",
     "description": "appears as tab name in dashboard"
   },
@@ -220,7 +220,7 @@
     "description": "Tooltip when hovering the top-most cell of the global-rules column."
   },
   "popupTipLocalRules": {
-    "message": "Local rules: this column is for rules which apply to the current site only.\nLocal rules override global rules.",
+    "message": "Local rules: this column is for rules which apply to the current site only.",
     "description": "Tooltip when hovering the top-most cell of the local-rules column."
   },
   "popupTipSaveRules": {
@@ -627,23 +627,23 @@
     "message": "ಗಮ್ಯಸ್ಥಾನ",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "The trusted site directives dictate on which web pages uBlock Origin should be disabled. One entry per line.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "ಆಮದಿಸಿ ಸೇರ್ಪಡಿಸು",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "ರಫ್ತು...\n",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "ನನ್ನ-ublock-ವಿಶ್ವಾಸಾರ್ಹ-ಸೈಟ್ಗಳು_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಿ",
     "description": "English: Apply changes"
   },

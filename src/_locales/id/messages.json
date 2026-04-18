@@ -39,7 +39,7 @@
     "message": "Aturan Saya",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Situs Terpercaya",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Tujuan",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "Arahan situs tepercaya menentukan halaman web mana yang uBlock Origin harus dinonaktifkan. Satu entri per baris.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Impor dan tambahkan…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Ekspor…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "my-ublock-trusted-sites_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Terapkan perubahan",
     "description": "English: Apply changes"
   },

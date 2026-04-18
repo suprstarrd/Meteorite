@@ -495,7 +495,7 @@
     "message": "Uppdatera",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Vitlistor",
     "description": "appears as tab name in dashboard"
   },

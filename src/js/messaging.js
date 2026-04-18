@@ -198,20 +198,20 @@ const onMessage = function(request, sender, callback) {
           response = redirectEngine.getTrustedScriptletTokens();
           break;
 
-      case 'getWhitelist':
+      case 'getAllowlist':
           response = {
               dntEnabled: dnt.enabled(),
-              whitelist: µb.arrayFromWhitelist(µb.netWhitelist),
-              reBadHostname: µb.reWhitelistBadHostname.source,
-              reHostnameExtractor: µb.reWhitelistHostnameExtractor.source
+              allowlist: µb.arrayFromAllowlist(µb.netAllowlist),
+              reBadHostname: µb.reAllowlistBadHostname.source,
+              reHostnameExtractor: µb.reAllowlistHostnameExtractor.source
           };
           break;
       // Adn - strictBlockList
       case 'getStrictBlockList':
           response = {
               strictBlockList: µb.arrayFromStrictBlockList(µb.netStrictBlockList),
-              reBadHostname: µb.reWhitelistBadHostname.source,
-              reHostnameExtractor: µb.reWhitelistHostnameExtractor.source
+              reBadHostname: µb.reAllowlistBadHostname.source,
+              reHostnameExtractor: µb.reAllowlistHostnameExtractor.source
           };
           break;
       // end of adn
@@ -251,9 +251,9 @@ const onMessage = function(request, sender, callback) {
           }
           break;
       }
-      case 'setWhitelist':
-          µb.netWhitelist = µb.whitelistFromString(request.whitelist);
-          µb.saveWhitelist();
+      case 'setAllowlist':
+          µb.netAllowlist = µb.allowlistFromString(request.allowlist);
+          µb.saveAllowlist();
           filteringBehaviorChanged();
           break;
       case 'setStrictBlockList':
@@ -1087,7 +1087,7 @@ const backupUserData = async function() {
         selectedFilterLists: µb.selectedFilterLists,
         hiddenSettings:
             µb.getModifiedSettings(µb.hiddenSettings, µb.hiddenSettingsDefault),
-        whitelist: µb.arrayFromWhitelist(µb.netWhitelist),
+        allowlist: µb.arrayFromAllowlist(µb.netAllowlist),
         strictBlockList: µb.arrayFromStrictBlockList(µb.netStrictBlockList),
         dynamicFilteringString: permanentFirewall.toString(),
         urlFilteringString: permanentURLFiltering.toString(),
@@ -1159,19 +1159,19 @@ const restoreUserData = async function(request) {
         }
     }
 
-    // Whitelist directives can be represented as an array or as a
+    // Allowlist directives can be represented as an array or as a
     // (eventually to be deprecated) string.
-    let whitelist = userData.whitelist;
+    let allowlist = userData.allowlist;
     if (
-        Array.isArray(whitelist) === false &&
-        typeof userData.netWhitelist === 'string' &&
-        userData.netWhitelist !== ''
+        Array.isArray(allowlist) === false &&
+        typeof userData.netAllowlist === 'string' &&
+        userData.netAllowlist !== ''
     ) {
-        whitelist = userData.netWhitelist.split('\n');
+        allowlist = userData.netAllowlist.split('\n');
     }
     vAPI.storage.set({
         hiddenSettings,
-        netWhitelist: whitelist || [],
+        netAllowlist: allowlist || [],
         dynamicFilteringString: userData.dynamicFilteringString || '',
         urlFilteringString: userData.urlFilteringString || '',
         hostnameSwitchesString: userData.hostnameSwitchesString || '',
@@ -1473,8 +1473,8 @@ const getSupportData = async function() {
         },
         'filterset (user)': filterset,
         trustedset: diffArrays(
-            µb.arrayFromWhitelist(µb.netWhitelist),
-            µb.netWhitelistDefault
+            µb.arrayFromAllowlist(µb.netAllowlist),
+            µb.netAllowlistDefault
         ),
         // Adn
         untrustedset: diffArrays(
@@ -1895,7 +1895,7 @@ const onMessage = function(request, sender, callback) {
         vAPI.tabs.remove(tabId);
         break;
 
-    case 'temporarilyWhitelistDocument':
+    case 'temporarilyAllowlistDocument':
         webRequest.strictBlockBypass(request.hostname);
         break;
 

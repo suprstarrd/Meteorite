@@ -37,7 +37,7 @@ function directiveFromLine(line) {
 
 /******************************************************************************/
 
-CodeMirror.defineMode("ubo-whitelist-directives", function() {
+CodeMirror.defineMode("ubo-allowlist-directives", function() {
     const reRegex = /^\/.+\/$/;
 
     return {
@@ -52,7 +52,7 @@ CodeMirror.defineMode("ubo-whitelist-directives", function() {
             }
             if ( line.indexOf('/') === -1 ) {
                 if ( reBadHostname.test(line) ) { return 'error'; }
-                if ( whitelistDefaultSet.has(line.trim()) ) {
+                if ( allowlistDefaultSet.has(line.trim()) ) {
                     return 'keyword';
                 }
                 return null;
@@ -68,7 +68,7 @@ CodeMirror.defineMode("ubo-whitelist-directives", function() {
             if ( reHostnameExtractor.test(line) === false ) {
                 return 'error';
             }
-            if ( whitelistDefaultSet.has(line.trim()) ) {
+            if ( allowlistDefaultSet.has(line.trim()) ) {
                 return 'keyword';
             }
             return null;
@@ -78,16 +78,16 @@ CodeMirror.defineMode("ubo-whitelist-directives", function() {
 
 let reBadHostname;
 let reHostnameExtractor;
-let whitelistDefaultSet = new Set();
+let allowlistDefaultSet = new Set();
 
 /******************************************************************************/
 
 const messaging = vAPI.messaging;
 const noopFunc = function(){};
 
-let cachedWhitelist = '';
+let cachedAllowlist = '';
 
-const cmEditor = new CodeMirror(qs$('#whitelist'), {
+const cmEditor = new CodeMirror(qs$('#allowlist'), {
     autofocus: true,
     lineNumbers: true,
     lineWrapping: true,
@@ -109,17 +109,17 @@ function setEditorText(text) {
 
 /******************************************************************************/
 
-function whitelistChanged() {
-    const whitelistElem = qs$('#whitelist');
-    const bad = qs$(whitelistElem, '.cm-error') !== null;
-    const changedWhitelist = getEditorText().trim();
-    const changed = changedWhitelist !== cachedWhitelist;
-    qs$('#whitelistApply').disabled = !changed || bad;
-    qs$('#whitelistRevert').disabled = !changed;
+function allowlistChanged() {
+    const allowlistElem = qs$('#allowlist');
+    const bad = qs$(allowlistElem, '.cm-error') !== null;
+    const changedAllowlist = getEditorText().trim();
+    const changed = changedAllowlist !== cachedAllowlist;
+    qs$('#allowlistApply').disabled = !changed || bad;
+    qs$('#allowlistRevert').disabled = !changed;
     CodeMirror.commands.save = changed && !bad ? applyChanges : noopFunc;
 }
 
-cmEditor.on('changes', whitelistChanged);
+cmEditor.on('changes', allowlistChanged);
 
 /******************************************************************************/
 const buttonUpdateEff = function() {
@@ -132,9 +132,9 @@ const buttonUpdateEff = function() {
      },200);
 };
 
-async function renderWhitelist() {
+async function renderAllowlist() {
     const details = await messaging.send('dashboard', {
-        what: 'getWhitelist',
+        what: 'getAllowlist',
     });
     qs$('#effListInput').checked = details.dntEnabled; // ADN
 
@@ -142,30 +142,30 @@ async function renderWhitelist() {
     if ( first ) {
         reBadHostname = new RegExp(details.reBadHostname);
         reHostnameExtractor = new RegExp(details.reHostnameExtractor);
-        whitelistDefaultSet = new Set(details.whitelistDefault);
+        allowlistDefaultSet = new Set(details.allowlistDefault);
     }
-    const toAdd = new Set(whitelistDefaultSet);
-    for ( const line of details.whitelist ) {
+    const toAdd = new Set(allowlistDefaultSet);
+    for ( const line of details.allowlist ) {
         const directive = directiveFromLine(line);
-        if ( whitelistDefaultSet.has(directive) === false ) { continue; }
+        if ( allowlistDefaultSet.has(directive) === false ) { continue; }
         toAdd.delete(directive);
         if ( toAdd.size === 0 ) { break; }
     }
     if ( toAdd.size !== 0 ) {
-        details.whitelist.push(...Array.from(toAdd).map(a => `# ${a}`));
+        details.allowlist.push(...Array.from(toAdd).map(a => `# ${a}`));
     }
-    details.whitelist.sort((a, b) => {
+    details.allowlist.sort((a, b) => {
         const ad = directiveFromLine(a);
         const bd = directiveFromLine(b);
-        const abuiltin = whitelistDefaultSet.has(ad);
-        if ( abuiltin !== whitelistDefaultSet.has(bd) ) {
+        const abuiltin = allowlistDefaultSet.has(ad);
+        if ( abuiltin !== allowlistDefaultSet.has(bd) ) {
             return abuiltin ? -1 : 1;
         }
         return ad.localeCompare(bd);
     });
-    const whitelistStr = details.whitelist.join('\n').trim();
-    cachedWhitelist = whitelistStr;
-    setEditorText(whitelistStr);
+    const allowlistStr = details.allowlist.join('\n').trim();
+    cachedAllowlist = allowlistStr;
+    setEditorText(allowlistStr);
     if ( first ) {
         cmEditor.clearHistory();
     }
@@ -202,11 +202,11 @@ function startImportFilePicker() {
 
 /******************************************************************************/
 
-function exportWhitelistToFile() {
+function exportAllowlistToFile() {
     const val = getEditorText();
     if ( val === '' ) { return; }
     const filename =
-        i18n$('whitelistExportFilename')
+        i18n$('allowlistExportFilename')
             .replace('{{datetime}}', uBlockDashboard.dateNowToSensibleString())
             .replace(/ +/g, '_');
     vAPI.download({
@@ -218,16 +218,16 @@ function exportWhitelistToFile() {
 /******************************************************************************/
 
 async function applyChanges() {
-    cachedWhitelist = getEditorText().trim();
+    cachedAllowlist = getEditorText().trim();
     await messaging.send('dashboard', {
-        what: 'setWhitelist',
-        whitelist: cachedWhitelist,
+        what: 'setAllowlist',
+        allowlist: cachedAllowlist,
     });
-    renderWhitelist();
+    renderAllowlist();
 }
 
 function revertChanges() {
-    setEditorText(cachedWhitelist);
+    setEditorText(cachedAllowlist);
 }
 
 /******************************************************************************/
@@ -252,19 +252,19 @@ self.cloud.onPull = setCloudData;
 self.wikilink = 'https://github.com/gorhill/uBlock/wiki/Dashboard:-Trusted-sites';
 
 self.hasUnsavedData = function() {
-    return getEditorText().trim() !== cachedWhitelist;
+    return getEditorText().trim() !== cachedAllowlist;
 };
 
 /******************************************************************************/
 
-dom.on('#importWhitelistFromFile', 'click', startImportFilePicker);
+dom.on('#importAllowlistFromFile', 'click', startImportFilePicker);
 dom.on('#importFilePicker', 'change', handleImportFilePicker);
-dom.on('#exportWhitelistToFile', 'click', exportWhitelistToFile);
-dom.on('#whitelistApply', 'click', ( ) => { applyChanges(); });
-dom.on('#whitelistRevert', 'click', revertChanges);
+dom.on('#exportAllowlistToFile', 'click', exportAllowlistToFile);
+dom.on('#allowlistApply', 'click', ( ) => { applyChanges(); });
+dom.on('#allowlistRevert', 'click', revertChanges);
 dom.on('#buttonUpdateEff', 'click', buttonUpdateEff);
 
-renderWhitelist();
+renderAllowlist();
 
 /******************* exports for adn strict-block-list ************************/
 

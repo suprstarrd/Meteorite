@@ -39,7 +39,7 @@
     "message": "Kanuni zangu",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Orodha-ruhusu",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Fikio",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "Orodha ya vikubaliwa inaamrisha ni kwenye kurasa zipi uBlock Origin italemazwa. Ingizo moja tu kila laini. Maelekezi batili yatapuuzwa kimyakimya na kufanywa kuwa maoni.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Leta na ambatisha",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Hamisha",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "orodhakubalizi-yangu-ya-ublock_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Tekeleza mabadiliko",
     "description": "English: Apply changes"
   },
