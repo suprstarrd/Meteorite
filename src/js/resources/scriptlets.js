@@ -38,7 +38,6 @@ import './spoof-css.js';
 
 import {
     collateFetchArgumentsFn,
-    generateContentFn,
     getExceptionTokenFn,
     getRandomTokenFn,
     matchObjectPropertiesFn,

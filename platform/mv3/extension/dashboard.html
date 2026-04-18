@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="color-scheme" content="light dark" />
 <title data-i18n="dashboardName"></title>
+<link rel="stylesheet" href="css/fonts/stylesheet.css">
 <link rel="stylesheet" href="css/dashboard-common.css">
 <link rel="stylesheet" href="css/filtering-mode.css">
 <link rel="stylesheet" href="css/default.css">
@@ -24,7 +25,7 @@
     <!-- -------- -->
     <header>
         <nav id="dashboard-nav">
-            <span class="logo"><img data-i18n-title="extName" src="img/ublock.svg" alt="uBO Lite"></span><!--
+            <span class="logo"><img data-i18n-title="extName" src="img/ublock.svg" alt="AdNauseam"></span><!--
          --><button class="tabButton" type="button" data-pane="settings" data-i18n="settingsPageName" tabindex="0"></button><!--
          --><button class="tabButton" type="button" data-pane="rulesets" data-i18n="aboutFilterLists" tabindex="0"></button><!--
          --><button class="tabButton" type="button" data-pane="filters" data-i18n="customFiltersPageName"tabindex="0"></button><!--
@@ -147,17 +148,21 @@
     <!-- -------- -->
     <section data-pane="about">
         <div class="body">
-            <div id="aboutNameVer" class="li"></div>
+            <p><span id="aboutNameVer"></span>
+                <a href="https://github.com/dhowe/AdNauseam" target="new"><span id="builtOn"></span>
+                    <span id="uBlock">AdNauseam</span><span id="builtOnVersion">v{UBLOCK_VERSION}</span></a>
+            </p>
             <div class="liul">
-                <div class="li">Copyright (c) Raymond Hill 2014-present</div>
+                <div class="li">Copyright (c) Daniel C. Howe 2015-present</div>
             </div>
-            <div class="li"><a href="https://github.com/uBlockOrigin/uBOL-home/wiki/Privacy-policy" data-i18n="aboutPrivacyPolicy"></a></div>
-            <div class="li"><a href="https://github.com/uBlockOrigin/uBOL-home/releases" data-i18n="aboutChangelog"></a></div>
-            <div class="li"><a href="https://github.com/gorhill/uBlock" data-i18n="aboutCode"></a></div>
+            <div class="li"><a href="https://github.com/dhowe/adnauseam/releases" data-i18n="aboutChangelog"></a></div>
+            <div class="li"><a href="https://github.com/dhowe/adnauseam/wiki" data-i18n="aboutWiki"></a></div>
+            <div class="li"><a href="https://github.com/dhowe/adnauseam" data-i18n="aboutCode"></a></div>
+            <div class="li"><a href="https://github.com/dhowe/AdNauseam/wiki/FAQ" data-i18n="aboutFaq"></a></div>
             <div class="li"><span data-i18n="aboutContributors"></span></div>
             <div class="liul">
-                <div class="li"><a href="https://github.com/gorhill/uBlock/graphs/contributors" data-i18n="aboutSourceCode"></a></div>
-                <div class="li"><a href="https://crowdin.com/project/ublock" data-i18n="aboutTranslations"></a></div>
+                <div class="li"><a href="https://github.com/dhowe/AdNauseam/graphs/contributors" data-i18n="aboutSourceCode"></a></div>
+                <div class="li"><a href="https://crowdin.com/project/adnauseam" data-i18n="aboutTranslations"></a></div>
                 <div class="li"><a href="https://github.com/uBlockOrigin/uAssets/graphs/contributors" data-i18n="aboutFilterLists"></a></div>
             </div>
             <div class="li"><span data-i18n="aboutDependencies"></span></div>

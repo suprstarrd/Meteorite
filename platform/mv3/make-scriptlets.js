@@ -165,7 +165,7 @@ export async function commit(rulesetId, path, writeFn) {
         const worldDetails = worlds[world];
         const { scriptletFunctions, allFunctions, args, arglists } = worldDetails;
         if ( scriptletFunctions.size === 0 ) { continue; }
-        const hostnames = Array.from(worldDetails.hostnames).toSorted((a, b) => {
+        const hostnames = Array.from(worldDetails.hostnames).sort((a, b) => {
             const d = a[0].length - b[0].length;
             if ( d !== 0 ) { return d; }
             return a[0] < b[0] ? -1 : 1;

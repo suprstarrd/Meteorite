@@ -49,7 +49,6 @@ metacritic.com##.sitewide_promo
 spiegel.de##div[id*="google_ads_iframe"]
 spiegel.de##div[class*="Anzeige"]
 
-www.nytimes.com###app > div:has(.dfp-ad-top-wrapper)
 www.nytimes.com##[data-hierarchy=feed] > div:has(.ad)
 www.nytimes.com##[id^=story-ad]
 
@@ -74,7 +73,7 @@ www.spacious.hk##.page__commercial_display_banner_box__content
 ##img[src*="display-ad/"]
 
 # teads inread video ads, found on inc.com and bbc.com
-.teads-inread
+##.teads-inread
 
 analyticsindiamag.com##a[data-wpel-link="external"]
 
@@ -303,7 +302,7 @@ g1.globo.com##.publicidade
 ##DIV[id*='ucfad']
 ##DIV[id*='movie_ad']
 
-##bing.com
+# bing.com
 www.bing.com##.adbDef
 www.bing.com##.b_ad
 bing.com##.adsMvC
@@ -571,7 +570,7 @@ opensubtitles.org###fcninnerbox
 
 #Trackers[Verified]
 ||scorecardresearch.com^$third-party
-||assets.adobedtm.com^third-party
+||assets.adobedtm.com^$third-party
 ||postrelease.com^
 ||grvcdn.com/moth-min.js
 ||pointroll.com^
@@ -594,7 +593,7 @@ opensubtitles.org###fcninnerbox
 
 # Tracking pixel
 ||ad.turn.com/server/pixel.htm^$important
-||atpixel.alephd.com/post_adtech$image^$important
+||atpixel.alephd.com/post_adtech^$image,important
 ||cache.btrll.com/default/Pix-1x1.gif^$important
 
 # Rubicon tracking section

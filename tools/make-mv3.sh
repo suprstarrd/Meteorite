@@ -75,6 +75,13 @@ fi
 
 echo "*** uBOLite.mv3: Copying common files"
 cp -R "$ADN_DIR"/src/css/fonts/Inter "$ADNL_DIR"/css/fonts/
+cp -R "$ADN_DIR"/src/css/fonts/Noto_Sans "$ADNL_DIR"/css/fonts/
+cp -R "$ADN_DIR"/src/css/fonts/Roboto_Flex "$ADNL_DIR"/css/fonts/
+cp "$ADN_DIR"/src/css/fonts/stylesheet.css "$ADNL_DIR"/css/fonts/
+cp "$ADN_DIR"/src/css/fonts/bebasneue_*.woff2 "$ADNL_DIR"/css/fonts/
+cp "$ADN_DIR"/src/css/fonts/bebasneue_*.woff "$ADNL_DIR"/css/fonts/
+cp "$ADN_DIR"/src/css/fonts/bebasneue_*.ttf "$ADNL_DIR"/css/fonts/
+cp "$ADN_DIR"/src/css/fonts/fontawesome-webfont.ttf "$ADNL_DIR"/css/fonts/
 cp "$ADN_DIR"/src/css/themes/default.css "$ADNL_DIR"/css/
 cp "$ADN_DIR"/src/css/common.css "$ADNL_DIR"/css/
 cp "$ADN_DIR"/src/css/dashboard-common.css "$ADNL_DIR"/css/
@@ -120,6 +127,45 @@ cp platform/mv3/extension/lib/codemirror/codemirror-ubol/LICENSE \
     "$ADNL_DIR"/lib/codemirror/codemirror-quickstart.LICENSE
 mkdir -p "$ADNL_DIR"/lib/csstree
 cp "$ADN_DIR"/src/lib/csstree/* "$ADNL_DIR"/lib/csstree/
+
+# AdNauseam libraries
+cp platform/mv3/extension/lib/yamd5.js "$ADNL_DIR"/lib/
+
+# AdNauseam menu: copy source CSS & images (overrides MV3 placeholder)
+echo "*** AdNauseamLite.mv3: Copying menu dependencies from src"
+cp "$ADN_DIR"/src/css/menu.css "$ADNL_DIR"/css/
+cp "$ADN_DIR"/src/img/active@2x.png "$ADNL_DIR"/img/ 2>/dev/null || :
+cp "$ADN_DIR"/src/img/ublock.svg "$ADNL_DIR"/img/ 2>/dev/null || :
+cp "$ADN_DIR"/src/img/gray_grid.png "$ADNL_DIR"/img/ 2>/dev/null || :
+
+# AdNauseam vault: copy source files at build time (avoids duplication)
+echo "*** AdNauseamLite.mv3: Copying vault dependencies from src"
+cp "$ADN_DIR"/src/css/vault.css "$ADNL_DIR"/css/
+cp "$ADN_DIR"/src/css/fonts/stylesheet.css "$ADNL_DIR"/css/fonts/
+cp "$ADN_DIR"/src/css/fonts/bebasneue_* "$ADNL_DIR"/css/fonts/
+cp -R "$ADN_DIR"/src/css/fonts/Noto_Sans "$ADNL_DIR"/css/fonts/
+cp -R "$ADN_DIR"/src/css/fonts/Roboto_Flex "$ADNL_DIR"/css/fonts/
+cp "$ADN_DIR"/src/img/preloader.gif "$ADNL_DIR"/img/ 2>/dev/null || :
+cp "$ADN_DIR"/src/img/alert.png "$ADNL_DIR"/img/ 2>/dev/null || :
+cp "$ADN_DIR"/src/img/black.png "$ADNL_DIR"/img/ 2>/dev/null || :
+cp "$ADN_DIR"/src/img/statistics-icon.svg "$ADNL_DIR"/img/ 2>/dev/null || :
+cp "$ADN_DIR"/src/img/timeline-handle.svg "$ADNL_DIR"/img/ 2>/dev/null || :
+cp "$ADN_DIR"/src/js/adn/vault.js "$ADNL_DIR"/js/adn/
+cp "$ADN_DIR"/src/js/adn/uDom.js "$ADNL_DIR"/js/adn/
+cp "$ADN_DIR"/src/js/adn/notifications.js "$ADNL_DIR"/js/adn/
+cp "$ADN_DIR"/src/js/adn/adn-utils.js "$ADNL_DIR"/js/adn/vault-adn-utils.js
+cp "$ADN_DIR"/src/lib/jquery.js "$ADNL_DIR"/lib/
+cp "$ADN_DIR"/src/lib/jquery.mousewheel.min.js "$ADNL_DIR"/lib/
+cp "$ADN_DIR"/src/lib/packery.js "$ADNL_DIR"/lib/
+cp "$ADN_DIR"/src/lib/d3.min.js "$ADNL_DIR"/lib/
+# Overwrite MV3 module yamd5 with src global version (vault loads it as <script>)
+cp "$ADN_DIR"/src/lib/yamd5.js "$ADNL_DIR"/lib/
+
+# Patch imports in copied vault files for MV3 compatibility:
+#   - vault.js and notifications.js: adn-utils.js → vault-adn-utils.js
+#     (so the full src version is used instead of the MV3-slim version)
+sed -i '' "s|from './adn-utils.js'|from './vault-adn-utils.js'|" "$ADNL_DIR"/js/adn/vault.js
+sed -i '' "s|from \"./adn-utils.js\"|from \"./vault-adn-utils.js\"|" "$ADNL_DIR"/js/adn/notifications.js
 
 echo "*** uBOLite.mv3: Generating rulesets"
 UBOL_BUILD_DIR=$(mktemp -d)

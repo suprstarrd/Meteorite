@@ -883,7 +883,7 @@ async function processCosmeticFilters(assetDetails, realm, mapin) {
         allRegexesOrPaths.set(regexOrPath, ilistFromSelectorSet(selectorSet));
     }
 
-    const sortedHostnames = Array.from(allHostnames.keys()).toSorted((a, b) => {
+    const sortedHostnames = Array.from(allHostnames.keys()).sort((a, b) => {
         const d = a.length - b.length;
         if ( d !== 0 ) { return d; }
         return a < b ? -1 : 1;

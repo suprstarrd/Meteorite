@@ -300,50 +300,87 @@ dom.on('#gotoUnpicker', 'click', ( ) => {
 async function updateAdNauseamStats() {
     try {
         const response = await sendMessage({ what: 'getAdNauseamStats' });
-        if (response && response.stats) {
-            dom.text('#adn-total-ads', response.stats.totalAds);
-            dom.text('#adn-total-clicks', response.stats.totalClicks);
+        if (response) {
+            dom.text('#adn-total-ads', response.totalAds || 0);
+            dom.text('#adn-total-clicks', response.totalClicks || 0);
         }
     } catch (error) {
         console.error('[ADN Popup] Failed to get stats:', error);
     }
 }
 
+function adStatusText(ad) {
+    if (ad.visitedTs > 0) return 'visited';
+    if (ad.visitedTs < 0) return 'failed';
+    if (ad.noVisit) return 'no-visit';
+    if (ad.dntAllowed) return 'dnt';
+    return 'pending';
+}
+
+function adStatusLabel(ad) {
+    const status = adStatusText(ad);
+    const labels = {
+        'visited': 'Visited',
+        'failed': 'Failed',
+        'no-visit': 'Skipped',
+        'dnt': 'DNT',
+        'pending': 'Pending'
+    };
+    return labels[status] || 'Pending';
+}
+
 async function renderVault() {
     try {
-        const vault = await sendMessage({ what: 'getVault' });
+        const ads = await sendMessage({ what: 'adsForVault' });
         const vaultList = qs$('#adn-vault-list');
-        
-        if (!vault || vault.length === 0) {
+
+        if (!ads || ads.length === 0) {
             vaultList.innerHTML = '<div class="adn-vault-empty">No ads collected yet</div>';
             return;
         }
-        
-        // Show most recent ads first (last 20)
-        const recentAds = vault.slice(-20).reverse();
-        
+
+        // Sort by foundTs descending, show most recent 20
+        const sorted = ads.sort((a, b) => (b.foundTs || 0) - (a.foundTs || 0));
+        const recentAds = sorted.slice(0, 20);
+
         vaultList.innerHTML = recentAds.map(ad => {
-            const displayUrl = ad.targetUrl ? new URL(ad.targetUrl).hostname : '';
-            const imgHtml = ad.imgSrc 
-                ? `<img src="${ad.imgSrc}" class="adn-vault-img" onerror="this.style.display='none'">`
+            let displayUrl = '';
+            try {
+                displayUrl = ad.targetUrl ? new URL(ad.targetUrl).hostname : '';
+            } catch (e) {
+                displayUrl = ad.targetDomain || '';
+            }
+
+            // Get image source from contentData (MV2 format) or direct fields
+            const imgSrc = (ad.contentData && ad.contentData.src) || ad.imgSrc;
+            const imgWidth = (ad.contentData && ad.contentData.width) || ad.imgWidth;
+            const imgHeight = (ad.contentData && ad.contentData.height) || ad.imgHeight;
+            const title = (ad.contentData && ad.contentData.title) || ad.title || 'Untitled Ad';
+            const text = (ad.contentData && ad.contentData.text) || ad.text || '';
+
+            const imgHtml = imgSrc
+                ? `<img src="${imgSrc}" class="adn-vault-img" onerror="this.style.display='none'">`
                 : '';
-            
+
+            const status = adStatusText(ad);
+            const statusLabel = adStatusLabel(ad);
+
             return `
-                <div class="adn-vault-item ${ad.clicked ? 'clicked' : ''}">
+                <div class="adn-vault-item ${status}">
                     ${imgHtml}
                     <div class="adn-vault-details">
-                        <div class="adn-vault-title">${ad.title || 'Untitled Ad'}</div>
-                        ${ad.text ? `<div class="adn-vault-text">${ad.text.substring(0, 60)}...</div>` : ''}
+                        <div class="adn-vault-title">${title}</div>
+                        ${text ? `<div class="adn-vault-text">${text.substring(0, 60)}</div>` : ''}
                         <div class="adn-vault-url">${displayUrl}</div>
-                        <div class="adn-vault-status ${ad.clicked ? 'clicked' : ''}">
-                            ${ad.clicked ? '✓ Clicked' : '○ Not clicked'}
-                            ${ad.imgSrc ? ` • ${ad.imgWidth}×${ad.imgHeight}` : ''}
+                        <div class="adn-vault-status ${status}">
+                            ${statusLabel}
+                            ${imgWidth > 0 ? ` &bull; ${imgWidth}&times;${imgHeight}` : ''}
                         </div>
                     </div>
                 </div>
             `;
         }).join('');
-        
+
     } catch (error) {
         console.error('[ADN Popup] Failed to render vault:', error);
     }
@@ -352,7 +389,7 @@ async function renderVault() {
 dom.on('#adn-toggle-vault', 'click', async () => {
     const vaultList = qs$('#adn-vault-list');
     const isHidden = dom.cl.has(vaultList, 'hidden');
-    
+
     if (isHidden) {
         dom.cl.remove(vaultList, 'hidden');
         await renderVault();
@@ -363,9 +400,9 @@ dom.on('#adn-toggle-vault', 'click', async () => {
 
 dom.on('#adn-clear-vault', 'click', async () => {
     if (!confirm('Clear all ads from vault?')) return;
-    
+
     try {
-        await sendMessage({ what: 'clearVault' });
+        await sendMessage({ what: 'clearAds' });
         await updateAdNauseamStats();
         const vaultList = qs$('#adn-vault-list');
         if (!dom.cl.has(vaultList, 'hidden')) {
@@ -377,10 +414,8 @@ dom.on('#adn-clear-vault', 'click', async () => {
 });
 
 // Update stats when popup opens
-// Add this call in the existing init() function after other initialization
 async function initAdNauseam() {
     await updateAdNauseamStats();
-    
     // Update stats every 2 seconds while popup is open
     setInterval(updateAdNauseamStats, 2000);
 }

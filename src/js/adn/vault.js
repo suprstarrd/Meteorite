@@ -75,15 +75,15 @@ let draggingVault = false;
 let vaultLoading = false;
 
 const container_div = document.getElementById('container');
-const $container = $('#container')
-const $ratio = $('#ratio')
+const $container = $('#container');
+const $ratio = $('#ratio');
 
-var transitionTimeout = null
+let transitionTimeout = null;
 
 let gAds, gAdSets, gMin, gMax, gSliderRight, gSliderLeft, settings, pack;
 let lastAdDetectedTime, waitingAds = []; // stateful
 
-var hideDeadAds = false;
+let hideDeadAds = false;
 
 onBroadcast(request => {
   //console.log("GOT BROADCAST", request);
@@ -1183,109 +1183,98 @@ function computeZoom(items) {
   // OK at current size, done
 }
 
+// Starts a CSS transition on the container and cleans up after it completes
+function beginTransition(durationMs) {
+  if (transitionTimeout !== null) {
+    clearTimeout(transitionTimeout);
+  }
+  $container.addClass("posTransition");
+  transitionTimeout = setTimeout(() => {
+    $container.removeClass("posTransition");
+    // Clean up translate(0,0) from FLIP animations so setScale works cleanly
+    const currentScale = userZoomScale / 100;
+    $container.css({ transform: 'scale(' + currentScale + ')' });
+    transitionTimeout = null;
+  }, durationMs || 600);
+}
+
+// Smoothly animate the container from current position/scale to a target using FLIP:
+// 1. Instantly set target margins (no visual change yet thanks to translate offset)
+// 2. Animate transform from translate(offset)+scale(old) → translate(0)+scale(new)
+function animateContainerTo(ml_target, mt_target, scaleTarget) {
+  const ml_current = parseFloat(container_div.style.marginLeft) || -10000;
+  const mt_current = parseFloat(container_div.style.marginTop) || -10000;
+  const scaleCurrent = userZoomScale / 100;
+
+  // FLIP step 1: set target margins instantly
+  $container.addClass('notransition');
+  $container.css({
+    "margin-left": ml_target + "px",
+    "margin-top": mt_target + "px"
+  });
+  // Compensate with translate so visually nothing changes yet
+  const tx = ml_current - ml_target;
+  const ty = mt_current - mt_target;
+  $container.css({
+    transform: 'translate(' + tx + 'px,' + ty + 'px) scale(' + scaleCurrent + ')'
+  });
+  $container[0].offsetHeight; // force reflow to lock the "before" frame
+  $container.removeClass('notransition');
+
+  // FLIP step 2: animate to final transform (translate 0, target scale)
+  beginTransition(600);
+  $container.css({
+    transform: 'translate(0px,0px) scale(' + scaleTarget + ')'
+  });
+}
+
 function centerZoom($ele) {
 
   if ($ele) {
 
-    // compute target positions for transform
-    let dm;
-
-    const spacing = 10;
     const metaOffset = 110;
-    const center = -10000;
-    // const elPos = itemPosition($ele);
-
-    // now compute the centered position based on item-offset
-    // let mleft = center - pos.left, mtop = center - pos.top;
-
-    // can these 2 be removed?
     const elWidth = parseInt($ele.attr('data-width'));
     const elHeight = parseInt($ele.attr('data-height'));
+    const element_div = $ele[0];
 
-    let element_div = $ele[0]
+    // Save current view state before changing
+    storeViewState(true);
 
-    // make sure left/bottom corner of meta-data is onscreen (#180)
-    /*
-    if (iw > ww - (metaOffset * 2 + spacing)) {
+    // Compute scale to fit the ad in the viewport
+    const posX = element_div.offsetLeft + elWidth / 2;
+    const posY = element_div.offsetTop + (elHeight + metaOffset) / 2;
 
-      //log('HITX:  iw='+iw+" ww="+ww+" diff="+(iw - ww)  + "  offx="+offx);
-      mleft += ((iw - ww) / 2) + (metaOffset + spacing);
-    }
-    if (ih > wh - (metaOffset * 2 + spacing)) {
+    let rescale = Math.min(window.innerHeight / elHeight, window.innerWidth / elWidth);
+    rescale = Math.min(rescale, 1) * 0.8;
 
-      //log('HITY:  ih='+ih+" wh="+wh+" diff="+(ih - wh)  + "  offy="+offy);
-      mtop -= ((ih - wh) / 2) + (metaOffset + spacing); // bottom-margin
-    }
-    */
+    // Target margins that center the ad
+    const ml_target = -10000 - (posX - 10000) * rescale;
+    const mt_target = -10000 - (posY - 10000) * rescale;
 
-    $container.addClass("posTransition")
-    // transition to center
+    // Smoothly animate from current position/scale to target
+    animateContainerTo(ml_target, mt_target, rescale);
 
-    // reset zoom based on ads size
-    let stdHeight = window.innerHeight;
-    let stdWidth = window.innerWidth;
-
-    let posX = element_div.offsetLeft + elWidth / 2
-    let posY = element_div.offsetTop + (elHeight + metaOffset) / 2
-
-    let rescale = stdHeight / elHeight < stdWidth / elWidth ? stdHeight / elHeight : stdWidth / elWidth;
-    rescale = rescale > 1 ? 1 : rescale;
-
-    //some space to leave
-    rescale *= 0.8;
-
-    let marginLeft = -10000 - (posX - 10000) * rescale;
-    let marginTop = -10000 - (posY - 10000) * rescale;
-
-    storeViewState(rescale);
-
-    setScale(rescale * 100, { marginLeft, marginTop })
-
-
-
-    //////////
-
-    if (transitionTimeout !== null) {
-      clearTimeout(transitionTimeout)
-      transitionTimeout = null
-    }
-
-    transitionTimeout = setTimeout(() => {
-      $container.removeClass("posTransition")
-      transitionTimeout = null
-    }, 1000)
+    userZoomScale = rescale * 100;
+    $ratio.text(Math.round(userZoomScale) + '%');
 
   } else { // restore zoom-state
-
-    storeViewState(-1);
+    storeViewState(false);
   }
 }
 
-// stores zoom/drag-offset for container
-function storeViewState(focusScale) {
+// stores zoom/drag-offset for container, or restores it
+function storeViewState(saving) {
 
-  if (focusScale > 0) {
+  if (saving) {
     viewState.zoomScale = userZoomScale;
-    viewState.focusScale = focusScale * 100;
-    userZoomScale = viewState.focusScale;
-    viewState.left = $container.css('margin-left');
-    viewState.top = $container.css('margin-top');
-  } else { // restore
-
-    $container.addClass("posTransition")
-    if (transitionTimeout !== null) {
-      clearTimeout(transitionTimeout)
-      transitionTimeout = null
-    }
-
-    transitionTimeout = setTimeout(() => {
-      $container.removeClass("posTransition")
-      transitionTimeout = null
-    }, 1000)
-
-    // restore zoom scale to userZoomScale
-    dynamicZoom(viewState.zoomScale - viewState.focusScale,
-      { marginLeft: viewState.left, marginTop: viewState.top });
+    viewState.left = parseFloat(container_div.style.marginLeft) || -10000;
+    viewState.top = parseFloat(container_div.style.marginTop) || -10000;
+  } else {
+    // Smoothly animate back to saved position/scale
+    const s_target = viewState.zoomScale / 100;
+    animateContainerTo(viewState.left, viewState.top, s_target);
+    userZoomScale = viewState.zoomScale;
+    $ratio.text(Math.round(userZoomScale) + '%');
   }
 }
 
@@ -1482,45 +1471,32 @@ function zoomOut(immediate) {
 }
 
 function setScale(scale, targetPos) {
-
-  let _scale = scale / 100
-
-  $container.css({
-    transform: 'scale(' + _scale + ')'
-  });
-
+  const s = scale / 100;
+  $container.css({ transform: 'scale(' + s + ')' });
   $ratio.text(Math.round(scale) + '%');
 
   let marginLeft, marginTop;
 
   if (targetPos) {
-    marginLeft = targetPos.marginLeft
-    marginTop = targetPos.marginTop
+    marginLeft = targetPos.marginLeft;
+    marginTop = targetPos.marginTop;
   } else {
-    let center = -10000
+    const center = -10000;
+    const ml = parseFloat(container_div.style.marginLeft) || center;
+    const mt = parseFloat(container_div.style.marginTop) || center;
+    const prevZoom = $container.data("zoom") || 100;
+    const zoomProp = scale / prevZoom;
 
-    let ml = parseFloat(container_div.style.getPropertyValue("margin-left"));
-    let mt = parseFloat(container_div.style.getPropertyValue("margin-top"));
+    $container.data("zoom", scale);
 
-    let prevZoom = $container.data("zoom") || 100
-    let zoomProp = scale / prevZoom
+    const offsetLeft = (center - ml) * (1 - zoomProp);
+    const offsetTop = (center - mt) * (1 - zoomProp);
 
-    $container.data("zoom", scale)
-
-    let distToCenterX = (center - ml)
-    let distToCenterY = (center - mt)
-
-    let offsetLeft = distToCenterX * (1 - zoomProp)
-    let offsetTop = distToCenterY * (1 - zoomProp)
-
-    marginLeft = ml + offsetLeft + "px";
-    marginTop = mt + offsetTop + "px";
+    marginLeft = (ml + offsetLeft) + "px";
+    marginTop = (mt + offsetTop) + "px";
   }
 
-  $container.css({
-    "margin-left": marginLeft,
-    "margin-top": marginTop
-  });
+  $container.css({ "margin-left": marginLeft, "margin-top": marginTop });
 }
 
 function dynamicZoom(scaleInterval, targetPos) {
