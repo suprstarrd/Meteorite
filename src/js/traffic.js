@@ -763,7 +763,10 @@ function onHeadersReceived(details) {
     if ( Array.isArray(responseHeaders) === false ) { return; }
 
     if ( isRootDoc === false ) {
-        const result = pageStore.filterOnHeaders(fctxt, responseHeaders);
+        const result = pageStore.filterOnHeaders(fctxt,
+            responseHeaders,
+            requestHeadersManager.lookup(details)
+        );
         if ( result !== 0 ) {
             if ( logger.enabled ) {
                 fctxt.setRealm('network').toLogger();
@@ -1544,6 +1547,48 @@ function onResponseStarted(details) {
     scriptletFilteringEngine.injectNow(details);
 }
 
+onResponseStarted.start = function() {
+    browser.webRequest.onResponseStarted.addListener(onResponseStarted, {
+        types: [ 'main_frame', 'sub_frame' ],
+        urls: [ 'http://*/*', 'https://*/*' ]
+    });
+};
+
+/******************************************************************************/
+
+const requestHeadersManager = {
+    requests: new Map(),
+    start() {
+        const extraInfoSpec = [ 'requestHeaders' ];
+        if ( isGecko !== true ) {
+            extraInfoSpec.push('extraHeaders');
+        }
+        browser.webRequest.onSendHeaders.addListener(details => {
+            this.requests.set(details.requestId, details.requestHeaders);
+        }, {
+            urls: [ 'http://*/*', 'https://*/*' ]
+        }, extraInfoSpec);
+        browser.webRequest.onBeforeRedirect.addListener(details => {
+            this.requests.delete(details.requestId);
+        }, {
+            urls: [ 'http://*/*', 'https://*/*' ]
+        });
+        browser.webRequest.onCompleted.addListener(details => {
+            this.requests.delete(details.requestId);
+        }, {
+            urls: [ 'http://*/*', 'https://*/*' ]
+        });
+        browser.webRequest.onErrorOccurred.addListener(details => {
+            this.requests.delete(details.requestId);
+        }, {
+            urls: [ 'http://*/*', 'https://*/*' ]
+        });
+    },
+    lookup(details) {
+        return this.requests.get(details.requestId) || [];
+    }
+};
+
 /******************************************************************************/
 
 // https://github.com/uBlockOrigin/uBlock-issues/issues/2350
@@ -1588,6 +1633,8 @@ const webRequest = {
                 types: [ 'main_frame', 'sub_frame' ],
                 urls: [ 'http://*/*', 'https://*/*' ]
             });
+            onResponseStarted.start();
+            requestHeadersManager.start();
             vAPI.defer.once({ sec: µb.hiddenSettings.toolbarWarningTimeout }).then(( ) => {
                 if ( vAPI.net.hasUnprocessedRequest() === false ) { return; }
                 vAPI.net.removeUnprocessedRequest();

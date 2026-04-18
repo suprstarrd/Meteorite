@@ -58,6 +58,7 @@ cd - > /dev/null
 mkdir -p "$ADNL_DIR"/css/fonts
 mkdir -p "$ADNL_DIR"/js
 mkdir -p "$ADNL_DIR"/img
+mkdir -p "$ADNL_DIR"/lib
 
 if [ -n "$ADN_VERSION" ]; then
     ADN_REPO="https://github.com/dhowe/AdNauseam.git"
@@ -93,9 +94,12 @@ cp "$ADN_DIR"/src/js/fa-icons.js "$ADNL_DIR"/js/
 cp "$ADN_DIR"/src/js/i18n.js "$ADNL_DIR"/js/
 cp "$ADN_DIR"/src/js/jsonpath.js "$ADNL_DIR"/js/
 cp "$ADN_DIR"/src/js/redirect-resources.js "$ADNL_DIR"/js/
+cp "$ADN_DIR"/src/js/regex-analyzer.js "$ADNL_DIR"/js/
+cp -R "$ADN_DIR"/src/js/resources "$ADNL_DIR"/js/
 cp "$ADN_DIR"/src/js/static-filtering-parser.js "$ADNL_DIR"/js/
 cp "$ADN_DIR"/src/js/urlskip.js "$ADNL_DIR"/js/
 cp "$ADN_DIR"/src/lib/punycode.js "$ADNL_DIR"/js/
+cp -R "$ADN_DIR"/src/lib/regexanalyzer "$ADNL_DIR"/lib/
 
 cp -R "$ADN_DIR/src/img/flags-of-the-world" "$ADNL_DIR"/img
 
@@ -168,22 +172,25 @@ sed -i '' "s|from './adn-utils.js'|from './vault-adn-utils.js'|" "$ADNL_DIR"/js/
 sed -i '' "s|from \"./adn-utils.js\"|from \"./vault-adn-utils.js\"|" "$ADNL_DIR"/js/adn/notifications.js
 
 echo "*** uBOLite.mv3: Generating rulesets"
-UBOL_BUILD_DIR=$(mktemp -d)
-mkdir -p "$UBOL_BUILD_DIR"
-./tools/make-nodejs.sh "$UBOL_BUILD_DIR"
-cp platform/mv3/*.json "$UBOL_BUILD_DIR"/
-cp platform/mv3/*.js "$UBOL_BUILD_DIR"/
-cp platform/mv3/*.mjs "$UBOL_BUILD_DIR"/
-cp platform/mv3/extension/js/utils.js "$UBOL_BUILD_DIR"/js/
-cp "$ADN_DIR"/src/js/regex-analyzer.js "$UBOL_BUILD_DIR"/js/
-cp -R "$ADN_DIR"/src/lib/regexanalyzer "$UBOL_BUILD_DIR"/
-cp -R "$ADN_DIR"/src/js/resources "$UBOL_BUILD_DIR"/js/
-cp -R platform/mv3/scriptlets "$UBOL_BUILD_DIR"/
-mkdir -p "$UBOL_BUILD_DIR"/web_accessible_resources
-cp "$ADN_DIR"/src/web_accessible_resources/* "$UBOL_BUILD_DIR"/web_accessible_resources/
-cp -R platform/mv3/"$PLATFORM" "$UBOL_BUILD_DIR"/
+ADNL_BUILD_DIR=$(mktemp -d)
+mkdir -p "$ADNL_BUILD_DIR"
+./tools/make-nodejs.sh "$ADNL_BUILD_DIR"
+cp platform/mv3/*.json "$ADNL_BUILD_DIR"/
+cp platform/mv3/*.js "$ADNL_BUILD_DIR"/
+cp platform/mv3/*.mjs "$ADNL_BUILD_DIR"/
+cp platform/mv3/extension/js/utils.js "$ADNL_BUILD_DIR"/js/
+cp platform/mv3/extension/js/make-scriptlets.js "$ADNL_BUILD_DIR"/js/
+cp platform/mv3/extension/js/safe-replace.js "$ADNL_BUILD_DIR"/js/
+cp "$ADN_DIR"/src/js/regex-analyzer.js "$ADNL_BUILD_DIR"/js/
+cp -R "$ADN_DIR"/src/lib/regexanalyzer "$ADNL_BUILD_DIR"/
+cp -R "$ADN_DIR"/src/js/resources "$ADNL_BUILD_DIR"/js/
+cp -R platform/mv3/scriptlets "$ADNL_BUILD_DIR"/
+cp platform/mv3/extension/js/scriptlet.template.js "$ADNL_BUILD_DIR"/scriptlets/
+mkdir -p "$ADNL_BUILD_DIR"/web_accessible_resources
+cp "$ADN_DIR"/src/web_accessible_resources/* "$ADNL_BUILD_DIR"/web_accessible_resources/
+cp -R platform/mv3/"$PLATFORM" "$ADNL_BUILD_DIR"/
 
-cd "$UBOL_BUILD_DIR"
+cd "$ADNL_BUILD_DIR"
 node --no-warnings make-rulesets.js output="$ADNL_DIR" platform="$PLATFORM"
 if [ -n "$BEFORE" ]; then
     echo "*** uBOLite.mv3: salvaging rule ids to minimize diff size"
@@ -214,6 +221,7 @@ if [ -z "$TAGNAME" ]; then
 else
     jq --arg version "${TAGNAME}" '.version = $version' "$ADNL_DIR/manifest.json"  > "$tmp_manifest" \
         && mv "$tmp_manifest" "$ADNL_DIR/manifest.json"
+    rm -rf "$ADNL_DIR/rulesets/debug"
 fi
 
 # Platform-specific steps

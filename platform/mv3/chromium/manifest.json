@@ -45,7 +45,8 @@
     "declarativeNetRequest",
     "offscreen",
     "scripting",
-    "storage"
+    "storage",
+    "userScripts"
   ],
   "short_name": "AdNauseam",
   "storage": {
