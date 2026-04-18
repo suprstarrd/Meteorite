@@ -20,10 +20,10 @@
     <!-- -------- -->
     <div class="filteringModeSlider">
         <div class="filteringModeButton"><div></div></div>
-        <span data-level="0"></span>
-        <span data-level="1"></span>
-        <span data-level="2"></span>
-        <span data-level="3"></span>
+        <span data-level="0" aria-label="filteringMode0Name"></span>
+        <span data-level="1" aria-label="filteringMode1Name"></span>
+        <span data-level="2" aria-label="filteringMode2Name"></span>
+        <span data-level="3" aria-label="filteringMode3Name"></span>
     </div>
     <!-- -------- -->
     <div id="filteringModeText"><label data-i18n="popupFilteringModeLabel">_</label><br><span>_</span><span></span></div>
@@ -53,31 +53,34 @@
         <span id="gotoDashboard" class="fa-icon tool enabled" tabindex="0" data-i18n-title="popupTipDashboard">cogs<span class="caption" data-i18n="popupTipDashboard"></span></span>
     </div>
 
-		<!-- AdNauseam Vault Section -->
-		<div id="adn-vault-section" class="adn-section">
-				<div class="adn-header">
-						<label>AdNauseam Vault</label>
-						<span id="adn-stats">
-								<span id="adn-total-ads">0</span> ads • 
-								<span id="adn-total-clicks">0</span> clicks
-						</span>
-				</div>
-				
-				<div class="adn-actions">
-						<span id="adn-toggle-vault" class="tool enabled" tabindex="0">
-								<span class="fa-icon">folder-open</span>
-								<span>View Vault</span>
-						</span>
-						<span id="adn-clear-vault" class="tool enabled" tabindex="0">
-								<span class="fa-icon">trash</span>
-								<span>Clear</span>
-						</span>
-				</div>
-				<div id="adn-vault-list" class="adn-vault-list hidden">
-						<!-- Vault items will be inserted here -->
-				</div>
-		</div>
-</div>
+    <!-- AdNauseam Vault Section -->
+    <div id="adn-vault-section" class="adn-section">
+            <div class="adn-header">
+                    <label>AdNauseam Vault</label>
+                    <span id="adn-stats">
+                            <span id="adn-total-ads">0</span> ads • 
+                            <span id="adn-total-clicks">0</span> clicks
+                    </span>
+            </div>
+            
+            <div class="adn-actions">
+                    <span id="adn-toggle-vault" class="tool enabled" tabindex="0">
+                            <span class="fa-icon">folder-open</span>
+                            <span>View Vault</span>
+                    </span>
+                    <span id="adn-clear-vault" class="tool enabled" tabindex="0">
+                            <span class="fa-icon">trash</span>
+                            <span>Clear</span>
+                    </span>
+            </div>
+            <div id="adn-vault-list" class="adn-vault-list hidden">
+                    <!-- Vault items will be inserted here -->
+            </div>
+    </div>
+</main>
+<aside>
+    <span class="fa-icon">spinner</span>
+</aside>
 
 <script src="js/theme.js" type="module"></script>
 <script src="js/fa-icons.js" type="module"></script>
