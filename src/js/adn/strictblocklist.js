@@ -39,7 +39,7 @@ const directiveFromLine = function(line) {
 
 /******************************************************************************/
 
-CodeMirror.defineMode("ubo-whitelist-directives", function() {
+CodeMirror.defineMode("ubo-allowlist-directives", function() {
     const reRegex = /^\/.+\/$/;
     return {
         token: function(stream) {

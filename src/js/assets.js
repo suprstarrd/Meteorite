@@ -1512,7 +1512,7 @@ assets.forceUpdate = async function(which) { // ADN
         result = await getRemote("adnauseam-filters");
         break;
       case "Eff":
-        result = await getRemote("eff-dnt-whitelist");
+        result = await getRemote("eff-dnt-allowlist");
       default:
     }
       updatedOne(result);

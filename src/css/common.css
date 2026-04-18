@@ -622,6 +622,7 @@ hr {
 }
 textarea {
     font-size: 90%;
+    font-family: monospace;
 }
 input, select {
       border: solid 1px #999;

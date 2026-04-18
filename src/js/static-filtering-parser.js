@@ -242,6 +242,7 @@ export const nodeTypeFromOptionName = new Map([
     [ 'empty', NODE_TYPE_NET_OPTION_NAME_EMPTY ],
     [ 'font', NODE_TYPE_NET_OPTION_NAME_FONT ],
     [ 'frame', NODE_TYPE_NET_OPTION_NAME_FRAME ],
+    /* synonym */ [ 'iframe', NODE_TYPE_NET_OPTION_NAME_FRAME ],
     /* synonym */ [ 'subdocument', NODE_TYPE_NET_OPTION_NAME_FRAME ],
     [ 'from', NODE_TYPE_NET_OPTION_NAME_FROM ],
     /* synonym */ [ 'domain', NODE_TYPE_NET_OPTION_NAME_FROM ],

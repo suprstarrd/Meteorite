@@ -495,7 +495,7 @@
     "message": "Оновлення",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Список винятків",
     "description": "appears as tab name in dashboard"
   },

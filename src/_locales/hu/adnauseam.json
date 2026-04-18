@@ -495,7 +495,7 @@
     "message": "Frissítés",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Fehérlista",
     "description": "appears as tab name in dashboard"
   },

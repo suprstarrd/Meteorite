@@ -495,7 +495,7 @@
     "message": "Updatovat",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Povolené domény",
     "description": "appears as tab name in dashboard"
   },

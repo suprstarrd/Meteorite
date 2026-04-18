@@ -1,7 +1,7 @@
 {
   "https://www.eff.org/files/effdntlist.txt": {
     "off": false,
-    "title": "DNT Policy Whitelist",
+    "title": "DNT Policy Allowlist",
     "group": "privacy",
     "supportURL": "https://www.eff.org/dnt-policy"
   },
@@ -170,7 +170,7 @@
     "supportURL": "http://www.certyficate.it/adblock-ublock-polish-filters/"
   },
   "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt": {
-    "off": true,
+    "off": false,
     "title": "Adblock Warning Removal List",
     "group": "ads",
     "supportURL": "https://forums.lanik.us/"

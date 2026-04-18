@@ -39,7 +39,7 @@
     "message": "Le mie regole",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Siti affidabili",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Destinazione",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "Lista dei siti dove uBlock è disattivato. Un sito per ogni riga. Le voci non valide verranno silenziosamente ignorate.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Importa e aggiungi",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Esporta",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
-    "message": "ublock-whitelist_{{datetime}}.txt",
+  "allowlistExportFilename": {
+    "message": "ublock-allowlist_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Salva i cambiamenti",
     "description": "English: Apply changes"
   },

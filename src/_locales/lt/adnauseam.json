@@ -495,7 +495,7 @@
     "message": "Atnaujinti",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Išimtys",
     "description": "appears as tab name in dashboard"
   },

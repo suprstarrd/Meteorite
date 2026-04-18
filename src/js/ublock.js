@@ -57,19 +57,19 @@ import { redirectEngine } from './redirect-engine.js';
 /******************************************************************************/
 
 // https://github.com/chrisaljoudi/uBlock/issues/405
-// Be more flexible with whitelist syntax
+// Be more flexible with allowlist syntax
 
 // Any special regexp char will be escaped
-const whitelistDirectiveEscape = /[-/\\^$+?.()|[\]{}]/g;
+const allowlistDirectiveEscape = /[-/\\^$+?.()|[\]{}]/g;
 
 // All `*` will be expanded into `.*`
-const whitelistDirectiveEscapeAsterisk = /\*/g;
+const allowlistDirectiveEscapeAsterisk = /\*/g;
 
 // Remember encountered regexps for reuse.
 const directiveToRegexpMap = new Map();
 
-// Probably manually entered whitelist directive
-const isHandcraftedWhitelistDirective = function(directive) {
+// Probably manually entered allowlist directive
+const isHandcraftedAllowlistDirective = function(directive) {
     return directive.startsWith('/') && directive.endsWith('/') ||
            directive.indexOf('/') !== -1 && directive.indexOf('*') !== -1;
 };
@@ -95,8 +95,8 @@ const matchDirective = function(url, hostname, directive) {
         if ( directive.startsWith('/') && directive.endsWith('/') ) {
             reStr = directive.slice(1, -1);
         } else {
-            reStr = directive.replace(whitelistDirectiveEscape, '\\$&')
-                             .replace(whitelistDirectiveEscapeAsterisk, '.*');
+            reStr = directive.replace(allowlistDirectiveEscape, '\\$&')
+                             .replace(allowlistDirectiveEscapeAsterisk, '.*');
         }
         re = new RegExp(reStr);
         directiveToRegexpMap.set(directive, re);
@@ -121,14 +121,14 @@ const matchBucket = function(url, hostname, bucket, start) {
     const hostname = hostnameFromURI(url);
     let key = hostname;
     for (;;) {
-        if ( matchBucket(url, hostname, this.netWhitelist.get(key)) !== -1 ) {
+        if ( matchBucket(url, hostname, this.netAllowlist.get(key)) !== -1 ) {
             return false;
         }
         const pos = key.indexOf('.');
         if ( pos === -1 ) { break; }
         key = key.slice(pos + 1);
     }
-    if ( matchBucket(url, hostname, this.netWhitelist.get('//')) !== -1 ) {
+    if ( matchBucket(url, hostname, this.netAllowlist.get('//')) !== -1 ) {
         return false;
     }
     return true;
@@ -145,7 +145,7 @@ const matchBucket = function(url, hostname, bucket, start) {
         return currentState;
     }
 
-    const netWhitelist = this.netWhitelist;
+    const netAllowlist = this.netAllowlist;
     const pos = url.indexOf('#');
     let targetURL = pos !== -1 ? url.slice(0, pos) : url;
     const targetHostname = hostnameFromURI(targetURL);
@@ -154,63 +154,63 @@ const matchBucket = function(url, hostname, bucket, start) {
 
     // Add to directive list
     if ( newState === false ) {
-        let bucket = netWhitelist.get(key);
+        let bucket = netAllowlist.get(key);
         if ( bucket === undefined ) {
             bucket = [];
-            netWhitelist.set(key, bucket);
+            netAllowlist.set(key, bucket);
         }
         bucket.push(directive);
-        this.saveWhitelist();
+        this.saveAllowlist();
         filteringBehaviorChanged({ hostname: targetHostname, direction: -1 });
         return true;
     }
 
-    // Remove all directives which cause current URL to be whitelisted
+    // Remove all directives which cause current URL to be allowlisted
     for (;;) {
-        const bucket = netWhitelist.get(key);
+        const bucket = netAllowlist.get(key);
         if ( bucket !== undefined ) {
             let i;
             for (;;) {
                 i = matchBucket(targetURL, targetHostname, bucket, i);
                 if ( i === -1 ) { break; }
                 directive = bucket.splice(i, 1)[0];
-                if ( isHandcraftedWhitelistDirective(directive) ) {
-                    netWhitelist.get('#').push(`# ${directive}`);
+                if ( isHandcraftedAllowlistDirective(directive) ) {
+                    netAllowlist.get('#').push(`# ${directive}`);
                 }
             }
             if ( bucket.length === 0 ) {
-                netWhitelist.delete(key);
+                netAllowlist.delete(key);
             }
         }
         const pos = key.indexOf('.');
         if ( pos === -1 ) { break; }
         key = key.slice(pos + 1);
     }
-    const bucket = netWhitelist.get('//');
+    const bucket = netAllowlist.get('//');
     if ( bucket !== undefined ) {
         let i;
         for (;;) {
             i = matchBucket(targetURL, targetHostname, bucket, i);
             if ( i === -1 ) { break; }
             directive = bucket.splice(i, 1)[0];
-            if ( isHandcraftedWhitelistDirective(directive) ) {
-                netWhitelist.get('#').push(`# ${directive}`);
+            if ( isHandcraftedAllowlistDirective(directive) ) {
+                netAllowlist.get('#').push(`# ${directive}`);
             }
         }
         if ( bucket.length === 0 ) {
-            netWhitelist.delete('//');
+            netAllowlist.delete('//');
         }
     }
-    this.saveWhitelist();
+    this.saveAllowlist();
     filteringBehaviorChanged({ direction: 1 });
     return true;
 };
 
 /******************************************************************************/
 
-µb.arrayFromWhitelist = function(whitelist) {
+µb.arrayFromAllowlist = function(allowlist) {
     const out = new Set();
-    for ( const bucket of whitelist.values() ) {
+    for ( const bucket of allowlist.values() ) {
         for ( const directive of bucket ) {
             out.add(directive);
         }
@@ -218,17 +218,17 @@ const matchBucket = function(url, hostname, bucket, start) {
     return Array.from(out).sort((a, b) => a.localeCompare(b));
 };
 
-µb.stringFromWhitelist = function(whitelist) {
-    return this.arrayFromWhitelist(whitelist).join('\n');
+µb.stringFromAllowlist = function(allowlist) {
+    return this.arrayFromAllowlist(allowlist).join('\n');
 };
 
 /******************************************************************************/
 
-µb.whitelistFromArray = function(lines) {
-    const whitelist = new Map();
+µb.allowlistFromArray = function(lines) {
+    const allowlist = new Map();
 
     // Comment bucket must always be ready to be used.
-    whitelist.set('#', []);
+    allowlist.set('#', []);
 
     // New set of directives, scrap cached data.
     directiveToRegexpMap.clear();
@@ -249,7 +249,7 @@ const matchBucket = function(url, hostname, bucket, start) {
         }
         // Plain hostname
         else if ( line.indexOf('/') === -1 ) {
-            if ( this.reWhitelistBadHostname.test(line) ) {
+            if ( this.reAllowlistBadHostname.test(line) ) {
                 key = '#';
                 directive = '# ' + line;
             } else {
@@ -276,7 +276,7 @@ const matchBucket = function(url, hostname, bucket, start) {
         // label (or else it would be just impossible to make an efficient
         // dict.
         else {
-            const matches = this.reWhitelistHostnameExtractor.exec(line);
+            const matches = this.reAllowlistHostnameExtractor.exec(line);
             if ( !matches || matches.length !== 2 ) {
                 key = '#';
                 directive = '# ' + line;
@@ -292,27 +292,27 @@ const matchBucket = function(url, hostname, bucket, start) {
 
         // Be sure this stays fixed:
         // https://github.com/chrisaljoudi/uBlock/issues/185
-        let bucket = whitelist.get(key);
+        let bucket = allowlist.get(key);
         if ( bucket === undefined ) {
             bucket = [];
-            whitelist.set(key, bucket);
+            allowlist.set(key, bucket);
         }
         bucket.push(directive);
     }
-    return whitelist;
+    return allowlist;
 };
 
-µb.whitelistFromString = function(s) {
-    return this.whitelistFromArray(s.split('\n'));
+µb.allowlistFromString = function(s) {
+    return this.allowlistFromArray(s.split('\n'));
 };
 
 // https://github.com/gorhill/uBlock/issues/3717
-µb.reWhitelistBadHostname = /[^a-z0-9.\-_[\]:]/;
-µb.reWhitelistHostnameExtractor = /([a-z0-9.\-_[\]]+)(?::[\d*]+)?\/(?:[^\x00-\x20/]|$)[^\x00-\x20]*$/;
+µb.reAllowlistBadHostname = /[^a-z0-9.\-_[\]:]/;
+µb.reAllowlistHostnameExtractor = /([a-z0-9.\-_[\]]+)(?::[\d*]+)?\/(?:[^\x00-\x20/]|$)[^\x00-\x20]*$/;
 
 /******************************************************************************/
 // ADN - Strict Block List
-// Copy from whitelist helper functions
+// Copy from allowlist helper functions
 /******************************************************************************/
 
 µb.getIsPageStrictBlocked = function(url) {
@@ -332,10 +332,10 @@ const matchBucket = function(url, hostname, bucket, start) {
     return false;
 };
 
-µb.arrayFromStrictBlockList = µb.arrayFromWhitelist;
-µb.stringFromStrictBlockList =  µb.stringFromWhitelist;
-µb.strictBlockListFromArray = µb.whitelistFromArray;
-µb.strictBlockListFromString = µb.whitelistFromString;
+µb.arrayFromStrictBlockList = µb.arrayFromAllowlist;
+µb.stringFromStrictBlockList =  µb.stringFromAllowlist;
+µb.strictBlockListFromArray = µb.allowlistFromArray;
+µb.strictBlockListFromString = µb.allowlistFromString;
 
 
 µb.toggleStrictBlock = function(url, scope, newState) {
@@ -355,7 +355,7 @@ const matchBucket = function(url, hostname, bucket, start) {
     let key = targetHostname;
     let directive = scope === 'page' ? targetURL : targetHostname;
 
-    // Add to directive strictBlockList and remove from whitelist
+    // Add to directive strictBlockList and remove from allowlist
     if ( newState === true ) {
         let bucket = this.netStrictBlockList.get(key);
         if ( bucket === undefined ) {
@@ -364,7 +364,7 @@ const matchBucket = function(url, hostname, bucket, start) {
         }
         bucket.push(directive);
         this.saveStrictBlockList();
-        // this.removePageFromWhitelist(this.netWhitelist, targetURL, targetHostname)
+        // this.removePageFromAllowlist(this.netAllowlist, targetURL, targetHostname)
         return true;
     }
 
@@ -372,49 +372,49 @@ const matchBucket = function(url, hostname, bucket, start) {
     this.removePageFromStrictBlockList(netStrictBlockList, targetURL, targetHostname)
 };
 
-// Remove all directives which cause current URL to be whitelisted
-µb.removePageFromWhitelist = function (netWhitelist, targetURL, targetHostname) {
+// Remove all directives which cause current URL to be allowlisted
+µb.removePageFromAllowlist = function (netAllowlist, targetURL, targetHostname) {
     let key = targetHostname;
     for (;;) {
-        const bucket = netWhitelist.get(key);
+        const bucket = netAllowlist.get(key);
         if ( bucket !== undefined ) {
             let i;
             for (;;) {
                 i = matchBucket(targetURL, targetHostname, bucket, i);
                 if ( i === -1 ) { break; }
                 directive = bucket.splice(i, 1)[0];
-                if ( isHandcraftedWhitelistDirective(directive) ) {
-                    netWhitelist.get('#').push(`# ${directive}`);3
+                if ( isHandcraftedAllowlistDirective(directive) ) {
+                    netAllowlist.get('#').push(`# ${directive}`);3
                 }
             }
             if ( bucket.length === 0 ) {
-                netWhitelist.delete(key);
+                netAllowlist.delete(key);
             }
         }
         const pos = key.indexOf('.');
         if ( pos === -1 ) { break; }
         key = key.slice(pos + 1);
     }
-    const bucket = netWhitelist.get('//');
+    const bucket = netAllowlist.get('//');
     if ( bucket !== undefined ) {
         let i;
         for (;;) {
             i = matchBucket(targetURL, targetHostname, bucket, i);
             if ( i === -1 ) { break; }
             directive = bucket.splice(i, 1)[0];
-            if ( isHandcraftedWhitelistDirective(directive) ) {
-                netWhitelist.get('#').push(`# ${directive}`);
+            if ( isHandcraftedAllowlistDirective(directive) ) {
+                netAllowlist.get('#').push(`# ${directive}`);
             }
         }
         if ( bucket.length === 0 ) {
-            netWhitelist.delete('//');
+            netAllowlist.delete('//');
         }
     }
-    this.saveWhitelist();
+    this.saveAllowlist();
 }
 
 
-// Remove all directives which cause current URL to be whitelisted
+// Remove all directives which cause current URL to be allowlisted
 µb.removePageFromStrictBlockList = function (netStrictBlockList, targetURL, targetHostname) {
     let directive = targetHostname;
     let key = targetHostname;
@@ -426,7 +426,7 @@ const matchBucket = function(url, hostname, bucket, start) {
                 i = matchBucket(targetURL, targetHostname, bucket, i);
                 if ( i === -1 ) { break; }
                 directive = bucket.splice(i, 1)[0];
-                if ( isHandcraftedWhitelistDirective(directive) ) {
+                if ( isHandcraftedAllowlistDirective(directive) ) {
                     netStrictBlockList.get('#').push(`# ${directive}`);3
                 }
             }
@@ -445,7 +445,7 @@ const matchBucket = function(url, hostname, bucket, start) {
             i = matchBucket(targetURL, targetHostname, bucket, i);
             if ( i === -1 ) { break; }
             directive = bucket.splice(i, 1)[0];
-            if ( isHandcraftedWhitelistDirective(directive) ) {
+            if ( isHandcraftedAllowlistDirective(directive) ) {
                 netStrictBlockList.get('#').push(`# ${directive}`);
             }
         }

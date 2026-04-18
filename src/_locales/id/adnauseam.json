@@ -495,7 +495,7 @@
     "message": "Perbarui",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Daftar yang dibolehkan",
     "description": "appears as tab name in dashboard"
   },

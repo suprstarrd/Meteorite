@@ -208,7 +208,7 @@ const proceedToURL = function() {
 
 const proceedTemporary = async function() {
     await messaging.send('documentBlocked', {
-        what: 'temporarilyWhitelistDocument',
+        what: 'temporarilyAllowlistDocument',
         hostname: details.hn,
     });
     proceedToURL();

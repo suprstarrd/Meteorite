@@ -56,7 +56,7 @@
     actual elements on the current page. This component is dynamically loaded
     IF AND ONLY IF uBO's logger is opened.
 
-  If page is whitelisted:
+  If page is allowlisted:
     - domWatcher: off
     - domCollapser: off
     - domFilterer: off
@@ -64,7 +64,7 @@
     - domLogger: off
 
   I verified that the code in this file is completely flushed out of memory
-  when a page is whitelisted.
+  when a page is allowlisted.
 
   If cosmetic filtering is disabled:
     - domWatcher: on

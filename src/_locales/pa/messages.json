@@ -39,7 +39,7 @@
     "message": "ਮੇਰੇ ਨਿਯਮ",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "ਭਰੋਸੇਯੋਗ ਸਾਈਟਾਂ",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "ਟਿਕਾਣਾ",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "The trusted site directives dictate on which web pages uBlock Origin should be disabled. One entry per line.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "ਇੰਪੋਰਟ ਕਰੋ ਤੇ ਜੋੜੋ…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "ਐਕਸਪੋਰਟ…",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "my-ublock-trusted-sites_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "ਤਬਦੀਲੀਆਂ ਲਾਗੂ ਕਰੋ",
     "description": "English: Apply changes"
   },

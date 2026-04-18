@@ -10,7 +10,7 @@ import {
 
 const dnt = (function () {
 
-  //const effList = 'eff-dnt-whitelist';
+  //const effList = 'eff-dnt-allowlist';
 
   let exports = {};
 

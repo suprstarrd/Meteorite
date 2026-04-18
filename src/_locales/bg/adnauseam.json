@@ -495,7 +495,7 @@
     "message": "Актуализиране",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Бял списък",
     "description": "appears as tab name in dashboard"
   },

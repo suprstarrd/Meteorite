@@ -495,7 +495,7 @@
     "message": "تحديث",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "القوائم البيضاء",
     "description": "appears as tab name in dashboard"
   },

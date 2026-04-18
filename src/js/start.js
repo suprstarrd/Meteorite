@@ -171,9 +171,9 @@ const onVersionReady = async lastVersion => {
 // https://github.com/uBlockOrigin/uBlock-issues/issues/1433
 //   Allow admins to add their own trusted-site directives.
 
-const onNetWhitelistReady = (netWhitelistRaw, adminExtra) => {
-    if ( typeof netWhitelistRaw === 'string' ) {
-        netWhitelistRaw = netWhitelistRaw.split('\n');
+const onNetAllowlistReady = (netAllowlistRaw, adminExtra) => {
+    if ( typeof netAllowlistRaw === 'string' ) {
+        netAllowlistRaw = netAllowlistRaw.split('\n');
     }
 
     // Remove now obsolete built-in trusted directives
@@ -188,11 +188,11 @@ const onNetWhitelistReady = (netWhitelistRaw, adminExtra) => {
                 'wyciwyg-scheme',
             ];
             for ( const directive of obsolete ) {
-                const i = netWhitelistRaw.findIndex(s =>
+                const i = netAllowlistRaw.findIndex(s =>
                     s === directive || s === `# ${directive}`
                 );
                 if ( i === -1 ) { continue; }
-                netWhitelistRaw.splice(i, 1);
+                netAllowlistRaw.splice(i, 1);
             }
         }
     }
@@ -201,14 +201,14 @@ const onNetWhitelistReady = (netWhitelistRaw, adminExtra) => {
     if ( adminExtra instanceof Object ) {
         if ( Array.isArray(adminExtra.trustedSiteDirectives) ) {
             for ( const directive of adminExtra.trustedSiteDirectives ) {
-                µb.netWhitelistDefault.push(directive);
-                netWhitelistRaw.push(directive);
+                µb.netAllowlistDefault.push(directive);
+                netAllowlistRaw.push(directive);
             }
         }
     }
 
-    µb.netWhitelist = µb.whitelistFromArray(netWhitelistRaw);
-    µb.netWhitelistModifyTime = Date.now();
+    µb.netAllowlist = µb.allowlistFromArray(netAllowlistRaw);
+    µb.netAllowlistModifyTime = Date.now();
 };
 
 
@@ -381,7 +381,7 @@ const onFirstFetchReady = (fetched, adminExtra) => {
     permanentSwitches.fromString(fetched.hostnameSwitchesString);
     sessionSwitches.assign(permanentSwitches);
 
-    onNetWhitelistReady(fetched.netWhitelist, adminExtra);
+    onNetAllowlistReady(fetched.netAllowlist, adminExtra);
     // Adn strict block list
     onNetStrictBlockListReady(fetched.netStrictBlockList, adminExtra);
     // end of adn
@@ -409,7 +409,7 @@ const createDefaultProps = ( ) => {
         'dynamicFilteringString': µb.dynamicFilteringDefault.join('\n'),
         'urlFilteringString': '',
         'hostnameSwitchesString': µb.hostnameSwitchesDefault.join('\n'),
-        'netWhitelist': µb.netWhitelistDefault,
+        'netAllowlist': µb.netAllowlistDefault,
         'netStrictBlockList': µb.netStrictBlockListDefault, // ADN - strictBlockList
         'version': '0.0.0.0'
     };

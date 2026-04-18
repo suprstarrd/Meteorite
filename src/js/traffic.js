@@ -307,12 +307,12 @@ function onBeforeRootFrameRequest(fctxt) {
     let result = 0;
     let logData;
 
-    // If the site is whitelisted, disregard strict blocking
+    // If the site is allowlisted, disregard strict blocking
     const trusted = µb.getNetFilteringSwitch(requestURL) === false;
     if ( trusted ) {
         result = 2;
         if ( logger.enabled ) {
-            logData = { engine: 'u', result: 2, raw: 'whitelisted' };
+            logData = { engine: 'u', result: 2, raw: 'allowlisted' };
         }
     }
 
@@ -331,7 +331,7 @@ function onBeforeRootFrameRequest(fctxt) {
         }
     }
 
-    // Temporarily whitelisted?
+    // Temporarily allowlisted?
     if ( result === 0 && strictBlockBypasser.isBypassed(requestHostname) ) {
         result = 2;
         if ( logger.enabled ) {
@@ -579,21 +579,21 @@ function onBeforeBehindTheSceneRequest(fctxt) {
     ) {
         result = pageStore.filterRequest(fctxt);
 
-        // The "any-tab" scope is not whitelist-able, and in such case we must
+        // The "any-tab" scope is not allowlist-able, and in such case we must
         // use the origin URL as the scope. Most such requests aren't going to
-        // be blocked, so we test for whitelisting and modify the result only
+        // be blocked, so we test for allowlisting and modify the result only
         // when the request is being blocked.
         //
         // https://github.com/uBlockOrigin/uBlock-issues/issues/1478
         //   Also remove potential redirection when request is to be
-        //   whitelisted.
+        //   allowlisted.
         if (
             result === 1 &&
             µb.getNetFilteringSwitch(fctxt.tabOrigin) === false
         ) {
             result = 2;
             fctxt.redirectURL = undefined;
-            fctxt.filter = { engine: 'u', result: 2, raw: 'whitelisted' };
+            fctxt.filter = { engine: 'u', result: 2, raw: 'allowlisted' };
         }
     }
 

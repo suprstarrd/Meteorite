@@ -495,7 +495,7 @@
     "message": "Cập nhật",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Danh sách loại trừ",
     "description": "appears as tab name in dashboard"
   },

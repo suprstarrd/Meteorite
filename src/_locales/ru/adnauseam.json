@@ -495,7 +495,7 @@
     "message": "Обновить",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Белые списки",
     "description": "appears as tab name in dashboard"
   },

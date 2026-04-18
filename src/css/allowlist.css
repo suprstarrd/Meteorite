@@ -18,7 +18,7 @@ body {
 .codeMirrorContainer {
     flex-grow: 1;
     }
-#whitelist {
+#allowlist {
     text-align: left;
     }
 #strictBlockList {

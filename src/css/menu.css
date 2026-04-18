@@ -995,13 +995,13 @@ select {
   }
 }
 
-.add-to-whitelist{
+.add-to-allowlist{
   margin: 6px;
 }
-.add-to-whitelist p {
+.add-to-allowlist p {
   font-size: 14px;
 }
-.add-to-whitelist.checked p {
+.add-to-allowlist.checked p {
   color: var(--adn-blue);
 }
 @keyframes fadeIn {

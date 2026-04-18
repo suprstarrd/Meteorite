@@ -495,7 +495,7 @@
     "message": "Aktualizovať",
     "description": "English: update"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Zoznam povolených",
     "description": "appears as tab name in dashboard"
   },
