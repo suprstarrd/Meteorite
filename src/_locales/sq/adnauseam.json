@@ -1,0 +1,554 @@
+{
+  "adnAboutPageName": {
+    "message": "Rreth nesh",
+    "description": "English: Firstrun.html page title"
+  },
+  "aboutSupport": {
+    "message": "Ndihmë",
+    "description": "English: links.html Support"
+  },
+  "aboutBuiltOn": {
+    "message": "I integruar",
+    "description": "English: links.html Built on"
+  },
+  "aboutFaq": {
+    "message": "PESH (pyetje të shpeshta)",
+    "description": "English: links.html -> Frequently asked questions"
+  },
+  "adnFirstRunPlease": {
+    "message": "Ju lutem:",
+    "description": "English: Firstrun.html -> Please:"
+  },
+  "adnFirstRunHideAllAds": {
+    "message": "Fshih reklamat",
+    "description": "English: Firstrun.html -> Hide Ads:"
+  },
+  "adnFirstRunClickingAds": {
+    "message": "Klikoni në reklama",
+    "description": "English: Firstrun.html -> Click Ads"
+  },
+  "adnFirstRunBlockingMalware": {
+    "message": "Blloko programet keqdashëse",
+    "description": "English: Firstrun.html -> Block Malware"
+  },
+  "adnAboutResetDataConfirm": {
+    "message": "Të gjitha cilësimet tuaja do të hiqen, reklamat në kasafortën tuaj do të fshihen dhe AdNauseam do të riniset.\n\nRivendosni AdNauseam në cilësimet e fabrikës?",
+    "description": "Message asking user to confirm reset"
+  },
+  "adnFirstRunHideAllAdsDescription": {
+    "message": "Fshih reklamat në <span>listat e filtrave <span> të zgjedhura",
+    "description": "English: Firstrun.html -> Hide Ads in your selected filter lists"
+  },
+  "adnFirstRunClickingAdsDescription": {
+    "message": "Regjistro vizitat në reklamat e gjetura nëpërmjet <span>filtrave<\/span> të tua",
+    "description": "English: Firstrun.html -> Register visits on Ads found via your filter lists"
+  },
+  "adnFirstRunBlockingMalwareDescription": {
+    "message": "Blloko gjurmuesit dhe programet e tjera keqdashëse (<span>personalizoje<\/span>)",
+    "description": "English: Firstrun.html -> Block trackers and other malware (customize)"
+  },
+  "adnNotificationReactivate": {
+    "message": "Riaktivizo",
+    "description": "English: Notifications -> Reactivate"
+  },
+  "adnNotificationDisable": {
+    "message": "Çaktivizo",
+    "description": "English: Notifications -> Disable"
+  },
+  "adnNotificationActivateHiding": {
+    "message": "Aktivizo fshehjen e reklamave",
+    "description": "English: Notifications -> Activate Ad hiding"
+  },
+  "adnNotificationActivateClicking": {
+    "message": "Aktivizo klikimin e reklamave",
+    "description": "English: Notifications -> Activate Ad clicking"
+  },
+  "adnNotificationActivateBlocking": {
+    "message": "Aktivizoni bllokimin e malware-it",
+    "description": "English: Notifications -> Activate malware blocking"
+  },
+  "adnNotificationActivateEasyList": {
+    "message": "Aktivizoni filtrin EasyList",
+    "description": "English: Notifications -> Activate the EasyList filter"
+  },
+  "adnNotificationActivateAdNauseamList": {
+    "message": "Aktivizoni filtrin AdNauseam",
+    "description": "English: Notifications -> Activate the AdNauseam filter"
+  },
+  "adnNotificationDisableAdBlocker": {
+    "message": "Bllokuesi i reklamave dhe AdNauseam mund të jenë në konflikt!",
+    "description": "English: Notifications -> Your ad blocker and AdNauseam may conflict!"
+  },
+  "adnNotificationDisableUBlock": {
+    "message": "uBlock dhe AdNauseam mund të jenë në konflikt!",
+    "description": "English: Notifications -> uBlock and AdNauseam may conflict!"
+  },
+  "adnNotificationOperaSetting": {
+    "message": "Ju lutemi lejoni AdNauseam të ket qasje në rezultatet e faqes së kërkimit.",
+    "description": "English: Notifications -> Please allow AdNauseam to access search page results"
+  },
+  "adnNotificationBrowserSetting": {
+    "message": "Cilësimet e 'Bllokimit të Përmbajtjes' në shfletuesin tuaj mund të ndërhyjnë në funksionimin e AdNauseam!",
+    "description": "English: Notifications -> The 'Content Blocking' settings in your browser may interfere with AdNauseam!"
+  },
+  "adnNotificationPrivacyMode": {
+    "message": "Ju keni lejuar adnauseam të ketë qasje në aktivitetet tuaja online gjatë shfletimit privat.",
+    "description": "English: Notifications -> You have allowed adnauseam to have access to your online activities while private browsing."
+  },
+  "adnNotificationDNTAllowed": {
+    "message": "Kjo faqe respekton <b>Mos gjurmo<\/b>, lejohen reklamat.",
+    "description": "English: Notifications -> This page respects Do Not Track, Ads are allowed."
+  },
+  "adnNotificationDNTHidingNotClicking": {
+    "message": "Kjo faqe respekton <b>Mos gjurmo<\/b>, duke fshehur jo duke klikuar.",
+    "description": "English: Notifications -> This page respects Do Not Track, hiding not clicking."
+  },
+  "adnNotificationDNTClickingNotHiding": {
+    "message": "Kjo faqe respekton <b>Mos gjurmo<\/b>, duket klikuar jo fshir.",
+    "description": "English: Notifications -> This page respects Do Not Track, clicking not hiding."
+  },
+  "adnNotificationDNTJustSoYouKnow": {
+    "message": "Kjo faqe respekton <b>Mos gjurmo<\/b>, vetëm që ta dini.",
+    "description": "English: Notifications -> This page respects Do Not Track, just so you know."
+  },
+  "adnNotificationShowAdsDebug": {
+    "message": "Cilësimi i Avancuar \"Shfaq Debugimin e Reklamave\" është aktivizuar",
+    "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
+  },
+  "adnNewerVersionAvailableNotification": {
+    "message": "Një version më i ri i AdNauseam është i disponueshëm",
+    "description": "English: Notifications -> A newer version of AdNauseam is available"
+  },
+  "adnTarget": {
+    "message": "OBJEKTIVI",
+    "description": "English: Vault.html -> inspected Ad -> TARGET"
+  },
+  "adnFoundOn": {
+    "message": "GJENDET NË",
+    "description": "English: Vault.html -> inspected Ad -> FOUND ON"
+  },
+  "adnNotYetVisited": {
+    "message": "Ende e Pavizituar",
+    "description": "English: Not Yet Visited"
+  },
+  "adnAllowedByDNT": {
+    "message": "Lejohet nëpërmjet politikës \"Mos gjurmo\"",
+    "description": "English: Not Yet Visited"
+  },
+  "adnFirstRunSwitchMeOn": {
+    "message": "Më ndez",
+    "description": "English: Firstrun.html -> Switch me on"
+  },
+  "adnFirstRunThatsIt": {
+    "message": "Kaq është? Në rregull…",
+    "description": "English: Firstrun.html -> That's it? ok…"
+  },
+  "adnFirstRunBetterButStill": {
+    "message": "Më mirë, por prapë…",
+    "description": "English: Firstrun.html -> Better, but still…"
+  },
+  "adnFirstRunLetsGo": {
+    "message": "Le të shkojmë!",
+    "description": "English: Firstrun.html -> Let's go!"
+  },
+  "goToAdNauseamWebsite": {
+    "message": "Shkoni në faqen e internetit të AdNauseam",
+    "description": "English: Menu icon title -> Go to AdNauseam website"
+  },
+  "adnPausedOnPage": {
+    "message": "AdNauseam është ndaluar në këtë faqe",
+    "description": "English: Menu->display when paused on page\/site"
+  },
+  "adnNotHiding": {
+    "message": "AdNauseam nuk i fsheh reklamat aktualisht",
+    "description": "English: Menu->display when not hiding Ads"
+  },
+  "adnVaultName": {
+    "message": "AdNauseam — AdVault",
+    "description": "English: AdNauseam — Ad Vault"
+  },
+  "myStatistics": {
+    "message": "Statistikat e mia",
+    "description": "appears in ADN vault, above ad slider"
+  },
+  "topAdnetworks": {
+    "message": "Rrjetet kryesore të reklamave",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "topSites": {
+    "message": "Faqet kryesore",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypes": {
+    "message": "Llojet e reklamave",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypesImageAds": {
+    "message": "Reklama me imazhe",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypesTextAds": {
+    "message": "Reklama me tekst",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adnShowingRecentAds": {
+    "message": "Nuk janë mbledhur reklama në këtë faqe (duke shfaqur reklamat e fundit)",
+    "description": "shown in menu when only 'recent' Ads are shown"
+  },
+  "adnThisPageStrictBlocked": {
+    "message": "{{domain}}aktualisht është i bllokuar në mënyrë strikte",
+    "description": "shown in menu when the current page is strict-blocked"
+  },
+  "adnStrictBlockListDescription": {
+    "message": "Lista e bllokimit të rreptë shërben për të ndihmuar përdoruesit të bllokojnë domene ose faqe specifike më lehtë.",
+    "description": "Description on the strict-block list tab, which is found on the dashboard"
+  },
+  "adnExportedAdsFilename": {
+    "message": "AdNauseam_Export_{{datetime}}.json",
+    "description": "English: AdNauseam file export"
+  },
+  "adnImportAlertFormat": {
+    "message": "Skedari nuk përmban reklama, ju lutemi zgjidhni një skedar tjetër.",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnImportAlert": {
+    "message": "{{count}} reklama të reja u importuan",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnClearConfirm": {
+    "message": "Ky veprim do t'i heqë përgjithmonë TË GJITHA reklamat tuaja",
+    "description": "appears in ADN settings"
+  },
+  "adnPurgeConfirm": {
+    "message": "Ky veprim do të heqë përgjithmonë të gjitha reklamat për të cilat nuk mund të ngarkohet imazhi. Është një ide e mirë të krijoni një kopje rezervë të kasafortës suaj para se ta pastroni, si dhe të siguroheni që keni një lidhje aktive me internetin.",
+    "description": "appears in ADN settings"
+  },
+  "adnAdClickingStatusPending": {
+    "message": "Në pritje",
+    "description": "Menu & AdVault: Pending"
+  },
+  "adnAdClickingStatusVisited": {
+    "message": "Vizituar",
+    "description": "Menu & AdVault: Visited"
+  },
+  "adnAdClickingStatusFailed": {
+    "message": "Dështoi",
+    "description": "Menu & AdVault: Failed"
+  },
+  "adnAdClickingStatusSkippedDNT": {
+    "message": "U ANËSHKALUA: DNT i lejuar",
+    "description": "Menu & AdVault: SKIPPED: DNT Allowed"
+  },
+  "adnAdClickingStatusSkippedUser": {
+    "message": "ANËSHKALUAR: Klikuar nga përdoruesi",
+    "description": "Menu & AdVault: SKIPPED: Clicked by User"
+  },
+  "adnAdClickingStatusSkippedFrequency": {
+    "message": "U ANËSHALUA: Frekuenca e klikimeve",
+    "description": "Menu & AdVault: SKIPPED: Click Frequency"
+  },
+  "adnAdClickingStatusSkippedDisabled": {
+    "message": "U ANËSHKALUA: Klikimi u çaktivizua",
+    "description": "Menu & AdVault: SKIPPED: Clicking disabled"
+  },
+  "adnMenuViewLog": {
+    "message": "Shiko Regjistrin",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuAdsClicked": {
+    "message": "klikoi {{number}}",
+    "description": "appears in ADN popup menu and vault"
+  },
+  "adnMenuAdsDetected": {
+    "message": "{{count}} Reklama të zbuluara",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuViewVault": {
+    "message": "Shiko Kasafortën e Reklamave",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuResume": {
+    "message": "Rezyme",
+    "description": "appears in ADN popup menu three state button"
+  },
+  "adnMenuDisable": {
+    "message": "Çaktivizo",
+    "description": "Disabled Adnauseam -> appears in ADN popup menu three state button"
+  },
+  "adnMenuActive": {
+    "message": "Aktiv",
+    "description": "Make Adnauseam Active -> appears in ADN popup menu three state button"
+  },
+  "adnMenuStrict": {
+    "message": "I rreptë",
+    "description": "Activate Strict-Block -> appears in ADN popup menu three state button"
+  },
+  "adnMenuDisableScopeDomain": {
+    "message": "në {{domain}}",
+    "description": "Disable AdNaueam Block On this Domain -> Popup option that appears inside ADN menu"
+  },
+  "adnMenuDisableScopePage": {
+    "message": "në këtë faqe",
+    "description": "Disable AdNaueam Block On This Page -> Popup option that appears inside ADN menu"
+  },
+  "adnMenuSettings": {
+    "message": "Cilësimet",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuExportOptions": {
+    "message": "Opsionet e eksportit",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportAdsOnly": {
+    "message": "Vetëm reklama",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsOnly": {
+    "message": "Vetëm Cilësimet",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsAndAds": {
+    "message": "Cilësimet dhe reklamat",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuImportAds": {
+    "message": "Importo reklamat",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableAllLogging": {
+    "message": "Çaktivizo të gjitha regjistrimet",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableOutgoingReferrer": {
+    "message": "Çaktivizo referuesin dalës",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAds": {
+    "message": "Fshi reklamat me historikun e shfletuesit",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuHideBadge": {
+    "message": "Fshih numrin e reklamave në ikonë",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAdsNow": {
+    "message": "Fshij reklamat",
+    "description": "appears in ADN popup menu"
+  },
+  "adnLogNoLog": {
+    "message": "Nuk ka regjistër të disponueshëm",
+    "description": "appears in ADN log page"
+  },
+  "adnLogViewFullLog": {
+    "message": "Shiko regjistrin e plotë",
+    "description": "appears in ADN log page"
+  },
+  "adnVaultSince": {
+    "message": "Që nga {{datetime}}",
+    "description": "appears on vault page"
+  },
+  "adnVaultExport": {
+    "message": "Eksporto",
+    "description": "appears on vault page"
+  },
+  "adnVaultImport": {
+    "message": "Importo",
+    "description": "appears on vault page"
+  },
+  "adnVaultClear": {
+    "message": "Pastro",
+    "description": "appears on vault page"
+  },
+  "adnPurgeDeadAds": {
+    "message": "Fshij reklamat e vdekura",
+    "description": "appears on vault page"
+  },
+  "adnShowDeadAds": {
+    "message": "Shfaq reklama të vdekura",
+    "description": "appears on vault page"
+  },
+  "adnHideDeadAds": {
+    "message": "Fshih reklamat e vdekura",
+    "description": "appears on vault page"
+  },
+  "adnCaptureVault": {
+    "message": "Kap",
+    "description": "appears on vault page in dev mode"
+  },
+  "adnVaultFound": {
+    "message": "{{total}} reklama të mbledhura",
+    "description": "appears on vault page"
+  },
+  "adnVaultShowing": {
+    "message": "duke shfaqur",
+    "description": "appears on vault page"
+  },
+  "adnVaultDeleteThisAd": {
+    "message": "fshi këtë reklamë",
+    "description": "appears on vault page"
+  },
+  "adnVaultTotalEstimated": {
+    "message": "totali i vlerësuar",
+    "description": "appears on vault page"
+  },
+  "adnVaultAdsCost": {
+    "message": "kosto",
+    "description": "appears on vault page"
+  },
+  "hidingAdsPrompt": {
+    "message": "Fshih reklamat e identifikuara nga listat e filtrave që ke zgjedhur",
+    "description": "English: Hide Ads identified by your chosen filter lists"
+  },
+  "clickingAdsPrompt": {
+    "message": "Klikoni mbi reklamat e identifikuara nga listat e filtrave që keni zgjedhur.",
+    "description": "English: Click Ads identified by your chosen filter lists"
+  },
+  "blockingMalwarePrompt": {
+    "message": "Blloko gjurmuesit dhe programet e tjera keqdashëse",
+    "description": "English: lock trackers and other malware"
+  },
+  "parseTextAdsPrompt": {
+    "message": "Kap reklama vetëm me tekst kur është e mundur",
+    "description": "English: Capture text-only Ads when possible"
+  },
+  "settingsIconBadgePrompt": {
+    "message": "Shfaq numrin e reklamave në ikonë",
+    "description": "English: Show the number of found Ads on the icon"
+  },
+  "settingsExtraPrivacyPrompt": {
+    "message": "Privatësi shtesë",
+    "description": "English: Interface"
+  },
+  "settingsInterfacePrompt": {
+    "message": "Ndërfaqja",
+    "description": "English: Interface"
+  },
+  "noIncomingCookiesPrompt": {
+    "message": "Injoro cookie-t e kthyera me klikime",
+    "description": "English: Ignore cookies returned with clicks"
+  },
+  "noOutgoingCookiesPrompt": {
+    "message": "Mos dërgoni cookie gjatë vizitave",
+    "description": "English: Don't send cookies on visits"
+  },
+  "noOutgoingUserAgentPrompt": {
+    "message": "Fshih kokën e agjentit të përdoruesit në vizita",
+    "description": "English: Hide user-agent header on visits"
+  },
+  "noOutgoingRefererPrompt": {
+    "message": "Fshih faqen referuese në vizita",
+    "description": "English: Hide referring page on visits"
+  },
+  "ClickingFrequencyRarely": {
+    "message": "Rrallë",
+    "description": "English: Click Frequency - Rarely"
+  },
+  "ClickingFrequencySometimes": {
+    "message": "Ndonjëherë",
+    "description": "English: Click Frequency - Sometimes"
+  },
+  "ClickingFrequencyAlways": {
+    "message": "Gjithmonë",
+    "description": "English: Click Frequency - Always"
+  },
+  "respectDNTPrompt": {
+    "message": "Bëni përjashtime për reklamat që nuk gjurmohen",
+    "description": "English: Make exceptions for non-tracking Ads"
+  },
+  "disableHidingForDNTPrompt": {
+    "message": "Mos i fshihni reklamat që nuk gjurmohen",
+    "description": "English: Don't hide non-tracking Ads"
+  },
+  "disableClickingForDNTPrompt": {
+    "message": "Mos klikoni reklamat që nuk gjurmohen",
+    "description": "English: Don't click non-tracking Ads"
+  },
+  "extName": {
+    "message": "AdNauseam",
+    "description": "extension name"
+  },
+  "extShortDesc": {
+    "message": "Luftoni kundër mbikëqyrjes së reklamave",
+    "description": "for the chrome web store: must be 132 characters or less"
+  },
+  "3pGroupEssentials": {
+    "message": "Gjërat thelbësore",
+    "description": "English: Essentials"
+  },
+  "3pGroupOther": {
+    "message": "Të tjera",
+    "description": "English: Other"
+  },
+  "3pGroupMalware": {
+    "message": "Programe keqdashëse",
+    "description": "English: Malware"
+  },
+  "3pGroupRegions": {
+    "message": "Gjuhët",
+    "description": "English: Languages"
+  },
+  "3pPageUpdate": {
+    "message": "Përditëso",
+    "description": "English: update"
+  },
+  "adnUpdateButton": {
+    "message": "Përditëso",
+    "description": "English: update"
+  },
+  "allowlistPageName": {
+    "message": "Faqet e besueshme",
+    "description": "appears as tab name in dashboard"
+  },
+  "strictBlockListPageName": {
+    "message": "Lista e Bllokimeve të Rrepta",
+    "description": "appears as tab name in dashboard"
+  },
+  "eventLoggingPrompt": {
+    "message": "Modaliteti i debugimit",
+    "description": "prompt for toggle"
+  },
+  "disableWarnings": {
+    "message": "Çaktivizo paralajmërimet",
+    "description": "English:Disable warnings"
+  },
+  "blurCollectedAds": {
+    "message": "Turbulloj Reklama të mbledhura",
+    "description": "English: Blur Collected ads"
+  },
+  "hideDeadAds": {
+    "message": "Fshih reklamat e vdekura",
+    "description": "English: Hide Dead ads"
+  },
+  "showAdsDebugPrompt": {
+    "message": "Shfaq reklama për korrigjimin e mbledhjes së reklamave",
+    "description": "English: Show ads for ad-collection debugging"
+  },
+  "removeAdsInPrivate": {
+    "message": "Hiq reklamat e mbledhura në modalitetin privat",
+    "description": "English:Remove ads collected in private mode - settings page"
+  },
+  "settingsStrictBlockingMode": {
+    "message": "Aktivizo Modalitetin e Bllokimit të Rreptësisë",
+    "description": "English: Activate Strict-Blocking Mode"
+  },
+  "adnRefreshButton": {
+    "message": "Rifresko",
+    "description": "English: refresh page from menu notification button"
+  },
+  "adnRefreshNotification": {
+    "message": "Zbato ndryshimet në faqen aktuale",
+    "description": "English: refresh page from menu notification"
+  },
+  "supportS6P3S1": {
+    "message": "Sigurohuni që ky problem është <b>specifik për AdNauseam<\/b>.",
+    "description": "A paragraph in the filter issue reporter section"
+  },
+  "supportS6P3S2": {
+    "message": "E kam testuar të njëjtën faqe interneti në <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> dhe konfirmoj se ky problem është <b>specifik për AdNauseam<\/b>.",
+    "description": "A checkbox in the filter issue reporter section"
+  },
+  "supportS6Select1Option7": {
+    "message": "Reklamat nuk u mblodhën",
+    "description": "Ads are present on page but none are collected"
+  }
+}

@@ -27,6 +27,7 @@ import {
     originFromURI,
 } from './uri-utils.js';
 
+import { internalLinkDomainsDefault } from './adn/adn-utils.js'; // adn 
 import { FilteringContext } from './filtering-context.js';
 import logger from './logger.js';
 import { ubologSet } from './console.js';
@@ -68,12 +69,15 @@ const hiddenSettingsDefault = {
     disableWebAssembly: false,
     dnsCacheTTL: 600,
     dnsResolveEnabled: true,
-    extensionUpdateForceReload: false,
+    extensionUpdateForceReload: true,
     filterAuthorMode: false,
     loggerPopupType: 'popup',
-    manualUpdateAssetFetchPeriod: 500,
+    manualUpdateAssetFetchPeriod: 1,
     modifyWebextFlavor: 'unset',
     noScriptingCSP: 'script-src http: https:',
+    nanoIgnoreThirdPartyWhitelist: false,
+    nanoMakeThirdPartyFiltersPrivileged: false,
+    nanoMakeUserFiltersPrivileged: false,
     popupFontSize: 'unset',
     popupPanelDisabledSections: 0,
     popupPanelHeightMode: 0,
@@ -89,17 +93,46 @@ const hiddenSettingsDefault = {
     uiStyles: 'unset',
     updateAssetBypassBrowserCache: false,
     userResourcesLocation: 'unset',
+    showAdsDebug: false, // Adn set "true" to show ads that can be potentially be collected #2136 
+    costPerClick: 1.03, // Adn https://github.com/dhowe/AdNauseam/issues/2131
+		cssInjectionDelay: 1, // Adn delay for css injection to ensure it happens after the page has loaded and ads have been collected
+    internalLinkDomains: internalLinkDomainsDefault.join(','), // Adn
 };
 
-if ( vAPI.webextFlavor.soup.has('devbuild') ) {
-    hiddenSettingsDefault.consoleLogLevel = 'info';
-    hiddenSettingsDefault.cacheStorageAPI = 'unset';
-    ubologSet(true);
-}
-
 const userSettingsDefault = {
-    advancedUserEnabled: false,
-    alwaysDetachLogger: true,
+
+    ////////////////// ADN //////////////////
+
+    admap: {},
+    devMode: false,
+    dntDomains: [],
+    parseTextAds: true,
+    eventLogging: false,
+    firstInstall: true,
+
+    hidingAds: false,
+    clickingAds: false,
+    blockingMalware: false,
+    disableHidingForDNT: false,
+    disableClickingForDNT: false,
+    clickProbability: 1.0,
+    removeAdsInPrivate: true,
+    strictBlockingMode: false,
+    disableWarnings: false, 
+    blurCollectedAds: false,
+    hideDeadAds: false,
+
+    clickingExceptions: '', // ADN: newline-separated domain list for per-site click control
+    clickOnlyWhenIdleFor: 0,
+    noIncomingCookies: true,
+    noOutgoingCookies: false,
+    noOutgoingReferer: false,
+    noOutgoingUserAgent: false,
+    advancedUserEnabled: true,
+
+    ////////////////// end-ADN ////////////////////
+
+    alwaysDetachLogger: false,
     autoUpdate: true,
     cloudStorageEnabled: false,
     cnameUncloakEnabled: true,
@@ -108,7 +141,7 @@ const userSettingsDefault = {
     contextMenuEnabled: true,
     uiAccentCustom: false,
     uiAccentCustom0: '#aca0f7',
-    uiTheme: 'auto',
+    uiTheme: 'dark', // ADN default is 'dark' 
     externalLists: '',
     firewallPaneMinimized: true,
     hyperlinkAuditingDisabled: true,
@@ -126,7 +159,20 @@ const userSettingsDefault = {
     webrtcIPAddressHidden: false,
 };
 
+if (vAPI.webextFlavor.soup.has('devbuild')) {
+    userSettingsDefault.devMode = true;
+    hiddenSettingsDefault.consoleLogLevel = 'info';
+    hiddenSettingsDefault.cacheStorageAPI = 'unset';
+    ubologSet(true);
+}
+
+/* Adn https://github.com/dhowe/AdNauseam/issues/2040 */
+
+const allowAnyBlockOnDomains = ['youtube.com', 'gmail.com', 'funnyordie.com', 'facebook.com']; // no dnt in here
+const strictBlockDefault = allowAnyBlockOnDomains.map(d => d + ' * * strictBlock');
 const dynamicFilteringDefault = [
+    'no-csp-reports: * true',
+    'no-csp-reports: fake-domain.noscript.net false',
     'behind-the-scene * * noop',
     'behind-the-scene * image noop',
     'behind-the-scene * 3p noop',
@@ -134,7 +180,9 @@ const dynamicFilteringDefault = [
     'behind-the-scene * 1p-script noop',
     'behind-the-scene * 3p-script noop',
     'behind-the-scene * 3p-frame noop',
-];
+].concat(strictBlockDefault);
+
+/* end of Adn */
 
 const hostnameSwitchesDefault = [
     'no-large-media: behind-the-scene false',
@@ -165,13 +213,32 @@ const µBlock = {  // jshint ignore:line
     canFilterResponseData: typeof browser.webRequest.filterResponseData === 'function',
 
     // https://github.com/chrisaljoudi/uBlock/issues/180
-    // Whitelist directives need to be loaded once the PSL is available
-    netWhitelist: new Map(),
-    netWhitelistModifyTime: 0,
-    netWhitelistDefault: [
+    // Allowlist directives need to be loaded once the PSL is available
+    netAllowlist: new Map(),
+    netAllowlistModifyTime: 0,
+    netAllowlistDefault: [
         'chrome-extension-scheme',
         'moz-extension-scheme',
     ],
+
+    // Adn
+    // Strict Block List
+    netStrictBlockList: new Map(),
+    netStrictBlockListModifyTime: 0,
+    /*
+    * default strict blocked websites 
+    * cases where there isnt a way to collect ads
+    */
+    netStrictBlockListDefault: [
+        'facebook.com',
+        'instagram.com',
+        'open.spotify.com'
+    ],
+    // end of Adn
+    localSettings: {
+        blockedRequestCount: 0,
+        allowedRequestCount: 0
+    },
 
     requestStats: {
         blockedCount: 0,
@@ -208,10 +275,15 @@ const µBlock = {  // jshint ignore:line
     // lists to enable by default when uBO is first installed.
     assetsBootstrapLocation: undefined,
 
-    assetsJsonPath: vAPI.webextFlavor.soup.has('devbuild')
-        ? '/assets/assets.dev.json'
-        : '/assets/assets.json',
+    /*
+        ADN - no need for us to use dev assets for dev build, but it is something we can implement later. 
+        assetsJsonPath: vAPI.webextFlavor.soup.has('devbuild')
+          ? '/assets/assets.dev.json'
+          : '/assets/assets.json',    
+    */
+    assetsJsonPath: '/assets/assets.json', // Adn
     userFiltersPath: 'user-filters',
+    nanoPartialUserFiltersPath: 'nano-partial-user-filters',
     pslAssetKey: 'public_suffix_list.dat',
 
     selectedFilterLists: [],

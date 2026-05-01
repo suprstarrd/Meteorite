@@ -583,6 +583,13 @@ class ProceduralFilterer {
             }
             if ( pselector.budget <= 0 ) { continue; }
             const nodes = pselector.exec();
+            /* ADN parse procedural selector hits */
+            if ( nodes.length > 0) {
+                for ( const node of nodes ) {
+                    vAPI.adCheck && vAPI.adCheck(node);
+                }
+            }
+            /* end ADN */
             const t1 = Date.now();
             pselector.budget += t0 - t1;
             if ( pselector.budget < -500 ) {

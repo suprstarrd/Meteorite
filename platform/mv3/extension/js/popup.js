@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin Lite - a comprehensive, MV3-compliant content blocker
+    AdNauseam Lite - a comprehensive, MV3-compliant content blocker
     Copyright (C) 2022-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -293,6 +293,134 @@ dom.on('#gotoUnpicker', 'click', ( ) => {
     self.close();
 });
 
+
+/******************************************************************************/
+// AdNauseam Vault Integration
+/******************************************************************************/
+
+async function updateAdNauseamStats() {
+    try {
+        const response = await sendMessage({ what: 'getAdNauseamStats' });
+        if (response) {
+            dom.text('#adn-total-ads', response.totalAds || 0);
+            dom.text('#adn-total-clicks', response.totalClicks || 0);
+        }
+    } catch (error) {
+        console.error('[ADN Popup] Failed to get stats:', error);
+    }
+}
+
+function adStatusText(ad) {
+    if (ad.visitedTs > 0) return 'visited';
+    if (ad.visitedTs < 0) return 'failed';
+    if (ad.noVisit) return 'no-visit';
+    if (ad.dntAllowed) return 'dnt';
+    return 'pending';
+}
+
+function adStatusLabel(ad) {
+    const status = adStatusText(ad);
+    const labels = {
+        'visited': 'Visited',
+        'failed': 'Failed',
+        'no-visit': 'Skipped',
+        'dnt': 'DNT',
+        'pending': 'Pending'
+    };
+    return labels[status] || 'Pending';
+}
+
+async function renderVault() {
+    try {
+        const ads = await sendMessage({ what: 'adsForVault' });
+        const vaultList = qs$('#adn-vault-list');
+
+        if (!ads || ads.length === 0) {
+            vaultList.innerHTML = '<div class="adn-vault-empty">No ads collected yet</div>';
+            return;
+        }
+
+        // Sort by foundTs descending, show most recent 20
+        const sorted = ads.sort((a, b) => (b.foundTs || 0) - (a.foundTs || 0));
+        const recentAds = sorted.slice(0, 20);
+
+        vaultList.innerHTML = recentAds.map(ad => {
+            let displayUrl = '';
+            try {
+                displayUrl = ad.targetUrl ? new URL(ad.targetUrl).hostname : '';
+            } catch (e) {
+                displayUrl = ad.targetDomain || '';
+            }
+
+            // Get image source from contentData (MV2 format) or direct fields
+            const imgSrc = (ad.contentData && ad.contentData.src) || ad.imgSrc;
+            const imgWidth = (ad.contentData && ad.contentData.width) || ad.imgWidth;
+            const imgHeight = (ad.contentData && ad.contentData.height) || ad.imgHeight;
+            const title = (ad.contentData && ad.contentData.title) || ad.title || 'Untitled Ad';
+            const text = (ad.contentData && ad.contentData.text) || ad.text || '';
+
+            const imgHtml = imgSrc
+                ? `<img src="${imgSrc}" class="adn-vault-img" onerror="this.style.display='none'">`
+                : '';
+
+            const status = adStatusText(ad);
+            const statusLabel = adStatusLabel(ad);
+
+            return `
+                <div class="adn-vault-item ${status}">
+                    ${imgHtml}
+                    <div class="adn-vault-details">
+                        <div class="adn-vault-title">${title}</div>
+                        ${text ? `<div class="adn-vault-text">${text.substring(0, 60)}</div>` : ''}
+                        <div class="adn-vault-url">${displayUrl}</div>
+                        <div class="adn-vault-status ${status}">
+                            ${statusLabel}
+                            ${imgWidth > 0 ? ` &bull; ${imgWidth}&times;${imgHeight}` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+    } catch (error) {
+        console.error('[ADN Popup] Failed to render vault:', error);
+    }
+}
+
+dom.on('#adn-toggle-vault', 'click', async () => {
+    const vaultList = qs$('#adn-vault-list');
+    const isHidden = dom.cl.has(vaultList, 'hidden');
+
+    if (isHidden) {
+        dom.cl.remove(vaultList, 'hidden');
+        await renderVault();
+    } else {
+        dom.cl.add(vaultList, 'hidden');
+    }
+});
+
+dom.on('#adn-clear-vault', 'click', async () => {
+    if (!confirm('Clear all ads from vault?')) return;
+
+    try {
+        await sendMessage({ what: 'clearAds' });
+        await updateAdNauseamStats();
+        const vaultList = qs$('#adn-vault-list');
+        if (!dom.cl.has(vaultList, 'hidden')) {
+            await renderVault();
+        }
+    } catch (error) {
+        console.error('[ADN Popup] Failed to clear vault:', error);
+    }
+});
+
+// Update stats when popup opens
+async function initAdNauseam() {
+    await updateAdNauseamStats();
+    // Update stats every 2 seconds while popup is open
+    setInterval(updateAdNauseamStats, 2000);
+}
+
 /******************************************************************************/
 
 async function init() {
@@ -343,6 +471,9 @@ async function init() {
     dom.cl.toggle(dom.root, 'isHTTP', isHTTP);
 
     dom.cl.toggle('#gotoUnpicker', 'enabled', popupPanelData.hasCustomFilters);
+
+		// adn
+		await initAdNauseam();
 
     return true;
 }

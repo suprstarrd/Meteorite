@@ -39,6 +39,7 @@ const uselessKeys = [
     'userSettings.uiAccentCustom',
     'userSettings.uiAccentCustom0',
     'userSettings.uiTheme',
+    'userSettings.dntDomains', // adn
 ];
 
 const sensitiveValues = [
@@ -46,6 +47,8 @@ const sensitiveValues = [
     'userSettings.popupPanelSections',
     'hiddenSettings.userResourcesLocation',
     'trustedset.added',
+    'untrustedset.added', // adn
+    'userSettings.admap', // adn
     'hostRuleset.added',
     'switchRuleset.added',
     'urlRuleset.added',
@@ -213,6 +216,15 @@ const reportedPage = (( ) => {
         if ( shouldUpdateLists !== null ) {
             dom.body.dataset.shouldUpdateLists = shouldUpdateLists;
         }
+        // adn-specific, block create new report if adn-specific checkbox is not checked
+        dom.cl.add(dom.body, 'adn-unchecked');
+        // add event to checkbox to remove adn-unchecked class
+        dom.on('#isAdnSpecific', 'click', ev => {
+            // check if checkbox is checked
+            if ( ev.target.checked ) { dom.cl.remove(dom.body, 'adn-unchecked');
+            } else { dom.cl.add(dom.body, 'adn-unchecked'); }
+        });
+
         dom.cl.add(dom.body, 'filterIssue');
         return {
             hostname: parsedURL.hostname.replace(/^(m|mobile|www)\./, ''),
@@ -229,8 +241,8 @@ function reportSpecificFilterType() {
 
 function reportSpecificFilterIssue() {
     const githubURL = new URL(
-        'https://github.com/uBlockOrigin/uAssets/issues/new?template=specific_report_from_ubo.yml'
-    );
+        'https://github.com/dhowe/AdNauseam/issues/new?template=specific_report_from_adn.yml'
+    ); // ADN
     const issueType = reportSpecificFilterType();
     let title = `${reportedPage.hostname}: ${issueType}`;
     if ( qs$('#isNSFW').checked ) {
@@ -297,7 +309,7 @@ uBlockDashboard.patchCodeMirrorEditor(cmEditor);
         });
 
         dom.on('[data-i18n="supportFindSpecificButton"]', 'click', ev => {
-            const url = new URL('https://github.com/uBlockOrigin/uAssets/issues');
+            const url = new URL('https://github.com/dhowe/AdNauseam/issues');
             url.searchParams.set('q', `is:issue sort:updated-desc "${reportedPage.hostname}" in:title`);
             vAPI.messaging.send('default', {
                 what: 'gotoURL',

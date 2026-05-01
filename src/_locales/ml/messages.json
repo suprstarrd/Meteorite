@@ -39,7 +39,7 @@
     "message": "എന്‍റെ നിയമങ്ങള്‍",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "വൈറ്റ് ലിസ്റ്റ്",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "ലക്ഷ്യസ്ഥാനം",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "യുബ്ലോക്ക്ഒ ഡിസേബിള്‍ ചെയ്യപ്പെടേണ്ട ഹോസ്റ്റ് നെയിമുകള്‍. ഒരു വരിയില്‍ ഒരു എന്‍ട്രി എന്ന രീതിയില്‍ ചേര്‍ക്കുക. ഇന്‍വാലിഡ്‌ ഹോസ്റ്റ് നെയിമുകള്‍ നിശബ്ദമായി ഇഗ്നോര്‍ ചെയ്യപെടും.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "ഇമ്പോര്‍ട്ടും കൂട്ടിചേര്‍ക്കലും ചെയ്യുക",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "എക്സ്പോര്‍ട്ട്‌",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "എന്‍റെ-യുബ്ലോക്ക്-വൈറ്റ്ലിസ്റ്റ്_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "മാറ്റങ്ങള്‍ അപ്ലേ ചെയ്യുക",
     "description": "English: Apply changes"
   },

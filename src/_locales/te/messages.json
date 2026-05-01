@@ -39,7 +39,7 @@
     "message": "నా నియమాలు",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "నమ్మే సైట్లు",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "గమ్యం",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "uBlock Origin అచేతనబడించిన హోస్టూల జాబితా, ఇది మీరు కూర్చినది,. ఒక్కో పంక్తికి ఒక్కో నమోదు. చెల్లని నమోదులు మౌనంగా విస్మరించబడుతాయి.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "దిగుమతిచేసి పోడిగించుము",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "ఎగుమతి",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
-    "message": "my-ublock-whitelist_{{datetime}}.txt",
+  "allowlistExportFilename": {
+    "message": "my-ublock-allowlist_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "మార్పులను భద్రపరచు",
     "description": "English: Apply changes"
   },

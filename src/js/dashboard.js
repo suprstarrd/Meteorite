@@ -19,9 +19,24 @@
     Home: https://github.com/gorhill/uBlock
 */
 
+'use strict';
+
+import { renderNotifications } from './adn/notifications.js'
 import { dom, qs$ } from './dom.js';
+import { onBroadcast } from './broadcast.js';
 
 /******************************************************************************/
+
+const resizeFrame = function() {
+    const navRect = document.getElementById('dashboard-nav')
+                            .getBoundingClientRect();
+    const viewRect = document.documentElement.getBoundingClientRect();
+    const notiRect = document.getElementById('notifications').offsetHeight; //AdNauseam
+    document.getElementById('iframe').style.setProperty(
+        'height',
+        (viewRect.height - navRect.height - notiRect) + 'px' //AdNauseam
+    );
+};
 
 function discardUnsavedData(synchronous = false) {
     const paneFrame = qs$('#iframe');
@@ -103,6 +118,23 @@ if ( self.location.hash.slice(1) === 'no-dashboard.html' ) {
     dom.cl.add(dom.body, 'noDashboard');
 }
 
+/// ADN notification to appear on dashboard
+onBroadcast(request => {
+    switch (request.what) {
+        case 'notifications':
+            renderNotifications(request.notifications, "dashboard");
+            resizeFrame();
+            break;
+        // ADN when "disable notifications" option is changed, hide or show notifications
+        case 'hideNotifications':
+            dom.cl.add('#notifications', 'hide');
+            break;
+        case 'showNotifications':
+            dom.cl.remove('#notifications', 'hide');
+            break;
+    }
+  });
+
 (async ( ) => {
     // Wait for uBO's main process to be ready
     await new Promise(resolve => {
@@ -146,7 +178,7 @@ if ( self.location.hash.slice(1) === 'no-dashboard.html' ) {
         if ( self.location.hash !== '' ) {
             pane = self.location.hash.slice(1) || null;
         }
-        loadDashboardPanel(pane !== null ? pane : 'settings.html', true);
+        loadDashboardPanel(pane !== null ? pane : 'options.html', true);
 
         dom.on('.tabButton', 'click', onTabClickHandler);
 
@@ -166,3 +198,39 @@ if ( self.location.hash.slice(1) === 'no-dashboard.html' ) {
 
     }
 })();
+
+vAPI.messaging.send(
+    'adnauseam', {
+        what: 'verifyAdBlockers'
+    }).then(n => {
+      vAPI.messaging.send(
+          'adnauseam', {
+              what: 'getNotifications'
+          }).then(data => {
+          if (data.notifications && data.notifications.length)
+              renderNotifications(data.notifications, 'dashboard');
+              resizeFrame();
+        })
+});
+
+// disable warnings #1910
+vAPI.messaging.send(
+    'adnauseam', {
+      what: 'getWarningDisabled'
+    }
+  ).then(isDisabled => {
+    if (isDisabled) {
+      dom.cl.add('#notifications', 'hide');
+    } else {
+      dom.cl.remove('#notifications', 'hide');
+    }
+    // adjustHeight();
+  })
+/******************************************************************************/
+/*
+function adjustHeight(){
+    let notificationsHeight = $("#notifications").hasClass("hide") ? 0 : $("#notifications").height(); 
+    $("#stage").css('height', String($(window).height() - notificationsHeight) + "px" );
+}
+*/
+

@@ -1,6 +1,6 @@
 /*******************************************************************************
 
-    uBlock Origin Lite - a comprehensive, MV3-compliant content blocker
+    AdNauseam Lite - a comprehensive, MV3-compliant content blocker
     Copyright (C) 2022-present Raymond Hill
 
     This program is free software: you can redistribute it and/or modify
@@ -341,6 +341,7 @@ registerInjectables.register = async function register() {
         registerCustomScriptlets(context),
         registerPreventPopup(context),
         registerToolbarIconToggler(context),
+				registerAdNauseam(context), // ADN
     ]);
 
     ubolLog(`Unregistered all content (css/js)`);
@@ -363,6 +364,50 @@ registerInjectables.register = async function register() {
 
     return true;
 };
+
+/******************************************************************************/
+// ADN register AdNauseam scripting
+
+async function registerAdNauseam(context) {
+  const { filteringModeDetails } = context;
+
+  const { none, basic, optimal, complete } = filteringModeDetails;
+
+  // Only run on optimal/complete modes (has broad permissions)
+  const matches = [
+    ...ut.matchesFromHostnames(optimal),
+    ...ut.matchesFromHostnames(complete),
+  ];
+
+  if (matches.length === 0) {
+    console.log('[ADN] No matches, skipping registration');
+    return;
+  }
+
+  normalizeMatches(matches);
+
+  const directive = {
+    id: 'adn-parser',
+    js: ['/js/adn/parser.js'],
+    matches,
+    allFrames: true,
+    runAt: 'document_idle',
+  };
+
+  const excludeMatches = [];
+  if (none.has('all-urls') === false) {
+    excludeMatches.push(...ut.matchesFromHostnames(none));
+  }
+  if (basic.has('all-urls') === false) {
+    excludeMatches.push(...ut.matchesFromHostnames(basic));
+  }
+  if (excludeMatches.length !== 0) {
+    directive.excludeMatches = excludeMatches;
+  }
+
+  context.toAdd.push(directive);
+  console.log('[ADN] Registering parser');
+}
 
 /******************************************************************************/
 
@@ -401,3 +446,8 @@ export async function onWakeupRun() {
 }
 
 /******************************************************************************/
+
+export {
+    registerInjectables,
+		registerAdNauseam // ADN
+};

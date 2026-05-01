@@ -2,7 +2,7 @@
 #
 # This script assumes a linux environment
 
-set -e
+
 
 DES="dist/build/uBlock0.npm"
 

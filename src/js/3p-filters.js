@@ -159,8 +159,25 @@ const renderFilterLists = ( ) => {
             dom.attr(qs$(listEntry, ':scope > .detailbar .status.cache'), 'title', lastUpdateString);
             const timeSinceLastUpdate = Date.now() - asset.writeTime;
             dom.cl.toggle(listEntry, 'recent', timeSinceLastUpdate < recentlyUpdated);
+            // AdNauseam update button
+            let button = listEntry.querySelector('#buttonUpdateAdNauseam');
+            if ( button != null ) {
+                button.setAttribute(
+                    'title',
+                    lastUpdateTemplateString.replace(
+                        '{{ago}}',
+                        renderElapsedTimeToString(asset.writeTime)
+                        )
+                );
+            }
         } else {
             dom.cl.remove(listEntry, 'cached');
+        }
+
+        // ADN: add adnauseam update button
+        if (listkey === "adnauseam-filters") {
+            const button = document.getElementById("buttonUpdateAdNauseam");
+            listEntry.querySelector(".detailbar").appendChild(button);
         }
     };
 
@@ -185,6 +202,9 @@ const renderFilterLists = ( ) => {
                 if ( ap !== bp ) { return ap ? -1 : 1; }
                 const as = (a[1].title || a[0]).replace(reEmojis, '');
                 const bs = (b[1].title || b[0]).replace(reEmojis, '');
+                // ADN to-do: push 'My filters' to last
+                // if (aTitle === 'My filters') return 1;
+                // if (bTitle === 'My filters') return -1;
                 return as.localeCompare(bs);
             });
         }
@@ -210,6 +230,10 @@ const renderFilterLists = ( ) => {
             }
             listEntries.append(listEntry);
         }
+
+        // ADN to-do: Hide the 'hidden' group
+        // if (groupKey === 'hidden') liGroup.classList.toggle('hidden', true);
+
         return listEntries;
     };
 
@@ -240,6 +264,28 @@ const renderFilterLists = ( ) => {
                 lists: {},
             };
         }
+
+        /* ADN: to-do: move lists to different groups
+        // ADN: move the lists in these groups to multipurpose
+        const toOther = ['ads'];
+        for (let i = 0; i < toOther.length; i++) {
+            Array.prototype.push.apply(groups.get('multipurpose'), groups.get(toOther[i]));
+            delete groups[toOther[i]];
+            let index = groupKeys.indexOf(toOther[i]);
+            groupKeys.splice(index,1);
+        }
+
+
+        // ADN: move these specific lists to default/Essentials
+        const toDefault = [ 'easylist', 'easyprivacy', 'ublock-abuse' ];
+        for (let i = 0; i < toDefault.length; i++) {
+            let idx = groups.get('multipurpose').indexOf(toDefault[i]);
+            if (idx > -1) {
+              groups.get('default').push(groups.get('multipurpose').splice(idx, 1)[0]);
+            }
+        }
+        */
+
         for ( const [ listkey, listDetails ] of Object.entries(response.available) ) {
             let groupkey = listDetails.group2 || listDetails.group;
             if ( Object.hasOwn(listTree, groupkey) === false ) {
@@ -336,11 +382,30 @@ const updateAssetStatus = details => {
     renderWidgets();
 };
 
-/*******************************************************************************
+/*******************************************************************************/
 
+// ADN
+const availableLists = listsetDetails.available, currentLists = listsetDetails.current;
+let availableOff, currentOff;
+
+const checkExistingEntries = function() {
+    // This check existing entries
+    for ( let location in availableLists ) {
+        if ( availableLists.hasOwnProperty(location) === false ) {
+            continue;
+        }
+        availableOff = availableLists[location].off === true;
+        currentOff = currentLists[location] === undefined || currentLists[location].off === true;
+        if ( availableOff !== currentOff ) {
+            return true;
+        }
+    }
+}
+checkExistingEntries();
+
+/**
     Compute a hash from all the settings affecting how filter lists are loaded
     in memory.
-
 **/
 
 let filteringSettingsHash = '';
@@ -630,6 +695,7 @@ const selectFilterLists = async ( ) => {
 
 const buttonApplyHandler = async ( ) => {
     await selectFilterLists();
+    vAPI.messaging.send('adnauseam', { what: 'verifyLists' });
     dom.cl.add(dom.body, 'working');
     dom.cl.remove('#lists .listEntry.stickied', 'stickied');
     renderWidgets();
@@ -638,6 +704,20 @@ const buttonApplyHandler = async ( ) => {
 };
 
 dom.on('#buttonApply', 'click', ( ) => { buttonApplyHandler(); });
+
+/******************************************************************************/
+
+const buttonUpdateAdNauseam = async function() {
+    // only update adnauseam.txt
+     let adnauseamEntry = document.querySelector(".listEntry[data-key='adnauseam-filters']");
+     dom.cl.add(adnauseamEntry, 'obsolete');
+     dom.cl.remove(adnauseamEntry, 'cached');
+     setTimeout(function(){
+        vAPI.messaging.send('dashboard', { what: 'forceUpdateAdnauseam' });
+     },200);
+};
+
+dom.on('#buttonUpdateAdNauseam', 'click', ( ) => { buttonUpdateAdNauseam(); }); // Adn
 
 /******************************************************************************/
 

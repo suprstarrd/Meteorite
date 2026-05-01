@@ -1,0 +1,554 @@
+{
+  "adnAboutPageName": {
+    "message": "AdNauseam - Acerca de",
+    "description": "English: Firstrun.html page title"
+  },
+  "aboutSupport": {
+    "message": "Soporte",
+    "description": "English: links.html Support"
+  },
+  "aboutBuiltOn": {
+    "message": "Feito en",
+    "description": "English: links.html Built on"
+  },
+  "aboutFaq": {
+    "message": "Preguntas frecuentes",
+    "description": "English: links.html -> Frequently asked questions"
+  },
+  "adnFirstRunPlease": {
+    "message": "Por Favor",
+    "description": "English: Firstrun.html -> Please:"
+  },
+  "adnFirstRunHideAllAds": {
+    "message": "Oculta os anuncios",
+    "description": "English: Firstrun.html -> Hide Ads:"
+  },
+  "adnFirstRunClickingAds": {
+    "message": "Pincha os anuncios",
+    "description": "English: Firstrun.html -> Click Ads"
+  },
+  "adnFirstRunBlockingMalware": {
+    "message": "Bloquear Malware",
+    "description": "English: Firstrun.html -> Block Malware"
+  },
+  "adnAboutResetDataConfirm": {
+    "message": "Todos os seus axustes serán eliminados, os anuncios no seu baúl serán eliminados e AdNauseam será reiniciado.",
+    "description": "Message asking user to confirm reset"
+  },
+  "adnFirstRunHideAllAdsDescription": {
+    "message": "Oculta os anuncios da súa <span>lista de filtros<\/span>",
+    "description": "English: Firstrun.html -> Hide Ads in your selected filter lists"
+  },
+  "adnFirstRunClickingAdsDescription": {
+    "message": "Rexistra visitas en anuncios encontrados a través da súa <span>lista de filtros<\/span>",
+    "description": "English: Firstrun.html -> Register visits on Ads found via your filter lists"
+  },
+  "adnFirstRunBlockingMalwareDescription": {
+    "message": "Bloquea anuncios e outro software malicioso (<span>personalizar<\/span>)",
+    "description": "English: Firstrun.html -> Block trackers and other malware (customize)"
+  },
+  "adnNotificationReactivate": {
+    "message": "Reativar",
+    "description": "English: Notifications -> Reactivate"
+  },
+  "adnNotificationDisable": {
+    "message": "Desabilitar",
+    "description": "English: Notifications -> Disable"
+  },
+  "adnNotificationActivateHiding": {
+    "message": "Activar a ocultación de anuncios",
+    "description": "English: Notifications -> Activate Ad hiding"
+  },
+  "adnNotificationActivateClicking": {
+    "message": "Activar o pinchado de anuncios",
+    "description": "English: Notifications -> Activate Ad clicking"
+  },
+  "adnNotificationActivateBlocking": {
+    "message": "Activar o bloqueo de software malicioso",
+    "description": "English: Notifications -> Activate malware blocking"
+  },
+  "adnNotificationActivateEasyList": {
+    "message": "Activar os filtros de EasyList",
+    "description": "English: Notifications -> Activate the EasyList filter"
+  },
+  "adnNotificationActivateAdNauseamList": {
+    "message": "Activar os filtros de AdNauseam",
+    "description": "English: Notifications -> Activate the AdNauseam filter"
+  },
+  "adnNotificationDisableAdBlocker": {
+    "message": "O seu bloquador de anuncios e AdNauseam poden entrar en conflito!",
+    "description": "English: Notifications -> Your ad blocker and AdNauseam may conflict!"
+  },
+  "adnNotificationDisableUBlock": {
+    "message": "uBlock e AdNauseam poden entrar en conflito!",
+    "description": "English: Notifications -> uBlock and AdNauseam may conflict!"
+  },
+  "adnNotificationOperaSetting": {
+    "message": "Por favor permite a AdNauseam acceder á páxina de resultados de procura",
+    "description": "English: Notifications -> Please allow AdNauseam to access search page results"
+  },
+  "adnNotificationBrowserSetting": {
+    "message": "O axuste de \"Bloqueo de Contido\" do seu navegador pode interferir con AdNausam!",
+    "description": "English: Notifications -> The 'Content Blocking' settings in your browser may interfere with AdNauseam!"
+  },
+  "adnNotificationPrivacyMode": {
+    "message": "Permitiches a AdNauseam o acceso a as súas actividades en liña durante procuras privadas.",
+    "description": "English: Notifications -> You have allowed adnauseam to have access to your online activities while private browsing."
+  },
+  "adnNotificationDNTAllowed": {
+    "message": "Esta páxina respecta <b>Non Rastrear<\/b>, anuncios están permitidos.",
+    "description": "English: Notifications -> This page respects Do Not Track, Ads are allowed."
+  },
+  "adnNotificationDNTHidingNotClicking": {
+    "message": "Esta páxina respecta <b>Non Rastrear<\/b>, ocultando e non pinchando.",
+    "description": "English: Notifications -> This page respects Do Not Track, hiding not clicking."
+  },
+  "adnNotificationDNTClickingNotHiding": {
+    "message": "Esta páxina respecta <b>Non Rastrear<\/b>, pinchando e non ocultando.",
+    "description": "English: Notifications -> This page respects Do Not Track, clicking not hiding."
+  },
+  "adnNotificationDNTJustSoYouKnow": {
+    "message": "Esta páxina respecta <b>Non Rastrear<\/b>, para que o saibas.",
+    "description": "English: Notifications -> This page respects Do Not Track, just so you know."
+  },
+  "adnNotificationShowAdsDebug": {
+    "message": "O axuste avanzado \"Mostrar Anuncios en Depuración\" está habilitado.",
+    "description": "English: Notifications -> The Advanced Setting \"Show Ads Debug\" is turned on"
+  },
+  "adnNewerVersionAvailableNotification": {
+    "message": "Unha versión máis moderna de AdNauseam está dispoñible",
+    "description": "English: Notifications -> A newer version of AdNauseam is available"
+  },
+  "adnTarget": {
+    "message": "OBXECTIVO",
+    "description": "English: Vault.html -> inspected Ad -> TARGET"
+  },
+  "adnFoundOn": {
+    "message": "ATOPADO EN",
+    "description": "English: Vault.html -> inspected Ad -> FOUND ON"
+  },
+  "adnNotYetVisited": {
+    "message": "Aínda Non Visitado",
+    "description": "English: Not Yet Visited"
+  },
+  "adnAllowedByDNT": {
+    "message": "Permitido a través da política de Non Rastrear",
+    "description": "English: Not Yet Visited"
+  },
+  "adnFirstRunSwitchMeOn": {
+    "message": "Acende-me",
+    "description": "English: Firstrun.html -> Switch me on"
+  },
+  "adnFirstRunThatsIt": {
+    "message": "Iso é todo? vale...",
+    "description": "English: Firstrun.html -> That's it? ok…"
+  },
+  "adnFirstRunBetterButStill": {
+    "message": "Millor, per aínda así...",
+    "description": "English: Firstrun.html -> Better, but still…"
+  },
+  "adnFirstRunLetsGo": {
+    "message": "Imos!",
+    "description": "English: Firstrun.html -> Let's go!"
+  },
+  "goToAdNauseamWebsite": {
+    "message": "Vaia a páxina de AdNauseam",
+    "description": "English: Menu icon title -> Go to AdNauseam website"
+  },
+  "adnPausedOnPage": {
+    "message": "AdNauseam está pausado nesta páxina",
+    "description": "English: Menu->display when paused on page\/site"
+  },
+  "adnNotHiding": {
+    "message": "AdNauseam non está ocultando os anuncios agora mesmo",
+    "description": "English: Menu->display when not hiding Ads"
+  },
+  "adnVaultName": {
+    "message": "AdNauseam - AdVault",
+    "description": "English: AdNauseam — Ad Vault"
+  },
+  "myStatistics": {
+    "message": "As miñas Estadísticas",
+    "description": "appears in ADN vault, above ad slider"
+  },
+  "topAdnetworks": {
+    "message": "Principais Redes de Anunciantes",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "topSites": {
+    "message": "Principais Sitios",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypes": {
+    "message": "Tipos de Anuncios",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypesImageAds": {
+    "message": "Anuncios de Imaxe",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adTypesTextAds": {
+    "message": "Anuncios de texto",
+    "description": "appears in ADN vault\/My Statistics"
+  },
+  "adnShowingRecentAds": {
+    "message": "Ningún anuncio recollido nesta páxina (mostrando recentes)",
+    "description": "shown in menu when only 'recent' Ads are shown"
+  },
+  "adnThisPageStrictBlocked": {
+    "message": "{{domain}} está agora mesmo bloqueado estritamente.",
+    "description": "shown in menu when the current page is strict-blocked"
+  },
+  "adnStrictBlockListDescription": {
+    "message": "A lista estrita de bloqueo serve para axudar aos usuarios a bloquear de forma estrita dominios ou páxinas máis facilmente.",
+    "description": "Description on the strict-block list tab, which is found on the dashboard"
+  },
+  "adnExportedAdsFilename": {
+    "message": "AdNauseam_Exportado_{{datetime}}.json",
+    "description": "English: AdNauseam file export"
+  },
+  "adnImportAlertFormat": {
+    "message": "Este arquivo non ten ningún anuncio, por favor escolla outro arquivo.",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnImportAlert": {
+    "message": "{{count}} novos anuncios foron importados",
+    "description": "appears in ADN vault, after import"
+  },
+  "adnClearConfirm": {
+    "message": "Esta acción eliminará permanentemente TODOS os seus Anuncios",
+    "description": "appears in ADN settings"
+  },
+  "adnPurgeConfirm": {
+    "message": "Esta acción eliminará permanentemente todos os anuncios cuxa imaxe non pode ser cargada. É unha boa idea facer unha copia de seguridade do seu baúl antes da purga, e tamén comproba que tes unha conexión a Internet activa.",
+    "description": "appears in ADN settings"
+  },
+  "adnAdClickingStatusPending": {
+    "message": "Pendente",
+    "description": "Menu & AdVault: Pending"
+  },
+  "adnAdClickingStatusVisited": {
+    "message": "Visitado",
+    "description": "Menu & AdVault: Visited"
+  },
+  "adnAdClickingStatusFailed": {
+    "message": "Fallou",
+    "description": "Menu & AdVault: Failed"
+  },
+  "adnAdClickingStatusSkippedDNT": {
+    "message": "SALTADO: Non Rastrear Permitido",
+    "description": "Menu & AdVault: SKIPPED: DNT Allowed"
+  },
+  "adnAdClickingStatusSkippedUser": {
+    "message": "SALTADO: Pinchado polo usuario",
+    "description": "Menu & AdVault: SKIPPED: Clicked by User"
+  },
+  "adnAdClickingStatusSkippedFrequency": {
+    "message": "SALTADO: Frecuencia de Pinchado",
+    "description": "Menu & AdVault: SKIPPED: Click Frequency"
+  },
+  "adnAdClickingStatusSkippedDisabled": {
+    "message": "SALTADO: Pinchado inhabilitado",
+    "description": "Menu & AdVault: SKIPPED: Clicking disabled"
+  },
+  "adnMenuViewLog": {
+    "message": "Ver Rexistro",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuAdsClicked": {
+    "message": "Pinchado {{number}}",
+    "description": "appears in ADN popup menu and vault"
+  },
+  "adnMenuAdsDetected": {
+    "message": "{{count}} Anuncios detectados",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuViewVault": {
+    "message": "Ver Baúl de Anuncios",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuResume": {
+    "message": "Retomar",
+    "description": "appears in ADN popup menu three state button"
+  },
+  "adnMenuDisable": {
+    "message": "Desabilitar",
+    "description": "Disabled Adnauseam -> appears in ADN popup menu three state button"
+  },
+  "adnMenuActive": {
+    "message": "Activa",
+    "description": "Make Adnauseam Active -> appears in ADN popup menu three state button"
+  },
+  "adnMenuStrict": {
+    "message": "Estrito",
+    "description": "Activate Strict-Block -> appears in ADN popup menu three state button"
+  },
+  "adnMenuDisableScopeDomain": {
+    "message": "en {{domain}}",
+    "description": "Disable AdNaueam Block On this Domain -> Popup option that appears inside ADN menu"
+  },
+  "adnMenuDisableScopePage": {
+    "message": "Nesta páxina",
+    "description": "Disable AdNaueam Block On This Page -> Popup option that appears inside ADN menu"
+  },
+  "adnMenuSettings": {
+    "message": "Axustes",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuExportOptions": {
+    "message": "Opcións de exportación",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportAdsOnly": {
+    "message": "Só Anuncios",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsOnly": {
+    "message": "Só Axustes",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuExportSettingsAndAds": {
+    "message": "Axustes e Anuncios",
+    "description": "appears in Menu - Export Dialog box"
+  },
+  "adnMenuImportAds": {
+    "message": "Importar Anuncios",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableAllLogging": {
+    "message": "Desabilitar o rexistro",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuDisableOutgoingReferrer": {
+    "message": "Desabilitar os referidos saíntes",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAds": {
+    "message": "Limpar Anuncios con historial de navegación",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuHideBadge": {
+    "message": "Ocultar a conta de anuncios na icona",
+    "description": "appears in ADN popup menu"
+  },
+  "adnMenuClearAdsNow": {
+    "message": "Limpar Anuncios",
+    "description": "appears in ADN popup menu"
+  },
+  "adnLogNoLog": {
+    "message": "Ningún rexistro dispoñible",
+    "description": "appears in ADN log page"
+  },
+  "adnLogViewFullLog": {
+    "message": "Ver o rexistro completo",
+    "description": "appears in ADN log page"
+  },
+  "adnVaultSince": {
+    "message": "Dende {{datetime}}",
+    "description": "appears on vault page"
+  },
+  "adnVaultExport": {
+    "message": "Exportar",
+    "description": "appears on vault page"
+  },
+  "adnVaultImport": {
+    "message": "Importar",
+    "description": "appears on vault page"
+  },
+  "adnVaultClear": {
+    "message": "Limpar",
+    "description": "appears on vault page"
+  },
+  "adnPurgeDeadAds": {
+    "message": "Purgar Anuncios Mortos",
+    "description": "appears on vault page"
+  },
+  "adnShowDeadAds": {
+    "message": "Mostrar Anuncios Mortos",
+    "description": "appears on vault page"
+  },
+  "adnHideDeadAds": {
+    "message": "Ocultar Anuncios Mortos",
+    "description": "appears on vault page"
+  },
+  "adnCaptureVault": {
+    "message": "Capturar",
+    "description": "appears on vault page in dev mode"
+  },
+  "adnVaultFound": {
+    "message": "{{total}} anuncios recollidos",
+    "description": "appears on vault page"
+  },
+  "adnVaultShowing": {
+    "message": "mostrando",
+    "description": "appears on vault page"
+  },
+  "adnVaultDeleteThisAd": {
+    "message": "eliminar este anuncio",
+    "description": "appears on vault page"
+  },
+  "adnVaultTotalEstimated": {
+    "message": "total estimado",
+    "description": "appears on vault page"
+  },
+  "adnVaultAdsCost": {
+    "message": "coste",
+    "description": "appears on vault page"
+  },
+  "hidingAdsPrompt": {
+    "message": "Ocultar Anuncios identificados polas súas listas de filtros",
+    "description": "English: Hide Ads identified by your chosen filter lists"
+  },
+  "clickingAdsPrompt": {
+    "message": "Pinchar Anuncios identificados polas túas listas de filtrado",
+    "description": "English: Click Ads identified by your chosen filter lists"
+  },
+  "blockingMalwarePrompt": {
+    "message": "Bloquear rastreadores e outro software malicioso",
+    "description": "English: lock trackers and other malware"
+  },
+  "parseTextAdsPrompt": {
+    "message": "Capturar Anuncios de só texto cando sexa posíbel",
+    "description": "English: Capture text-only Ads when possible"
+  },
+  "settingsIconBadgePrompt": {
+    "message": "Amosar o número de Anuncios na icona",
+    "description": "English: Show the number of found Ads on the icon"
+  },
+  "settingsExtraPrivacyPrompt": {
+    "message": "Privacidade Extra",
+    "description": "English: Interface"
+  },
+  "settingsInterfacePrompt": {
+    "message": "Interface",
+    "description": "English: Interface"
+  },
+  "noIncomingCookiesPrompt": {
+    "message": "Ignora galletas devoltas por clics",
+    "description": "English: Ignore cookies returned with clicks"
+  },
+  "noOutgoingCookiesPrompt": {
+    "message": "Non enviar galletas nas visitas",
+    "description": "English: Don't send cookies on visits"
+  },
+  "noOutgoingUserAgentPrompt": {
+    "message": "Ocultar o axente de usuario nas visitas",
+    "description": "English: Hide user-agent header on visits"
+  },
+  "noOutgoingRefererPrompt": {
+    "message": "Ocultar as páxinas de referidos nas visitas",
+    "description": "English: Hide referring page on visits"
+  },
+  "ClickingFrequencyRarely": {
+    "message": "Raramente",
+    "description": "English: Click Frequency - Rarely"
+  },
+  "ClickingFrequencySometimes": {
+    "message": "As veces",
+    "description": "English: Click Frequency - Sometimes"
+  },
+  "ClickingFrequencyAlways": {
+    "message": "Sempre",
+    "description": "English: Click Frequency - Always"
+  },
+  "respectDNTPrompt": {
+    "message": "Facer excepcións para Anuncios sen rastreadores",
+    "description": "English: Make exceptions for non-tracking Ads"
+  },
+  "disableHidingForDNTPrompt": {
+    "message": "Non ocultar Anuncios sen rastreadores",
+    "description": "English: Don't hide non-tracking Ads"
+  },
+  "disableClickingForDNTPrompt": {
+    "message": "Non pinchar Anuncios sen rastreadores",
+    "description": "English: Don't click non-tracking Ads"
+  },
+  "extName": {
+    "message": "AdNauseam",
+    "description": "extension name"
+  },
+  "extShortDesc": {
+    "message": "Loitar contra a vixilancia dos anuncios",
+    "description": "for the chrome web store: must be 132 characters or less"
+  },
+  "3pGroupEssentials": {
+    "message": "Esenciais",
+    "description": "English: Essentials"
+  },
+  "3pGroupOther": {
+    "message": "Outros",
+    "description": "English: Other"
+  },
+  "3pGroupMalware": {
+    "message": "Software malicioso",
+    "description": "English: Malware"
+  },
+  "3pGroupRegions": {
+    "message": "Idiomas",
+    "description": "English: Languages"
+  },
+  "3pPageUpdate": {
+    "message": "Actualizar",
+    "description": "English: update"
+  },
+  "adnUpdateButton": {
+    "message": "Actualizar",
+    "description": "English: update"
+  },
+  "allowlistPageName": {
+    "message": "Sitios de confianza",
+    "description": "appears as tab name in dashboard"
+  },
+  "strictBlockListPageName": {
+    "message": "Lista de Bloqueo Estrito",
+    "description": "appears as tab name in dashboard"
+  },
+  "eventLoggingPrompt": {
+    "message": "Modo de Depuración",
+    "description": "prompt for toggle"
+  },
+  "disableWarnings": {
+    "message": "Desabilitar advertencias",
+    "description": "English:Disable warnings"
+  },
+  "blurCollectedAds": {
+    "message": "Poñer os Anuncios Recollidos borrosos",
+    "description": "English: Blur Collected ads"
+  },
+  "hideDeadAds": {
+    "message": "Ocultar Anuncios Mortos",
+    "description": "English: Hide Dead ads"
+  },
+  "showAdsDebugPrompt": {
+    "message": "Mostrar anuncios para a depuración de recollida de anuncios",
+    "description": "English: Show ads for ad-collection debugging"
+  },
+  "removeAdsInPrivate": {
+    "message": "Eliminar anuncios recollidos en modo privado",
+    "description": "English:Remove ads collected in private mode - settings page"
+  },
+  "settingsStrictBlockingMode": {
+    "message": "Activar o Modo de Bloqueo Estrito",
+    "description": "English: Activate Strict-Blocking Mode"
+  },
+  "adnRefreshButton": {
+    "message": "Recargar",
+    "description": "English: refresh page from menu notification button"
+  },
+  "adnRefreshNotification": {
+    "message": "Aplicar cambios nesta páxina",
+    "description": "English: refresh page from menu notification"
+  },
+  "supportS6P3S1": {
+    "message": "Asegúrate de que esta incidencia é <b>específica de AdNauseam<\/b>",
+    "description": "A paragraph in the filter issue reporter section"
+  },
+  "supportS6P3S2": {
+    "message": "Probei a mesma páxina en <a url='https:\/\/github.com\/gorhill\/uBlock'>#uBO#<\/a> e confirmeis que esta incidéncia é <b>específica de AdNauseam<\/b>.",
+    "description": "A checkbox in the filter issue reporter section"
+  },
+  "supportS6Select1Option7": {
+    "message": "Anuncios non recollidos",
+    "description": "Ads are present on page but none are collected"
+  }
+}

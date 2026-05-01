@@ -221,6 +221,9 @@ vAPI.shutdown.add(( ) => {
     window.vAPI = undefined;
 });
 
+vAPI.prefs = {}; // ADN, for content-scripts
+//vAPI.executionCost.stop('vapi-client.js');
+
 /******************************************************************************/
 /******************************************************************************/
 

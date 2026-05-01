@@ -159,6 +159,10 @@
     color: var(--df-noop-ink);
     font-weight: bold;
     }
+.cm-s-default .cm-strictBlockrule {
+    color: var(--df-strictBlock-ink);
+    font-weight: bold;
+    }
 .cm-s-default .cm-sortkey {
     color: var(--sf-keyword-ink);
     }

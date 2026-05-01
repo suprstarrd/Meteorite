@@ -61,7 +61,9 @@ if (
         self.vAPI instanceof Object === false || vAPI.uBO !== true
     )
 ) {
-    vAPI = self.vAPI = { uBO: true };
+    vAPI = window.vAPI = vAPI instanceof Object && vAPI.uBO === true
+        ? vAPI
+        : { uBO: true, chrome: true /* adn */ };
 }
 
 

@@ -39,7 +39,7 @@
     "message": "मेरे नियमों",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "विश्वस्त साइट सूची",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "गंतव्य",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "वाइटलिस्ट के नियम यह बताते हैं कि uBlock Origin को किस वेब पेज पर बंद करना चाहिए। एक एंट्री हर लाइन में। अमान्य नियमों को सीधे-सीधे नजरअंदाज कर दिया जाएगा।",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "इम्पोर्ट करें और जोड़ें...",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "निर्यात करें...",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "मेरे-उबलॉक-व्हाइटलिस्ट_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "परिवर्तन लागू करें",
     "description": "English: Apply changes"
   },

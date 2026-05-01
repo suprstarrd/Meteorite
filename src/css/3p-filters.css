@@ -1,16 +1,27 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-    }
+}
 body {
     margin-bottom: 6rem;
-    }
+}
 #actions {
-    background-color: var(--surface-1);
+    background-color: transparent; /*ADN*/
     position: sticky;
     top: 0;
     z-index: 10;
-    }
+}
+
+/* ADN */
+#actions button {
+    backdrop-filter: blur(5px);
+}
+
+#options .li:nth-child(1) input{
+  /* auto-update filter lists */
+    margin-right: 0.6em;
+}
+
 #buttonUpdate.active {
     pointer-events: none;
     }
@@ -32,14 +43,16 @@ body.working #actions button {
 .listExpander {
     font-size: 18px;
     padding: 0;
+    color: var(--info0-ink);
+    fill: var(--info0-ink);
     }
 .listExpander:first-child {
     justify-content: flex-start;
     min-width: 20px;
     }
 .listExpander:not(:first-child) {
-    color: var(--checkbox-checked-ink);
-        fill: var(--checkbox-checked-ink);
+    color: var(--adn-blue); /* adn blue */
+    fill: var(--adn-blue); /* adn blue */
     }
 .listExpander svg {
     transform: rotate(90deg);
@@ -94,7 +107,16 @@ body.working #actions button {
 #lists .listEntry > .detailbar {
     column-gap: calc(var(--default-gap-xxsmall) + 2px);
     display: inline-flex;
-    }
+    position: relative; /* ADN */
+}
+/* ADN - font changes */
+#lists .listEntry[data-parent="root"] > .detailbar {
+    font-size: 120%;
+    font-family: bebas_neue,roboto_flex,noto_sans,sans-serif;
+    font-stretch: 47.5%;
+    font-variation-settings: "opsz" 48, "slnt" 0, "GRAD" 0, "XTRA" 468, "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712;
+}
+/* end of ADN */
 #lists .listEntry[data-key="user"] > .detailbar {
     display: none;
     }
@@ -137,6 +159,9 @@ body.working #actions button {
     }
 #lists .listEntry > .detailbar .iconbar a.support {
     display: inline-flex;
+}
+.listEntry  a.towiki {
+    display: inline-block;
     }
 #lists .listEntry > .detailbar .iconbar a.support[href="#"] {
     display: none;
@@ -174,6 +199,30 @@ body.working #actions button {
 #lists .listEntry.checked > .detailbar .leafstats {
     display: inline-flex;
 }
+
+/* Adn */
+.groupEntry {
+    margin: 0.5em 0;
+    }
+.groupEntry .listEntries {
+    margin: 0.25em 0 0 0;
+    margin-inline-start: 0.6em;
+    -webkit-margin-start: 0.6em;
+}
+.listEntry.toRemove .checkbox {
+        visibility: hidden;
+}
+/* end of Adn */
+
+#buttonApply {
+    margin-top: 4px; /* Adn */
+    margin-bottom: 0px; /* Adn */
+}
+
+li.listEntry span.status {
+    color: #AAA;  /* Adn */
+}
+
 #lists .iconbar .status {
     cursor: default;
     display: none;
@@ -209,6 +258,9 @@ body.working #lists .listEntry.checked.obsolete:not(.cached) > .detailbar .iconb
     animation: spin 1s steps(8) infinite;
     display: inline-flex;
     }
+.listEntry.toImport.checked textarea {
+    visibility: visible;
+}
 
 #lists .listEntry.toRemove .checkbox {
     visibility: hidden;
@@ -229,9 +281,41 @@ body.working #lists .listEntry.checked.obsolete:not(.cached) > .detailbar .iconb
     display: block;
     font-size: smaller;
     height: 6em;
-    margin: 0;
+    /* margin-left: 2em; ADN */
+    margin-top: 0.5em; /* ADN */
     resize: vertical;
     visibility: hidden;
     white-space: pre;
     width: 100%;
+    color:#DDD;
+    background-color:#333;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+/* Adn changes */
+
+#lists > .groupEntry .listname {
+    font-size: 120%;
+    font-family: bebas_neue,roboto_flex,noto_sans,sans-serif; /* ADN */
+    font-stretch: 47.5%; /* ADN */
+    font-variation-settings: "opsz" 48, "slnt" 0, "GRAD" 0, "XTRA" 468, "YOPQ" 79, "YTAS" 750, "YTDE" -203, "YTFI" 738, "YTLC" 514, "YTUC" 712; /* ADN */
     }
+#lists > .groupEntry > .geCount {
+    font-size: 90%;
+    }
+#lists > .groupEntry:not(:first-child) > .geName:before {
+    color: #aaa;
+    /*content: '\2212  ';*/
+    }
+#lists > .groupEntry > .geName:before {
+    content: '-  ';
+    }
+#lists > .groupEntry.collapsed > .geName:before {
+    color: #aaa;
+    content: '+  ';
+    }
+/* end of adn */

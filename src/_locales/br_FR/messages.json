@@ -39,7 +39,7 @@
     "message": "Ma reolennoù",
     "description": "appears as tab name in dashboard"
   },
-  "whitelistPageName": {
+  "allowlistPageName": {
     "message": "Lec'hiennoù sur",
     "description": "appears as tab name in dashboard"
   },
@@ -627,23 +627,23 @@
     "message": "Pal",
     "description": "English: a sort option for list of rules."
   },
-  "whitelistPrompt": {
+  "allowlistPrompt": {
     "message": "En ur dermeniñ peseurt lec'hiennoù a zo sur e lavarit da uBlock Origin e peseurt lec'hiennoù e rank bezañ diweredekaet. Un enmont dre linenn.",
     "description": "A concise description of the 'Trusted sites' pane."
   },
-  "whitelistImport": {
+  "allowlistImport": {
     "message": "Enporzhiañ hag ouzhpennañ",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExport": {
+  "allowlistExport": {
     "message": "Ezporzhiañ",
     "description": "Button in the 'Trusted sites' pane"
   },
-  "whitelistExportFilename": {
+  "allowlistExportFilename": {
     "message": "ma-lec'hiennoù-fizius-ublock_{{datetime}}.txt",
     "description": "The default filename to use for import/export purpose"
   },
-  "whitelistApply": {
+  "allowlistApply": {
     "message": "Lakaat da dalvezout",
     "description": "English: Apply changes"
   },

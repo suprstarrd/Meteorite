@@ -19,7 +19,7 @@ manifest_out_file = os.path.join(build_dir, 'manifest.json')
 with open(manifest_out_file) as f:
     manifest_out = json.load(f)
 
-manifest_out['version'] = version
+# manifest_out['version'] = version
 
 with open(manifest_out_file, 'w') as f2:
     json.dump(manifest_out, f2, indent=2, separators=(',', ': '), sort_keys=True)

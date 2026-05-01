@@ -22,6 +22,7 @@
 /******************************************************************************/
 
 import * as sfp from './static-filtering-parser.js';
+import adnauseam from './adn/core.js';
 
 import { CompiledListReader, CompiledListWriter } from './static-filtering-io.js';
 import { LineIterator, orphanizeString } from './text-utils.js';
@@ -359,6 +360,8 @@ onBroadcast(msg => {
             r = parseInt(value.slice(2), 2);
         } else if ( value.startsWith('0x') ) {
             r = parseInt(value.slice(2), 16);
+        } else if (name == 'costPerClick') { // ADN https://github.com/dhowe/AdNauseam/issues/2131
+            r = parseFloat(value)
         } else {
             r = parseInt(value, 10);
         }
@@ -404,11 +407,22 @@ onBroadcast(msg => {
 
 /******************************************************************************/
 
-µb.saveWhitelist = function() {
+µb.saveAllowlist = function() {
     vAPI.storage.set({
-        netWhitelist: this.arrayFromWhitelist(this.netWhitelist)
+        netAllowlist: this.arrayFromAllowlist(this.netAllowlist)
     });
-    this.netWhitelistModifyTime = Date.now();
+    this.netAllowlistModifyTime = Date.now();
+};
+
+/******************************************************************************/
+// ADN
+/******************************************************************************/
+
+µb.saveStrictBlockList = function() {
+    vAPI.storage.set({
+        netStrictBlockList: this.arrayFromStrictBlockList(this.netStrictBlockList)
+    });
+    this.netStrictBlockListModifyTime = Date.now();
 };
 
 /******************************************************************************/
@@ -733,6 +747,11 @@ onBroadcast(msg => {
 /******************************************************************************/
 
 µb.getAvailableLists = async function() {
+    function adnListGroup(key) { // ADN tmp
+        return (key === 'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt')
+            ? 'default' : 'custom';
+    }
+
     const newAvailableLists = {};
 
     // User filter list
@@ -747,11 +766,12 @@ onBroadcast(msg => {
         this.listKeysFromCustomFilterLists(this.userSettings.importedLists)
     );
     for ( const listKey of importedListKeys ) {
+        let newGroup = adnListGroup(listKey); // ADN
         const asset = {
             content: 'filters',
             contentURL: listKey,
             external: true,
-            group: 'custom',
+            group: newGroup,
             submitter: 'user',
             title: '',
         };
@@ -944,6 +964,12 @@ onBroadcast(msg => {
                 acceptedCount;
             entry.entryUsedCount = entry.entryCount -
                 (snfe.discardedCount + sxfe.discardedCount - discardedCount);
+            // adn, tell core that the list is updated 
+            adnauseam.onListUpdated(assetKey, {
+                title: assetKey,
+                content: compiled
+            });
+            // end of adn
         }
         loadedListKeys.push(assetKey);
     };
@@ -1173,6 +1199,49 @@ onBroadcast(msg => {
 
     return compiledContent;
 };
+/******************************************************************************/
+
+// ADN: these 2 functions are no longer in uBlock (TODO: move to core.js)
+
+// `switches` contains the filter lists for which the switch must be revisited.
+
+µBlock.selectFilterLists = function(switches) {
+    switches = switches || {};
+
+    // console.log('storage.js::µBlock.selectFilterLists', switches);
+
+    // Only the lists referenced by the switches are touched.
+    var filterLists = this.availableFilterLists;
+    var entry, state, location;
+    var i = switches.length;
+    while ( i-- ) {
+        entry = switches[i];
+        state = entry.off === true;
+        location = entry.location;
+        if ( filterLists.hasOwnProperty(location) === false ) {
+            if ( state !== true ) {
+                filterLists[location] = { off: state };
+            }
+            continue;
+        }
+        if ( filterLists[location].off === state ) {
+            continue;
+        }
+        filterLists[location].off = state;
+    }
+
+    vAPI.storage.set({ 'availableFilterLists': filterLists });
+};
+
+µBlock.reactivateList = function(list) {
+
+  var lists = this.selectedFilterLists;
+  lists.push(list);
+  µBlock.selectFilterLists([{location:list, off:false}]); // change availableFilterLists
+  vAPI.storage.set({ 'selectedFilterLists': lists });
+
+  µBlock.loadFilterLists();
+}
 
 /******************************************************************************/
 
@@ -1459,16 +1528,33 @@ onBroadcast(msg => {
         Array.isArray(toOverwrite.trustedSiteDirectives) &&
         toOverwrite.trustedSiteDirectives.length !== 0
     ) {
-        µb.netWhitelistDefault = toOverwrite.trustedSiteDirectives.slice();
-        bin.netWhitelist = toOverwrite.trustedSiteDirectives.slice();
+        µb.netAllowlistDefault = toOverwrite.trustedSiteDirectives.slice();
+        bin.netAllowlist = toOverwrite.trustedSiteDirectives.slice();
         binNotEmpty = true;
-    } else if ( Array.isArray(data.whitelist) ) {
-        bin.netWhitelist = data.whitelist;
+    } else if ( Array.isArray(data.allowlist) ) {
+        bin.netAllowlist = data.allowlist;
         binNotEmpty = true;
-    } else if ( typeof data.netWhitelist === 'string' ) {
-        bin.netWhitelist = data.netWhitelist.split('\n');
+    } else if ( typeof data.netAllowlist === 'string' ) {
+        bin.netAllowlist = data.netAllowlist.split('\n');
         binNotEmpty = true;
     }
+
+    /* Adn */
+    if (
+        Array.isArray(toOverwrite.untrustedSiteDirectives) &&
+        toOverwrite.untrustedSiteDirectives.length !== 0
+    ) {
+        µb.netStrictBlockListDefault = toOverwrite.untrustedSiteDirectives.slice();
+        bin.netStrictBlockList = toOverwrite.untrustedSiteDirectives.slice();
+        binNotEmpty = true;
+    } else if ( Array.isArray(data.strictBlockList) ) {
+        bin.netStrictBlockList = data.strictBlockList;
+        binNotEmpty = true;
+    } else if ( typeof data.netStrictBlockList === 'string' ) {
+        bin.netStrictBlockList = data.netStrictBlockList.split('\n');
+        binNotEmpty = true;
+    }
+    /* End of Adn */
 
     if ( typeof data.dynamicFilteringString === 'string' ) {
         bin.dynamicFilteringString = data.dynamicFilteringString;
@@ -1627,6 +1713,14 @@ onBroadcast(msg => {
                             })
                         );
                     }
+                    // ADN: Need to tell core that lists have updated
+                    adnauseam.onListUpdated(details.assetKey, {
+                        title: details.assetKey,
+                        content: this.compileFilters(
+                            details.content,
+                            { assetKey: details.assetKey }
+                        )
+                    });
                 }
             } else {
                 this.removeCompiledFilterList(details.assetKey);

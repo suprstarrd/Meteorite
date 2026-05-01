@@ -1,5 +1,6 @@
 {
-  "author": "Raymond Hill & contributors",
+  "version": "1.41.0",
+  "author": "Daniel C. Howe",
   "background": {
     "page": "background.html"
   },
@@ -9,7 +10,7 @@
       "32": "img/icon_32.png",
       "64": "img/icon_64.png"
     },
-    "default_title": "uBlock Origin",
+    "default_title": "AdNauseam",
     "default_popup": "popup-fenix.html"
   },
   "commands": {
@@ -107,11 +108,11 @@
     "webRequestBlocking",
     "<all_urls>"
   ],
-  "short_name": "uBlock₀",
+  "short_name": "AdNauseam",
   "storage": {
     "managed_schema": "managed_storage.json"
   },
-  "version": "1.15.11.0",
+  "key": "mbfbgdonmnbmjjhhfoinempobihojlao",
   "web_accessible_resources": [
     "/web_accessible_resources/*"
   ]

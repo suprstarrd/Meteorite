@@ -52,6 +52,7 @@ export const    XMLHTTPREQUEST = 1 << 13;
 export const       INLINE_FONT = 1 << 14;
 export const     INLINE_SCRIPT = 1 << 15;
 export const             OTHER = 1 << 16;
+export const           ADVISIT = 1 << 17; // ADN
 export const         FRAME_ANY = MAIN_FRAME | SUB_FRAME | OBJECT;
 export const          FONT_ANY = FONT | INLINE_FONT;
 export const        INLINE_ANY = INLINE_FONT | INLINE_SCRIPT;
@@ -78,6 +79,7 @@ const typeStrToIntMap = {
        'inline-font': INLINE_FONT,
      'inline-script': INLINE_SCRIPT,
              'other': OTHER,
+           'advisit': ADVISIT,
 };
 
 export const    METHOD_NONE = 0;

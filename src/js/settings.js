@@ -55,8 +55,8 @@ function handleImportFilePicker() {
                 throw 'Invalid';
             }
             if (
-                Array.isArray(userData.whitelist) === false &&
-                typeof userData.netWhitelist !== 'string'
+                Array.isArray(userData.allowlist) === false &&
+                typeof userData.netAllowlist !== 'string'
             ) {
                 throw 'Invalid';
             }
@@ -71,6 +71,7 @@ function handleImportFilePicker() {
             userData = undefined;
         }
         if ( userData === undefined ) {
+            window.alert(i18n$('aboutRestoreDataError').replace(/uBlock₀/g, 'AdNauseam'));
             return reportError();
         }
         const time = new Date(userData.timeStamp);
@@ -146,6 +147,7 @@ function onLocalDataReceived(details) {
         i18n$('storageUsed')
             .replace('{{value}}', v.toLocaleString(undefined, { maximumSignificantDigits: 3 }))
             .replace('{{unit}}', unit && i18n$(unit) || '')
+            .replace(/uBlock₀/g, 'AdNauseam')
     );
 
     const timeOptions = {
@@ -217,8 +219,13 @@ function changeUserSettings(name, value) {
         value,
     });
 
+    console.log("changeUserSettings", name, value)
+
     // Maybe reflect some changes immediately
     switch ( name ) {
+    case 'colorBlindFriendly':
+        console.log("colorBlindFriendly", value)
+        setTheme(value, true);
     case 'uiTheme':
         setTheme(value, true);
         break;
