@@ -251,6 +251,10 @@
     "message": "SKIPPED: Clicking Disabled",
     "description": "Menu & AdVault: SKIPPED: Clicking disabled"
   },
+  "adnAdClickingStatusSkippedDomain": {
+    "message": "SKIPPED: Domain Exception",
+    "description": "Menu & AdVault: SKIPPED: Domain excluded from ad clicks"
+  },
   "adnMenuViewLog": {
     "message": "View Log",
     "description": "appears in ADN popup menu"
@@ -450,6 +454,18 @@
   "ClickingFrequencyAlways": {
     "message": "Always",
     "description": "English: Click Frequency - Always"
+  },
+  "clickExceptionsLabelExclude": {
+    "message": "Don't click ads on these domains (one per line)",
+    "description": "Label for click exceptions when clicking is enabled (exclusion mode)"
+  },
+  "clickExceptionsLabelInclude": {
+    "message": "Only click ads on these domains (one per line)",
+    "description": "Label for click exceptions when clicking is disabled (inclusion mode)"
+  },
+  "clickExceptionsPlaceholder": {
+    "message": "example.com",
+    "description": "Placeholder for click exceptions textarea"
   },
   "respectDNTPrompt": {
     "message": "Make exceptions for non-tracking Ads",

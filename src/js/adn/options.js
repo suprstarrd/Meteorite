@@ -198,6 +198,17 @@ const onPreventDefault = function (ev) {
 };
 /******************************************************************************/
 
+// Update the click exceptions label based on the clicking toggle state
+const updateClickExceptionsLabel = function () {
+  const label = document.getElementById('clickExceptionsLabel');
+  if (!label) return;
+  const clickingEnabled = uDom('#clickingAds').prop('checked');
+  label.textContent = i18n$(clickingEnabled
+    ? 'clickExceptionsLabelExclude'
+    : 'clickExceptionsLabelInclude'
+  );
+}
+
 // if any of 3 main toggles are off, disabled their subgroups
 const updateGroupState = function () {
 
@@ -206,6 +217,12 @@ const updateGroupState = function () {
 
   uDom('.clickingAds-child').prop('disabled', !uDom('#clickingAds').prop('checked'));
   uDom('.clickingAds-child').parent().parent().parent().toggleClass('disabled', !uDom('#clickingAds').prop('checked'));
+
+  // Click exceptions textarea should never be disabled (used in both on/off states)
+  const clickExTextarea = document.getElementById('clickingExceptions');
+  if (clickExTextarea) clickExTextarea.disabled = false;
+
+  updateClickExceptionsLabel();
 
   /*
   blocking malware doesnt have any subgroup
@@ -319,6 +336,23 @@ const onUserSettingsReceived = function (details) {
       .on('change', onInputChanged)
       .on('click', onPreventDefault);
   });
+
+  // Click exceptions textarea
+  const clickExTextarea = document.getElementById('clickingExceptions');
+  if (clickExTextarea) {
+    clickExTextarea.value = details.clickingExceptions || '';
+    clickExTextarea.addEventListener('change', function () {
+      changeUserSettings('clickingExceptions', this.value);
+    });
+  }
+  // Expand/collapse click exceptions
+  const expander = document.querySelector('.clickExceptions-expander');
+  if (expander) {
+    expander.querySelector('label').addEventListener('click', function () {
+      expander.classList.toggle('expanded');
+    });
+  }
+  updateClickExceptionsLabel();
 
   // disable warning
   uDom('[data-setting-name="disableWarnings"]')

@@ -370,7 +370,9 @@ import { broadcast, onBroadcast } from '../broadcast.js';
       }
     } else if (status != "SkippedDisabled") {
       if (ad.clickedByUser) status = "SkippedUser";
-      else status = "Skipped" + (ad.dntAllowed ? "DNT" : "Frequency");
+      else if (ad.dntAllowed) status = "SkippedDNT";
+      else if (ad.domainExcluded) status = "SkippedDomain";
+      else status = "SkippedFrequency";
     }
     return status;
   }

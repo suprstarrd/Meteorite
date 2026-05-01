@@ -350,7 +350,8 @@ const adnauseam = (function () {
     // changes for #1657
     //const pending = pendingAds();
     const settings = µb.userSettings;
-    if (/*pending.length && */settings.clickingAds && !isAutomated()) { // no visits if automated
+    const hasClickInclusions = !settings.clickingAds && (settings.clickingExceptions || '').trim();
+    if (/*pending.length && */(settings.clickingAds || hasClickInclusions) && !isAutomated()) { // no visits if automated
 
       // check whether an idle timeout has been specified
       const idleMs = disableIdler ? 0 : settings.clickOnlyWhenIdleFor;
@@ -395,6 +396,22 @@ const adnauseam = (function () {
     return adlist().filter(function (a) {
       return visitPending(a);
     });
+  }
+
+  const isClickingAllowedOnDomain = function (domain) {
+    const exceptions = (µb.userSettings.clickingExceptions || '').trim();
+    if (!exceptions) return µb.userSettings.clickingAds;
+    const domains = exceptions.split(/\s+/).filter(Boolean);
+    const isInList = domains.some(function (d) {
+      return domain === d || domain.endsWith('.' + d);
+    });
+    if (µb.userSettings.clickingAds) {
+      // Toggle ON: list is exclusion (click everywhere except listed)
+      return !isInList;
+    } else {
+      // Toggle OFF: list is inclusion (only click on listed)
+      return isInList;
+    }
   }
 
   const visitPending = function (ad) {
@@ -1782,6 +1799,11 @@ const adnauseam = (function () {
     if (dnt.mustNotVisit(ad)) { // see #1168
       ad.noVisit = true;
       ad.dntAllowed = true;
+    }
+    else if (!isClickingAllowedOnDomain(ad.pageDomain)) {
+      ad.noVisit = true;
+      ad.domainExcluded = true;
+      log('[SKIP] Domain excluded from ad clicks: ' + ad.pageDomain);
     }
     else {
       ad.noVisit = Math.random() > µb.userSettings.clickProbability; // if true, ad will never be visited

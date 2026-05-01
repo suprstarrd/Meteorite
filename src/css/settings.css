@@ -310,6 +310,39 @@ input[type=range]:disabled::-moz-range-progress {
   background: black;
 }
 
+/* Click exceptions expandable */
+.clickExceptions-expander {
+    cursor: pointer;
+}
+.clickExceptions-expander .listExpander {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--adn-blue);
+    fill: var(--adn-blue);
+    min-width: 16px;
+}
+.clickExceptions-expander .listExpander svg {
+    transform: rotate(90deg);
+    transform-origin: 50%;
+    width: 10px;
+    height: 10px;
+    transition: transform 0.2s;
+}
+.clickExceptions-expander.expanded .listExpander svg {
+    transform: rotate(180deg);
+}
+.clickExceptions-expander #clickingExceptions {
+    display: none;
+    width: 95%;
+    min-height: 80px;
+    margin-top: 6px;
+    font-size: var(--font-size-smaller);
+    resize: vertical;
+}
+.clickExceptions-expander.expanded #clickingExceptions {
+    display: block;
+}
+
 /* Mobile devices */
 :root.mobile #localData {
     max-width: 100vw;

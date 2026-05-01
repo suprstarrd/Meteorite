@@ -1084,7 +1084,8 @@ function untilTime(adsets) {
 function formatTargetDate(ad) {
   const dntNote = i18n$('adnAllowedByDNT') + "<a class='help-mark dnt' href='https://github.com/dhowe/AdNauseam/wiki/FAQ#what-is-the-effs-do-not-track-standard-and-how-it-is-supported-in-adnauseam'> ? </a>", frequencyNote = i18n$('adnAdClickingStatusSkippedFrequency'), userNote = i18n$('adnAdClickingStatusSkippedUser');
 
-  return ad.noVisit ? (ad.clickedByUser ? userNote : (ad.dntAllowed ? dntNote : frequencyNote)) : formatDate(ad.visitedTs);
+  const domainNote = i18n$('adnAdClickingStatusSkippedDomain');
+  return ad.noVisit ? (ad.clickedByUser ? userNote : (ad.dntAllowed ? dntNote : (ad.domainExcluded ? domainNote : frequencyNote))) : formatDate(ad.visitedTs);
 }
 
 function formatDate(ts) {

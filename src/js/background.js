@@ -122,6 +122,7 @@ const userSettingsDefault = {
     blurCollectedAds: false,
     hideDeadAds: false,
 
+    clickingExceptions: '', // ADN: newline-separated domain list for per-site click control
     clickOnlyWhenIdleFor: 0,
     noIncomingCookies: true,
     noOutgoingCookies: false,
