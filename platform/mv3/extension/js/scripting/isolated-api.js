@@ -52,7 +52,7 @@
         },
         get topHostname() {
             if ( this.entries.length === 0 ) { this.compute(); }
-            return this.entries[0].hns[0];
+            return this.entries.at(-1).hns[0];
         },
         get hostnames() {
             if ( this.entries.length === 0 ) { this.compute(); }
@@ -168,11 +168,11 @@
         }
         const { regexes } = data;
         for ( let i = 0, n = regexes.length; i < n; i += 3 ) {
-            if ( topHostname.includes(regexes[i+0]) === false ) { continue; }
+            if ( thisHostname.includes(regexes[i+0]) === false ) { continue; }
             if ( typeof regexes[i+1] === 'string' ) {
                 regexes[i+1] = new RegExp(regexes[i+1]);
             }
-            if ( regexes[i+1].test(topHostname) === false ) { continue; }
+            if ( regexes[i+1].test(thisHostname) === false ) { continue; }
             selectorsFromListIndex(data, regexes[i+2]);
         }
     };
@@ -206,7 +206,7 @@
     };
 
     const cacheKey =
-        `cache.css.${thisHostname || ''}${topHostname !== thisHostname ? `/${topHostname}` : ''}`;
+        `cache.css.${topHostname !== thisHostname ? `${topHostname}/` : ''}${thisHostname || ''}`;
     let clientCount = 0;
     let cacheEntry;
 
